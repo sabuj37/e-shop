@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\coustomerSupplier;
+use App\Http\Controllers\Product;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,3 +20,13 @@ Route::get('/add/customer',[
     'addCustomer'
 ])->name('addCustomer');
 //Coustomer&supplier Controller end
+
+
+//Product
+
+Route::get('/new/product',[
+    coustomerSupplier::class,
+    'Product'
+])->name('newProduct');
+
+//endProduct

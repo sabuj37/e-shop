@@ -10,13 +10,13 @@
       <title>E-Shop | @yield('backTitle')</title>
       
       <!-- Favicon -->
-      <link rel="shortcut icon" href="https://{{asset('/public/eshop/')}}/assets/images/favicon.ico" />
+      <link rel="shortcut icon" href="{{asset('/public/eshop/')}}/assets/images/favicon.ico" />
       <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/css/backend-plugin.min.css">
       <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/css/backende209.css?v=1.0.0">
       <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/vendor/fortawesome/fontawesome-free/css/all.min.css">
-      <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+      <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
       <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/vendor/remixicon/fonts/remixicon.css">  </head>
-  <body class="  ">
+  <body class="">
     <!-- loader Start -->
     <div id="loading">
           <div id="loading-center">
