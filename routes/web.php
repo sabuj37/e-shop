@@ -19,6 +19,11 @@ Route::get('/add/customer',[
     coustomerSupplier::class,
     'addCustomer'
 ])->name('addCustomer');
+
+Route::get('/add/supplier',[
+    coustomerSupplier::class,
+    'addSupplier'
+])->name('addSupplier');
 //Coustomer&supplier Controller end
 
 

@@ -10,4 +10,9 @@ class coustomerSupplier extends Controller
     public function addCustomer(){
         return view('customer&supplier.addCustomer');
     }
+
+    // add supplier
+    public function addSupplier(){
+        return view('customer&supplier.addSupplier');
+    }
 }

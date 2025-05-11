@@ -64,7 +64,7 @@
                                   </a>
                               </li>
                               <li class="">
-                                  <a href="">
+                                  <a href="{{route('addSupplier')}}">
                                       <i class="las la-minus"></i><span>Suplier</span>
                                   </a>
                               </li>
