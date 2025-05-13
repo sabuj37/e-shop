@@ -82,7 +82,7 @@
                           </a>
                           <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('newProduct')}}">
                                               <i class="las la-minus"></i><span>New Product</span>
                                           </a>
                                   </li>

@@ -30,7 +30,7 @@ Route::get('/add/supplier',[
 //Product
 
 Route::get('/new/product',[
-    coustomerSupplier::class,
+    product::class,
     'Product'
 ])->name('newProduct');
 
