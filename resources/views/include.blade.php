@@ -420,10 +420,7 @@
                                   </div>
                               </li>
                               <li>
-                                  <a href="#" class="btn border add-btn shadow-none mx-2 d-none d-md-block"
-                                ]
-                                ss      data-toggle="modal" data-target="#new-order"><i class="las la-plus mr-2"></i>New
-                                      Order</a>
+                                  <a href="#" class="btn border add-btn shadow-none mx-2 d-none d-md-block" data-toggle="modal" data-target="#new-order"><i class="las la-plus mr-2"></i>New Order</a>
                               </li>
                               <li class="nav-item nav-icon search-content">
                                   <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
@@ -630,6 +627,7 @@
                   <div class="modal-body">
                       <div class="popup text-left">
                           <h4 class="mb-3">New Order</h4>
+
                           <div class="content create-workform bg-body">
                               <div class="pb-3">
                                   <label class="mb-2">Email</label>
