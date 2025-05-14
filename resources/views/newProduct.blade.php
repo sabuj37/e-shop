@@ -44,36 +44,42 @@
                         <div class="col-md-1 mt-5 p-0">
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Category">Category</button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for="inputState" class="form-label">City *</label>
+                                <label>Product Unit</label>
+                                <label for="inputState" class="form-label"></label>
                                 <select id="inputState" class="form-control">
-                                    <option selected>customer type</option>
+                                    <option selected>Product Unit</option>
                                     <option>...</option>
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-1 mt-5 p-0">
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#unit">Product unit</button>
+                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputState" class="form-label">Aria *</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>customer type</option>
-                                    <option>...</option>
-                                </select>
+                                <label for="alert" class="form-label">Alert Quantity</label>
+                                 <input type="text" class="form-control" id="alert" placeholder="Optional">
+                                
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputState" class="form-label">Contact Type *</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>customer type</option>
-                                    <option>...</option>
-                                </select>
+                                <label for="deatils" class="form-label">Deatils</label>
+                                 <input type="text" class="form-control" id="deatils" placeholder="Optional">
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="deatils" class="form-label">Deatils</label>
+                                 <input type="text" class="form-control" id="deatils" placeholder="Optional">
+                                
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Add Customer</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="submit" class="btn btn-primary mr-2">Save Product</button>
                 </form>
             </div>
         </div>
@@ -84,15 +90,51 @@
         <div class="card">
             <div class="card-header ">
                     <div class="row">
-                        <div class="col-md-6">
-                            <h4 class="">Customer Receivable : </h4>
+                        <div class="col-md-12">
+                            <h4 class="">Product List</h4>
                         </div>
-                        <div class="col-md-6 text-last">
-                            <h4 class="">Add Customer Payable : </h4>
-                        </div>
+                        
                     </div>
             </div>
-            <div class="card-body">
+    <div class="card-body">
+<table class="table table-bordered border-primary">
+  <thead>
+    <tr class="table">
+      <th scope="col">Product Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Unit</th>
+      <th scope="col">Creat-date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>@mdo</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td>@mdo</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>@social</td>
+      <td>@mdo</td>
+      <td>@mdo</td>
+    </tr>
+  </tbody>
+</table>
             </div>
         </div>
     </div>
@@ -142,5 +184,27 @@
   </div>
 </div>
 
+<!-- product unit -->
+
+<div class="modal fade " id="unit" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="unit" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="unit">Modal name</h1>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+  <label for="unit" class="form-label">Product Unit</label>
+  <input type="text" class="form-control" id="unit" placeholder="Enter Product Unit name">
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection
