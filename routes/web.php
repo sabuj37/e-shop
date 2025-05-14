@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\coustomerSupplier;
 use App\Http\Controllers\Product;
+use App\Http\Controllers\purchase;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,3 +36,15 @@ Route::get('/new/product',[
 ])->name('newProduct');
 
 //endProduct
+
+//purchase str
+Route::get('/add/purchase',[
+    purchase::class,
+    'addPurchase'
+])->name('addPurchase');
+
+Route::get('/purchase/list',[
+    purchase::class,
+    'purchaseList'
+])->name('purchaseList');
+//Purchase end

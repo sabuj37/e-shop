@@ -120,12 +120,12 @@
                           </a>
                           <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('addPurchase')}}">
                                               <i class="las la-minus"></i><span>Naw Parchase</span>
                                           </a>
                                   </li>
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('addPurchase')}}">
                                               <i class="las la-minus"></i><span>Parchase List</span>
                                           </a>
                                   </li>
