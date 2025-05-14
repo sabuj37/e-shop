@@ -1,5 +1,5 @@
 @extends('include') 
-@section('backTitle') addCoustomer @endsection @section('container')
+@section('backTitle')new products @endsection @section('container')
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
@@ -36,7 +36,7 @@
                                 <label>Product Category</label>
                                 <label for="inputState" class="form-label"></label>
                                 <select id="inputState" class="form-control">
-                                    <option selected>Category *</option>
+                                    <option selected>Category</option>
                                     <option>...</option>
                                 </select>
                             </div>
@@ -129,11 +129,14 @@
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="mb-3">
+  <label for="formGroupExampleInput" class="form-label">Category</label>
+  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Category name">
+</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+        <button type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>
