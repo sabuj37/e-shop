@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="supplierName" class="form-label">Supplier *</label>
@@ -19,8 +19,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2 mt-5 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier">New Supplier</button>
+                        <div class="col-md-2 mt-4 p-0">
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier"><i class="las la-plus mr-2"></i>New Supplier</button>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -44,8 +44,8 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2 mt-5 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newProduct">New Product</button>
+                        <div class="col-md-2 mt-4 p-0">
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newProduct"><i class="las la-plus mr-2"></i>New Product</button>
                         </div>
                     </div>
                     <button type="save" class="btn btn-primary mr-2">Add Customer</button>
@@ -55,17 +55,43 @@
         </div>
     </div>
     <div class="col-sm-5 col-md-3 col-lg-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="header-title">
-                    <h6 class="card-title">Create Purchase</h6>
+            <div class="card">
+                <div class="card-body">
+                    <div class="header-title">
+                        <h6 class="card-title">Create Purchase</h6>
+                    </div>
+                    <form action="">
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-4">
+                                <label for="inputEmail3" class="col-form-label">Email</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" id="inputEmail3">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3  text-center">
+                            <div class="col-6">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                <label class="form-check-label" for="gridRadios1">
+                                Discount
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option1" checked>
+                                <label class="form-check-label" for="gridRadios2">
+                                Discount %
+                                </label>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
     </div>
     <div class="col-md-9 col-sm-7 col-lg-9">
         <div class="card">
             <div class="card-body">
+                <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
                 <div class="rounded mb-3 table-responsive product-table">
                     <table class="data-tables table mb-0 table-bordered">
                         <thead class="bg-white text-uppercase">
@@ -100,14 +126,19 @@
                                     Ac
                                 </td>
                                 <td>
-                                    <button type="reset" class="btn btn-success btn-sm">Add</button>
+                                    <button type="reset" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button>
                                 </td>
-                                <td>1 year</td>
-                                <td>12</td>
-                                <td>10000</td>
-                                <td>10%</td>
+                                <td>
+                                <input type="text" class="form-control" id="reference" name="reference" /></td>
+                                <td>
+                                <input type="text" class="form-control" id="reference" name="reference" /></td>
+                                <td>
+                                <input type="text" class="form-control" id="reference" name="reference" /></td>
+                                <td>
+                                <input type="text" class="form-control" id="reference" name="reference" /></td>
                                 <td>00</td>
-                                <td>000</td>
+                                <td>
+                                <input type="text" class="form-control" id="reference" name="reference" /></td>
                                 <td>00</td>
                                 <td>
                                     <div class="list-action">
@@ -118,6 +149,7 @@
                         </tbody>
                     </table>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -203,6 +235,35 @@
                     <div class="col-md-4">
                         <label for="mail" class="form-label">Email</label>
                         <input type="mail" class="form-control" id="mail" name="mail" placeholder="optional" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- seral madal -->
+ <div class="modal fade" id="serialModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="serialModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="serialModal">Manage Serial Numbers</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="serialNmuber" name="serialNmuber" placeholder="" />
+                    </div>
+                    <div class="col-4 p-0 ">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Removed</button>
+                    </div>
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Add Serial Number</button>
                     </div>
                 </div>
             </div>
