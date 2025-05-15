@@ -35,6 +35,11 @@ Route::get('/new/product',[
     'Product'
 ])->name('newProduct');
 
+Route::get('/product/list',[
+    product::class,
+    'productlist'
+])->name('productlist');
+
 //endProduct
 
 //purchase str
