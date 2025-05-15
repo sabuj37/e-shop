@@ -151,7 +151,7 @@
                                           </a>
                                   </li>
                                   <li class="">
-                                          <a href="{{route('addPurchase')}}">
+                                          <a href="{{route('purchaseList')}}">
                                               <i class="las la-minus"></i><span>Parchase List</span>
                                           </a>
                                   </li>

@@ -1,6 +1,9 @@
 @extends('include') @section('backTitle') purchase @endsection @section('container')
 <div class="row">
-    <div class="col-sm-9">
+    <div class="col-md-8">
+    
+<div class="row">
+    <div class="col-md-12 col-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
@@ -54,41 +57,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-5 col-md-3 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="header-title">
-                        <h6 class="card-title">Create Purchase</h6>
-                    </div>
-                    <form action="">
-                        <div class="row mb-3 align-items-center">
-                            <div class="col-4">
-                                <label for="inputEmail3" class="col-form-label">Email</label>
-                            </div>
-                            <div class="col-sm-8">
-                                <input type="email" class="form-control" id="inputEmail3">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3  text-center">
-                            <div class="col-6">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                                <label class="form-check-label" for="gridRadios1">
-                                Discount
-                                </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option1" checked>
-                                <label class="form-check-label" for="gridRadios2">
-                                Discount %
-                                </label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-    </div>
-    <div class="col-md-9 col-sm-7 col-lg-9">
+    <div class="col-md-12 col-sm-12 col-lg-12">
         <div class="card">
             <div class="card-body">
                 <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
@@ -154,6 +123,94 @@
         </div>
     </div>
 </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+<div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="header-title">
+                        <h6 class="card-title">Create Purchase</h6>
+                    </div>
+                    <form action="">
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-4">
+                                <label for="totalAmount" class="col-form-label">Total:</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" id="totalAmount" name="totalAmount">
+                            </div>
+                        </div>
+                        <div class="row mb-2  text-center">
+                            <div class="col-6">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="discountRadio"  checked>
+                                <label class="form-check-label" for="discountRadio" name="discountRadio">
+                                Discount
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="discountPerRadio" checked>
+                                <label class="form-check-label" for="discountPerRadio" naame="discountPerRadio">
+                                Discount %
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="discountAmount" class="col-form-label">Discount Amount:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="discountAmount" name="discountAmount">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="discountPer" class="col-form-label">Discount %:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="discountPer" name="discountPer">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="grandTotal" class="col-form-label">Grand Total:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="grandTotal" name="grandTotal">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="paidAmount" class="col-form-label">Paid Amount:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="paidAmount" name="paidAmount">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="dueAmount" class="col-form-label">Due Amount:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="dueAmount" name="dueAmount">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-12">
+                                <label for="note" class="col-form-label">Note:</label>
+                                <textarea class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+        </div>
+        
+    
+    </div>
+</div>
+
 
 <!-- Page end  -->
 
