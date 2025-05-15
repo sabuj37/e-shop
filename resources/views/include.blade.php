@@ -16,6 +16,32 @@
       <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/vendor/fortawesome/fontawesome-free/css/all.min.css">
       <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
       <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/vendor/remixicon/fonts/remixicon.css">  </head>
+      <style>
+        .product-table table td, table th{
+            font-size: 10px !important;
+            text-align: center !important;
+            padding: .5rem .2rem !important;
+        }
+        .form-control {
+            height: 30px;
+            line-height: 30px;
+            background: #fff;
+            border: 1px solid #DCDFE8;
+            font-size: 14px;
+            color: #000000;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .form-check-input {
+            position: absolute;
+            margin-top: .5rem;
+            margin-left: -1.25rem;
+        }
+      </style>
   <body class="">
     <!-- loader Start -->
     <div id="loading">
