@@ -113,7 +113,7 @@
                                           </a>
                                   </li>
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('productlist')}}">
                                               <i class="las la-minus"></i><span>Product List</span>
                                           </a>
                                   </li>

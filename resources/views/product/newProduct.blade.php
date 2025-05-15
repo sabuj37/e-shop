@@ -54,7 +54,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-1 mt-5 p-0">
+                        <div class="col-md-2 mt-5 p-0">
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#unit">Product unit</button>
                         </div>
                         <div class="col-md-4">
@@ -148,15 +148,18 @@
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="brand">Modal title</h1>
+        <h6 class="modal-title fs-5" id="brand">Creat Brand</h6>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+       <div class="mb-3">
+  <label for="brand" class="form-label">Creat Brand</label>
+  <input type="text" class="form-control" id="brand" placeholder="Enter Brand name">
+</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
+        <button type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>
@@ -167,7 +170,7 @@
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="Category">Modal title</h1>
+        <h6 class="modal-title fs-5" id="Category">Creat Category</h6>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -190,7 +193,7 @@
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="unit">Modal name</h1>
+        <h6 class="modal-title fs-5" id="unit">Preoduct Unit</h6>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
