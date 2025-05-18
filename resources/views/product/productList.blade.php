@@ -1,62 +1,71 @@
 @extends('include') @section('backTitle') Product List @endsection @section('container')
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header ">
+ <div class="card">
+            <div class="card-body">
+               
+                <div class="rounded mb-3 table-responsive product-table">
                     <div class="row">
-                        <div class="col-md-4">
-                            <h4 class="">Product List</h4>
-                        </div>
-                        <div class="col-md-4">
-                        <select id="inputState" class="form-control">
-                                    <option selected>Brand</option>
-                                    <option>...</option>
-                                </select>
+                        <div class="col-12 mb-3">
+                            <h4>Product List</h4>
+
                         </div>
                     </div>
-            </div>
-    <div class="card-body">
-<table class="table table-bordered border-primary data-tables">
-  <thead>
-    <tr class="table">
-      <th scope="col">Product Name</th>
-      <th scope="col">Category</th>
-      <th scope="col">Brand</th>
-      <th scope="col">Unit</th>
-      <th scope="col">Creat-date</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>John</td>
-      <td>Doe</td>
-      <td>@social</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-    </tr>
-  </tbody>
-</table>
+                    <table class="data-tables table mb-0 table-bordered">
+                        <thead class="bg-white text-uppercase">
+                            <tr>
+                                <th>
+                                    <div class="checkbox d-inline-block">
+                                        <input type="checkbox" class="checkbox-input" id="checkbox1" />
+                                        <label for="checkbox1" class="mb-0"></label>
+                                    </div>
+                                </th>
+                                <th>Name</th>
+                                <th>Unit</th>
+                                <th>Barcode</th>
+                                <th>Category Name</th>
+                                <th>Brand</th>
+                                <th>Total stock</th>
+                                <th>Last Purchase</th>
+                                <th>Last MRP</th>
+                                <th>Last DP/RP</th>
+                                <th>Highest Purchase</th>
+                                <th>Highest MRP</th>
+                                <th>Last DP</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="checkbox d-inline-block">
+                                        <input type="checkbox" class="checkbox-input" id="checkbox2" />
+                                        <label for="checkbox2" class="mb-0"></label>
+                                    </div>
+                                </td>
+                                <td>Sabuj</td>
+                                <td>Psc</td>
+                                <td>646556</td>
+                                <td>Best</td>
+                                <td>emotional</td>
+                                <td>1231</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><div class="d-flex align-items-center list-action">
+                                    
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
+                                        href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
+                                        href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            
             </div>
         </div>
-    </div>
-</div>
 @endsection

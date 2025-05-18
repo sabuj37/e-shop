@@ -169,7 +169,7 @@
                           </a>
                           <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('newsale')}}">
                                               <i class="las la-minus"></i><span>New sale</span>
                                           </a>
                                   </li>

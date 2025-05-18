@@ -71,13 +71,6 @@
                                 
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="deatils" class="form-label">Deatils</label>
-                                 <input type="text" class="form-control" id="deatils" placeholder="Optional">
-                                
-                            </div>
-                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Save Product</button>
                 </form>

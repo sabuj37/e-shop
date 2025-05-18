@@ -5,6 +5,8 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\coustomerSupplier;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\purchase;
+use App\Http\Controllers\saleController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,3 +55,11 @@ Route::get('/purchase/list',[
     'purchaseList'
 ])->name('purchaseList');
 //Purchase end
+  
+
+//sale start
+Route::get('/new/sale',[
+    saleController::class,
+    'newsale'
+])->name('newsale');
+//sale end
