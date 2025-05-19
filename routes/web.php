@@ -6,8 +6,58 @@ use App\Http\Controllers\coustomerSupplier;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\purchase;
 use App\Http\Controllers\saleController;
+use App\Http\Controllers\userInfo;
+
+//user info str
+Route::get('/login',[
+    userInfo::class,
+    'userLogin'
+])->name('userLogin');
 
 
+Route::get('/user/regiser',[
+    userInfo::class,
+    'userRegister'
+])->name('userRegister');
+
+Route::get('/user/lock/screen',[
+    userInfo::class,
+    'userLockScreen'
+])->name('userLockScreen');
+
+Route::get('/user/recover',[
+    userInfo::class,
+    'userRecover'
+])->name('userRecover');
+
+
+Route::get('/user/recover/code',[
+    userInfo::class,
+    'userRecoverCode'
+])->name('userRecoverCode');
+
+
+Route::get('/user/recover/password',[
+    userInfo::class,
+    'userRecoverPassword'
+])->name('userRecoverPassword');
+
+
+Route::get('/business/setup',[
+    userInfo::class,
+    'storeCreat'
+])->name('storeCreat');
+
+
+
+Route::get('/user/confirm/mail',[
+    userInfo::class,
+    'userConfirmMail'
+])->name('userConfirmMail');
+
+
+
+//user info end
 Route::get('/', function () {
     return view('welcome');
 });
