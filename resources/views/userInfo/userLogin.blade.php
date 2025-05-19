@@ -33,7 +33,9 @@
                   <div class="card auth-card">
                      <div class="card-body p-0">
                         <div class="d-flex align-items-center auth-content">
+                          
                            <div class="col-lg-7 align-self-center">
+                              @if($config->count()>0)
                               <div class="p-3">
                                  <h2 class="mb-2">Sign In</h2>
                                  <p>Login to stay connected.</p>
@@ -51,22 +53,15 @@
                                              <label>Password</label>
                                           </div>
                                        </div>
-                                       <div class="col-lg-6">
-                                          <div class="custom-control custom-checkbox mb-3">
-                                             <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                             <label class="custom-control-label control-label-1" for="customCheck1">Remember Me</label>
-                                          </div>
-                                       </div>
-                                       <div class="col-lg-6">
-                                          <a href="{{route('userRecover')}}" class="text-primary float-right">Forgot Password?</a>
-                                       </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Sign In</button>
-                                    <p class="mt-3">
-                                       Create an Account <a href="{{route('userRegister')}}" class="text-primary">Sign Up</a>
-                                    </p>
                                  </form>
                               </div>
+                              @else
+                              <div class="col-7">
+                                 <h2 class="mb-2">welcome To Dashboard</h2>
+                              </div>
+                              @endif
                            </div>
                            <div class="col-lg-5 content-right">
                               <img src="{{asset('/public/eshop/')}}/assets/images/login/01.png" class="img-fluid image-right" alt="">

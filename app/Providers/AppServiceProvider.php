@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\businessTable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //global variable
+       
+        
+        view()->composer('*',function(View $view){
+             $businessTable = businessTable::all();
+            $view->with('config',$businessTable);
+        }
+            
+        );
     }
 }
