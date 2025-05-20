@@ -24,10 +24,8 @@ class AppServiceProvider extends ServiceProvider
        
         
         view()->composer('*',function($view){
-             $businessTable = businessTable::all();
+            $businessTable = businessTable::all();
             $view->with('config',$businessTable);
-        }
-            
-        );
+        });
     }
 }

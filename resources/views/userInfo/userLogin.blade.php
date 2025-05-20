@@ -31,36 +31,77 @@
             <div class="row align-items-center justify-content-center height-self-center">
                <div class="col-lg-7">
                   <div class="card auth-card">
-                     <div class="card-body p-0">
+                     <div class="card-body">
                         <div class="d-flex align-items-center auth-content">
-                          
                            <div class="col-lg-7 align-self-center">
+                              <h2 class="mb-2">Admin Panel</h2>
+                              <p>Discover Your World</p>
                               @if($config->count()>0)
-                              <div class="p-3">
-                                 <h2 class="mb-2">Sign In</h2>
-                                 <p>Login to stay connected.</p>
+                              <form>
+                                 <div class="row">
+                                    <div class="col-lg-12">
+                                       <div class="floating-label form-group">
+                                          <input class="floating-input form-control" type="email" id="userMail" name="userMail" placeholder=" ">
+                                          <label>Email</label>
+                                       </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                       <div class="floating-label form-group">
+                                          <input class="floating-input form-control" type="password" id="password" name="password" placeholder=" ">
+                                          <label>Password</label>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <button type="submit" class="btn btn-primary">Sign In</button>
+                              </form>
+                              @else
                                  <form>
                                     <div class="row">
-                                       <div class="col-lg-12">
+                                       <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="email" id="userMail" name="userMail" placeholder=" ">
+                                             <input class="floating-input form-control" type="text" id="fullName" name="fullName" placeholder=" ">
+                                             <label>Full Name</label>
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                          <div class="floating-label form-group">
+                                             <input class="floating-input form-control" type="text" id="lastName" name="lastName" placeholder=" ">
+                                             <label>Last Name</label>
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                          <div class="floating-label form-group">
+                                             <input class="floating-input form-control" type="email" id="mail" name="mail" placeholder=" ">
                                              <label>Email</label>
                                           </div>
                                        </div>
-                                       <div class="col-lg-12">
+                                       <div class="col-lg-6">
+                                          <div class="floating-label form-group">
+                                             <input class="floating-input form-control" type="number" id="mobile" name="mobile" placeholder=" ">
+                                             <label>Phone No.</label>
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                          <div class="floating-label form-group">
+                                             <input class="floating-input form-control" type="number" id="otp" name="otp" placeholder=" ">
+                                             <label>OTP</label>
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-6">
                                           <div class="floating-label form-group">
                                              <input class="floating-input form-control" type="password" id="password" name="password" placeholder=" ">
                                              <label>Password</label>
                                           </div>
                                        </div>
+                                       <div class="col-lg-6">
+                                          <div class="floating-label form-group">
+                                             <input class="floating-input form-control" type="password" id="confirmPass" name="confirmPass" placeholder=" ">
+                                             <label>Confirm Password</label>
+                                          </div>
+                                       </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Sign In</button>
+                                    <button type="submit" class="btn btn-primary">Pos Register</button>
                                  </form>
-                              </div>
-                              @else
-                              <div class="col-7">
-                                 <h2 class="mb-2">welcome To Dashboard</h2>
-                              </div>
                               @endif
                            </div>
                            <div class="col-lg-5 content-right">
