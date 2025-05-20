@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         //global variable
        
         
-        view()->composer('*',function(View $view){
+        view()->composer('*',function($view){
              $businessTable = businessTable::all();
             $view->with('config',$businessTable);
         }
