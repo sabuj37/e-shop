@@ -42,6 +42,96 @@
     </div>
 </div>
 
+
+<div class="card">
+            <div class="card-body">
+               
+                    <table class="data-tables table mb-0 table-bordered">
+                        <thead class="bg-white text-uppercase">
+                            <tr>
+                                <th>#</th>
+                                <th>Product</th>
+                                <th>Purchase Date</th>
+                                <th>Serial</th>
+                                <th>Warranty</th>
+                                <th>Qty</th>
+                                <th>Sale Price</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                                <th>MRP</th>
+                                <th>Profit Margin %</th>
+                                <th>DP</th>
+                                <th>Purchase</th>
+                                <th>Purchase Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><div class="d-flex align-items-center list-action">
+                                    
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
+                                        href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
+                                        href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+<div class="row p-3 ">
+<div class="col-6">
+   
+<label>Select Product*</label>
+<label for="inputState" class="form-label"></label>
+<select id="inputState" class="form-control">
+<option selected>Customer</option>
+<option>...</option>
+</select>
+
+<label for="note">Note</label>
+<input type="text" class="form-control" id="note">
+
+                       
+
+</div>
+<div class="col-md-2 mt-4 p-2 ">
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customer">Reset Product</button>
+
+</div>
+
+
+<div class="col-md-4">
+        <div class="row">
+<div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="header-title">
+                        <h6 class="card-title">Create Purchase</h6>
+                    </div>
+                   
+                </div>
+            </div>
+    </div>
+
+
 <!-- start_model -->
  <div class="modal fade" id="customer" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="customer" aria-hidden="true">
     <div class="modal-dialog">
