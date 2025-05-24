@@ -107,7 +107,7 @@
 </select>
 
 <label for="note">Note</label>
-<input type="text" class="form-control" id="note">
+<textarea class="form-control" aria-label="With textarea"></textarea>
 
                        
 
@@ -123,10 +123,57 @@
 <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="header-title">
-                        <h6 class="card-title">Create Purchase</h6>
-                    </div>
-                   
+                    <form action="">
+                        <div class="row mb-2 align-items-center">
+                            
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="discountAmount" class="col-form-label">Total:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="discountAmount" name="discountAmount">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="discountPer" class="col-form-label">Discount %:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="discountPer" name="discountPer">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="grandTotal" class="col-form-label">Grand Total:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="grandTotal" name="grandTotal">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="paidAmount" class="col-form-label">Recevied Amount:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="paidAmount" name="paidAmount">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-6">
+                                <label for="dueAmount" class="col-form-label">Due Amount:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="dueAmount" name="dueAmount">
+                            </div>
+                        </div>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col-12">
+                                <label for="note" class="col-form-label">Note:</label>
+                                <textarea class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
     </div>

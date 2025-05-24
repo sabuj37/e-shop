@@ -275,7 +275,7 @@
                           </a>
                           <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('expensetype')}}">
                                               <i class="las la-minus"></i><span>Expense type</span>
                                           </a>
                                   </li>

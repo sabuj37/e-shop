@@ -7,6 +7,7 @@ use App\Http\Controllers\Product;
 use App\Http\Controllers\purchase;
 use App\Http\Controllers\saleController;
 use App\Http\Controllers\userInfo;
+use App\Http\Controllers\expenseController;
 
 //user info str
 Route::get('/login',[
@@ -47,8 +48,6 @@ Route::get('/business/setup',[
     userInfo::class,
     'storeCreat'
 ])->name('storeCreat');
-
-
 
 Route::get('/user/confirm/mail',[
     userInfo::class,
@@ -113,3 +112,11 @@ Route::get('/new/sale',[
     'newsale'
 ])->name('newsale');
 //sale end
+
+// expense
+
+Route::get('/expense/type',[
+    expenseController::class,
+    'expensetype'
+])->name('expensetype');
+// endexpense
