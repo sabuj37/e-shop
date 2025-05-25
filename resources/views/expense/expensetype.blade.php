@@ -15,9 +15,9 @@
 </div>
 
 
-<table class="table table-success table-bordered table-striped-columns">
+<table class="table left-text table-success table-bordered table-striped-columns">
   <thead>
-    <tr>
+    <tr class="fw-5 ">
       <th scope="col">Last</th>
       <th scope="col">Handle</th>
     </tr>
@@ -26,7 +26,13 @@
     <tr>
       
       <td>Mark</td>
-      <td>Otto</td>
+      <td><div class="d-flex align-items-center list-action">
+                                    
+        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
+            href="#"><i class="ri-pencil-line mr-0"></i>Edit</a>
+        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
+            href="#"><i class="ri-delete-bin-line mr-0"></i>Delete</a>
+    </div></td>
       
 </tr>
   </tbody>

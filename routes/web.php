@@ -119,4 +119,9 @@ Route::get('/expense/type',[
     expenseController::class,
     'expensetype'
 ])->name('expensetype');
+
+Route::get('/expense',[
+    expenseController::class,
+    'expense'
+])->name('expense');
 // endexpense

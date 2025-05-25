@@ -41,6 +41,9 @@
             margin-top: .5rem;
             margin-left: -1.25rem;
         }
+        .left-text{
+            text-align:left !important;
+        }
       </style>
   <body class="">
     <!-- loader Start -->
@@ -280,7 +283,7 @@
                                           </a>
                                   </li>
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('expense')}}">
                                               <i class="las la-minus"></i><span>Expense</span>
                                           </a>
                                   </li>

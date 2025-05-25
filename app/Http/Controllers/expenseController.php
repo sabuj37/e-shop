@@ -10,4 +10,10 @@ class expenseController extends Controller
         return view('expense.expensetype');
 
     }
+
+
+     Public function expense (){
+        return view('expense.expense');
+
+    }
 }
