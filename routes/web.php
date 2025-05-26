@@ -58,74 +58,81 @@ Route::get('/user/confirm/mail',[
     'userConfirmMail'
 ])->name('userConfirmMail');
 
+Route::get('/logout',[
+    userInfo::class,
+    'logout'
+])->name('logout');
+
 
 
 //user info end
 Route::get('/', function () {
     return view('welcome');
 });
+Route::middleware(['posAdmin'])->group(function(){
 
-Route::get('/dashboard',[
-    dashboardController::class,
-    'dashboard'
-])->name('dashboard');
+    Route::get('/dashboard',[
+        dashboardController::class,
+        'dashboard'
+    ])->name('dashboard');
 
-//Coustomer&supplier Controller str
-Route::get('/add/customer',[
-    coustomerSupplier::class,
-    'addCustomer'
-])->name('addCustomer');
+    //Coustomer&supplier Controller str
+    Route::get('/add/customer',[
+        coustomerSupplier::class,
+        'addCustomer'
+    ])->name('addCustomer');
 
-Route::get('/add/supplier',[
-    coustomerSupplier::class,
-    'addSupplier'
-])->name('addSupplier');
-//Coustomer&supplier Controller end
+    Route::get('/add/supplier',[
+        coustomerSupplier::class,
+        'addSupplier'
+    ])->name('addSupplier');
+    //Coustomer&supplier Controller end
 
 
-//Product
+    //Product
 
-Route::get('/new/product',[
-    product::class,
-    'Product'
-])->name('newProduct');
+    Route::get('/new/product',[
+        product::class,
+        'Product'
+    ])->name('newProduct');
 
-Route::get('/product/list',[
-    product::class,
-    'productlist'
-])->name('productlist');
+    Route::get('/product/list',[
+        product::class,
+        'productlist'
+    ])->name('productlist');
 
-//endProduct
+    //endProduct
 
-//purchase str
-Route::get('/add/purchase',[
-    purchase::class,
-    'addPurchase'
-])->name('addPurchase');
+    //purchase str
+    Route::get('/add/purchase',[
+        purchase::class,
+        'addPurchase'
+    ])->name('addPurchase');
 
-Route::get('/purchase/list',[
-    purchase::class,
-    'purchaseList'
-])->name('purchaseList');
-//Purchase end
-  
+    Route::get('/purchase/list',[
+        purchase::class,
+        'purchaseList'
+    ])->name('purchaseList');
+    //Purchase end
+    
 
-//sale start
-Route::get('/new/sale',[
-    saleController::class,
-    'newsale'
-])->name('newsale');
-//sale end
+    //sale start
+    Route::get('/new/sale',[
+        saleController::class,
+        'newsale'
+    ])->name('newsale');
+    //sale end
 
-// expense
+    // expense
 
-Route::get('/expense/type',[
-    expenseController::class,
-    'expensetype'
-])->name('expensetype');
+    Route::get('/expense/type',[
+        expenseController::class,
+        'expensetype'
+    ])->name('expensetype');
 
-Route::get('/expense',[
-    expenseController::class,
-    'expense'
-])->name('expense');
-// endexpense
+    Route::get('/expense',[
+        expenseController::class,
+        'expense'
+    ])->name('expense');
+    // endexpense
+});

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('contactNumber')->nullable();
             $table->string('mail')->nullable();
             $table->string('password')->nullable();
-            $table->string('confirmPass')->nullable();
             $table->string('businessId')->nullable();
             $table->string('accStatus')->nullable();
             $table->string('dob')->nullable();

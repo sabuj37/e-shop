@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdminUser;
+use Hash;
+use Session;
 
 
 class userInfo extends Controller
@@ -17,27 +19,35 @@ class userInfo extends Controller
     public function adminLogin(Request $req){
         $server = AdminUser::Where(['mail'=>$req->userMail])->first();
         if(!empty($server)):
-            if($server->password = $req->password):
-                return "You have permission";
+            if(Hash::check($req->password,$server->password)):
+                session()->regenerate();
+                session(['posAdmin'=>$server->id]);
+                session()->put('posAdmin',$server->id);
+                return redirect(route('dashboard'));
             else:
-                return "Wrond password";
+                return back()->with('error',"Wrong password provided");
             endif;
         else:
-            return "You are an annonimous person";
+            return back()->with('error',"User not exist");
         endif;
         
     }
+
     public function creatAdmin(Request $req){
         $server = new AdminUser();
+        
+        $hashPass = Hash::make($req->password);
+        if($req->password != $req->confirmPass):
+            return back()->with('error','Password not match confirm password');
+        endif;
 
-        $server->fullName       = $req->fullName ;
-        $server->sureName       = $req->sureName ;
-        $server->storeName      = $req->storeName ;
-        $server->mail           = $req->mail ;
-        $server->contactNumber  = $req->contactNumber ;
-        $server->password       = $req->password ;
-        $server->confirmPass    = $req->confirmPass ;
-        $server->businessId     = $req->businessId ;
+        $server->fullName       = $req->fullName;
+        $server->sureName       = $req->sureName;
+        $server->storeName      = $req->storeName;
+        $server->mail           = $req->mail;
+        $server->contactNumber  = $req->contactNumber;
+        $server->password       = $hashPass;
+        $server->businessId     = $req->businessId;
         
             if($server->save()):
                 return back()->with('success','Success! Admin profile created successfully');
@@ -45,6 +55,12 @@ class userInfo extends Controller
                 return back()->with('success','error! There was an error. Please try later');
             endif;
          
+    }
+
+    public function logout(){
+        Session::flush();
+        Session::regenerate();
+        return redirect(route('userLogin'))->with('success','logout successful');
     }
     
 
