@@ -15,11 +15,15 @@ Route::get('/login',[
     'userLogin'
 ])->name('userLogin');
 
-
-Route::get('/user/regiser',[
+Route::post('creat/admin',[
     userInfo::class,
-    'userRegister'
-])->name('userRegister');
+    'creatAdmin'
+])->name('creatAdmin');
+
+Route::post('admin/login',[
+    userInfo::class,
+    'adminLogin'
+])->name('adminLogin');
 
 Route::get('/user/lock/screen',[
     userInfo::class,

@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\businessTable;
+use App\Models\AdminUser;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
        
         
         view()->composer('*',function($view){
-            $businessTable = businessTable::all();
+            $businessTable = AdminUser::all();
             $view->with('config',$businessTable);
         });
     }

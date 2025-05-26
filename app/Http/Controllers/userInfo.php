@@ -3,16 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AdminUser;
+
 
 class userInfo extends Controller
 {
+    //user login & rge form str
     public function userLogin(){
-        return view('userInfo.userLogin');
+        $server = AdminUser::orderby('id','DESC')->limit(1);
+        return view('userInfo.userLogin',['server'=>$server]);
+    }
+
+    public function adminLogin(Request $req){
+        $server = AdminUser::Where(['mail'=>$req->userMail])->first();
+        if(!empty($server)):
+            if($server->password = $req->password):
+                return "You have permission";
+            else:
+                return "Wrond password";
+            endif;
+        else:
+            return "You are an annonimous person";
+        endif;
+        
+    }
+    public function creatAdmin(Request $req){
+        $server = new AdminUser();
+
+        $server->fullName       = $req->fullName ;
+        $server->sureName       = $req->sureName ;
+        $server->storeName      = $req->storeName ;
+        $server->mail           = $req->mail ;
+        $server->contactNumber  = $req->contactNumber ;
+        $server->password       = $req->password ;
+        $server->confirmPass    = $req->confirmPass ;
+        $server->businessId     = $req->businessId ;
+        
+            if($server->save()):
+                return back()->with('success','Success! Admin profile created successfully');
+            else:
+                return back()->with('success','error! There was an error. Please try later');
+            endif;
+         
     }
     
-    public function userRegister(){
-        return view('userInfo.userRegister');
-    }
+
+
+    
+    //user login & rge form end
     
     public function userLockScreen(){
         return view('userInfo.userLockScreen');

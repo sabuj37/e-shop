@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('admin_users', function (Blueprint $table) {
             $table->id();
             $table->string('fullName')->nullable();
+            $table->string('storeName')->nullable();
             $table->string('sureName')->nullable();
-            $table->string('userName')->nullable();
+            $table->string('contactNumber')->nullable();
             $table->string('mail')->nullable();
             $table->string('password')->nullable();
+            $table->string('confirmPass')->nullable();
             $table->string('businessId')->nullable();
-            $table->string('contactNumber')->nullable();
             $table->string('accStatus')->nullable();
             $table->string('dob')->nullable();
             $table->string('employeeId')->nullable();

@@ -34,10 +34,25 @@
                      <div class="card-body">
                         <div class="d-flex align-items-center auth-content">
                            <div class="col-lg-7 align-self-center">
+                              <div class="row">
+                                 <div class="col-12">
+                                       @if(session()->has('success'))
+                                          <div class="alert alert-success w-100">
+                                             {{ session()->get('success') }}
+                                          </div>
+                                       @endif
+                                       @if(session()->has('error'))
+                                          <div class="alert alert-danger w-100">
+                                             {{ session()->get('error') }}
+                                          </div>
+                                       @endif
+                                 </div>
+                              </div>
                               <h2 class="mb-2">Admin Panel</h2>
                               <p>Discover Your World</p>
                               @if($config->count()>0)
-                              <form>
+                              <form action="{{ route('adminLogin') }}" class="login-form" method="POST">
+                                    @csrf
                                  <div class="row">
                                     <div class="col-lg-12">
                                        <div class="floating-label form-group">
@@ -55,7 +70,8 @@
                                  <button type="submit" class="btn btn-primary">Sign In</button>
                               </form>
                               @else
-                                 <form>
+                                 <form action="{{ route('creatAdmin') }}" class="login-form" method="POST">
+                                    @csrf
                                     <div class="row">
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
@@ -65,7 +81,7 @@
                                        </div>
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="text" id="lastName" name="lastName" placeholder=" ">
+                                             <input class="floating-input form-control" type="text" id="sureName" name="sureName" placeholder=" ">
                                              <label>Last Name</label>
                                           </div>
                                        </div>
@@ -77,14 +93,14 @@
                                        </div>
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="number" id="mobile" name="mobile" placeholder=" ">
+                                             <input class="floating-input form-control" type="number" id="contactNumber" name="contactNumber" placeholder=" ">
                                              <label>Phone No.</label>
                                           </div>
                                        </div>
                                        <div class="col-lg-6">
                                           <div class="floating-label form-group">
-                                             <input class="floating-input form-control" type="number" id="otp" name="otp" placeholder=" ">
-                                             <label>OTP</label>
+                                             <input class="floating-input form-control" type="text" id="storeName" name="storeName" placeholder=" ">
+                                             <label>Store Name</label>
                                           </div>
                                        </div>
                                        <div class="col-lg-6">
