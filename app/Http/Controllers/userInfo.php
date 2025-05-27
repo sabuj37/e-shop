@@ -20,9 +20,9 @@ class userInfo extends Controller
         $server = AdminUser::Where(['mail'=>$req->userMail])->first();
         if(!empty($server)):
             if(Hash::check($req->password,$server->password)):
-                session()->regenerate();
-                session(['posAdmin'=>$server->id]);
-                session()->put('posAdmin',$server->id);
+                session()->flush();
+                session(['pos'=>$server->id]);
+                session()->put('pos',$server->id);
                 return redirect(route('dashboard'));
             else:
                 return back()->with('error',"Wrong password provided");

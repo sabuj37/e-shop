@@ -16,7 +16,7 @@ class SuperAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Session::has('posAdmin')):
+        if(Session::has('pos')):
             $x = "";
         else:
             return redirect(route('userLogin'))->with('error','Please login to continue');
