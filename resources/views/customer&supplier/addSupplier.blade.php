@@ -13,7 +13,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Name *</label>
-                                <input type="text" class="form-control" placeholder="Enter Name" required />
+                                <input type="text" class="form-control" placeholder="Enter Name" id="" name="" required />
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>

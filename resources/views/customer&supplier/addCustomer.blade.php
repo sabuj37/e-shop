@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
+                <form action="" method="POST" data-toggle="validator">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
