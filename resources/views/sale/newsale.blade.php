@@ -113,7 +113,7 @@
 
 </div>
 <div class="col-md-2 mt-4 p-2 ">
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customer">Reset Product</button>
+<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customer">Reset Product</button>
 
 </div>
 
