@@ -14,6 +14,15 @@ return new class extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             
+            $table->string('name')->nullable();
+            $table->string('accReceivable')->nullable();
+            $table->string('accPayable')->nullable();
+            $table->string('mail')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('aria')->nullable();
             $table->timestamps();
         });
     }

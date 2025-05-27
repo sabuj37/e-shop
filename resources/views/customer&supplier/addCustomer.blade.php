@@ -2,6 +2,20 @@
 @section('backTitle') addCoustomer @endsection @section('container')
 <div class="row">
     <div class="col-sm-12">
+        <div class="row">
+                                 <div class="col-12">
+                                       @if(session()->has('success'))
+                                          <div class="alert alert-success w-100">
+                                             {{ session()->get('success') }}
+                                          </div>
+                                       @endif
+                                       @if(session()->has('error'))
+                                          <div class="alert alert-danger w-100">
+                                             {{ session()->get('error') }}
+                                          </div>
+                                       @endif
+                                 </div>
+                              </div>
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
@@ -9,72 +23,70 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="" method="POST" data-toggle="validator">
+                <form action="{{route('saveCustomer')}}" method="POST" >
+                    @csrf
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Name *</label>
-                                <input type="text" class="form-control" placeholder="Enter Name" required />
+                                <input type="text" class="form-control" placeholder="Enter Name"  id="fullName" name="fullName" required />
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
+                                <label for="inputState" class="form-label">Accoount Receivable *</label>
+                                
+                                <input type="number" class="form-control" placeholder="Enter Accoount Receivable Amount" id="accReceivable" name="accReceivable" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="inputState" class="form-label">Accoount Payable *</label>
+                                
+                                <input type="number" class="form-control" placeholder="Enter Accoount Payable Amount" id="accPayable" name="accPayable" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label>Email *</label>
-                                <input type="text" class="form-control" placeholder="Enter Email" required />
+                                <input type="email" class="form-control" placeholder="Enter Email" id="mail" name="mail"  required />
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Phone Number *</label>
-                                <input type="text" class="form-control" placeholder="Enter Phone Number" required />
+                                <input type="text" class="form-control" placeholder="Enter Phone Number" id="mobile" name="mobile" required />
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="inputState" class="form-label">Country *</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>customer type *</option>
-                                    <option>...</option>
-                                </select>
+                                
+                                <input type="text" class="form-control" placeholder="Enter The Country" id="country" name="country" required />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="inputState" class="form-label">State *</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>customer type</option>
-                                    <option>...</option>
-                                </select>
+                                
+                                <input type="text" class="form-control" placeholder="Enter The State" id="state" name="state" required />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="inputState" class="form-label">City *</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>customer type</option>
-                                    <option>...</option>
-                                </select>
+                               
+                                <input type="text" class="form-control" placeholder="Enter The City" id="city" name="city" required />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="inputState" class="form-label">Aria *</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>customer type</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="inputState" class="form-label">Contact Type *</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>customer type</option>
-                                    <option>...</option>
-                                </select>
+                               
+                                <input type="text" class="form-control" placeholder="Enter The Aria" id="aria" name="aria" required />
                             </div>
                         </div>
                     </div>

@@ -82,6 +82,12 @@ Route::middleware(['posAdmin'])->group(function(){
         'addCustomer'
     ])->name('addCustomer');
 
+    //coustomer save
+    Route::post('/save/customer',[
+        coustomerSupplier::class,
+        'saveCustomer'
+    ])->name('saveCustomer');
+
     Route::get('/add/supplier',[
         coustomerSupplier::class,
         'addSupplier'
