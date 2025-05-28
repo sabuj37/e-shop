@@ -88,10 +88,29 @@ Route::middleware(['posAdmin'])->group(function(){
         'saveCustomer'
     ])->name('saveCustomer');
 
+    //coustomer edit
+    Route::get('/customer/edit/{id}',[
+        coustomerSupplier::class,
+        'editCustomer'
+    ])->name('editCustomer');
+
+      //supplier add
     Route::get('/add/supplier',[
         coustomerSupplier::class,
         'addSupplier'
     ])->name('addSupplier');
+
+    //supplier save
+    Route::post('/save/supplier',[
+        coustomerSupplier::class,
+        'saveSupplier'
+    ])->name('saveSupplier');
+
+    //supplier edit
+    Route::get('/supplier/edit/{id}',[
+        coustomerSupplier::class,
+        'editSupplier'
+    ])->name('editSupplier');
     //Coustomer&supplier Controller end
 
 
