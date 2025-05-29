@@ -14,9 +14,9 @@
     </div>
 </div>
 <div class="thead-start">
-<table class="table table-success table-bordered table-striped-colums">
+<table class="table  table-success table-bordered table-striped-colums">
     <thead class="">
-        <tr class="fw-5 ">
+        <tr class=" ">
             <th scope="">Last</th>
             <th scope="">Handle</th>
         </tr>

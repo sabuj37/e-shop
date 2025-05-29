@@ -160,4 +160,11 @@ Route::middleware(['posAdmin'])->group(function(){
         'expense'
     ])->name('expense');
     // endexpense
+
+    // balance_sheet
+        Route::get('/balance/sheet',[
+        coustomerSupplier::class,
+        'balancesheet'
+    ])->name('expebalancesheet');
+    // end_balancesheet
 });

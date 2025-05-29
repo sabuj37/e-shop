@@ -79,4 +79,13 @@ class coustomerSupplier extends Controller
         $data = Supplier::find($id);
         return view('customer&supplier.addSupplier',['profile'=>$data]);
     }
+
+
+    // balancesheet
+    public function balancesheet(){
+        return  view('customer&supplier');
+    }
+
+
+
 }
