@@ -34,7 +34,7 @@ class coustomerSupplier extends Controller
             if($data->save()):
                 return redirect(route('addCustomer'))->with('success','Success !  Customer profile created successfully');
             else:
-                return back()->with('Error','Error !  There was an error. Please try agin');
+                return back()->with('error','Error !  There was an error. Please try agin');
             endif;
     }
 
@@ -42,6 +42,17 @@ class coustomerSupplier extends Controller
      public function editCustomer($id){
         $data = Customer::find($id);
         return view('customer&supplier.addCustomer',['profile'=>$data]);
+    }
+
+    //delete customer
+    public function delCustomer($id){
+        $data = Customer::find($id);
+        if(!empty($data)):
+            $data->delete();
+            return back()->with('success','Data delete successfully');
+        else:
+            return back()->with('error','Data failed to delete');
+        endif;
     }
 
     // add supplier

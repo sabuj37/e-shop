@@ -1,5 +1,28 @@
 @extends('include') 
 @section('backTitle') addCoustomer @endsection @section('container')
+
+<div class="col-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="div">
+                    <dotlottie-player src="https://lottie.host/627a9420-8a1e-4d7e-b48f-25fc9dbc21f7/LZhGtIdB6j.lottie" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay> </dotlottie-player>
+                </div>
+                <div class="">
+                    <h5>Success</h5>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <div class="row">
     <div class="col-sm-12">
         <div class="row">
@@ -185,9 +208,9 @@
                             <div class="d-flex align-items-center list-action">
                                 
                                 <a href="{{route('editCustomer',['id'=>$customerList->id])}}" class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
-                                    href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                   ><i class="ri-pencil-line mr-0"></i></a>
                                 <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
-                                    href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                    href="{{route('delCustomer',['id'=>$customerList->id])}}"><i class="ri-delete-bin-line mr-0"></i></a>
                             </div>
                         </td>
                     </tr>

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\coustomerSupplier;
-use App\Http\Controllers\Product;
+use App\Http\Controllers\productController;
 use App\Http\Controllers\purchase;
 use App\Http\Controllers\saleController;
 use App\Http\Controllers\userInfo;
@@ -93,6 +93,12 @@ Route::middleware(['posAdmin'])->group(function(){
         coustomerSupplier::class,
         'editCustomer'
     ])->name('editCustomer');
+    
+    //coustomer delete
+    Route::get('/customer/delete/{id}',[
+        coustomerSupplier::class,
+        'delCustomer'
+    ])->name('delCustomer');
 
       //supplier add
     Route::get('/add/supplier',[
@@ -114,17 +120,111 @@ Route::middleware(['posAdmin'])->group(function(){
     //Coustomer&supplier Controller end
 
 
-    //Product
+    //Product 
 
     Route::get('/new/product',[
-        product::class,
-        'Product'
-    ])->name('newProduct');
+        productController::class,
+        'addProduct'
+    ])->name('addProduct');
 
+    //Product save
+    Route::post('/save/product',[
+        productController::class,
+        'saveProduct'
+    ])->name('saveProduct');
+
+    //Product edit
+    Route::get('/product/edit/{id}',[
+        productController::class,
+        'editProduct'
+    ])->name('editProduct');
+    
+    //Product delete
+    Route::get('/product/delete/{id}',[
+        productController::class,
+        'delProduct'
+    ])->name('delProduct');
+
+    //Product list page
     Route::get('/product/list',[
-        product::class,
+        productController::class,
         'productlist'
     ])->name('productlist');
+
+    //brand 
+
+    Route::get('/create/brand',[
+        productController::class,
+        'addBrand'
+    ])->name('addBrand');
+
+    //brand save
+    Route::post('/save/brand',[
+        productController::class,
+        'saveBrand'
+    ])->name('saveBrand');
+
+    //brand edit
+    Route::get('/brand/edit/{id}',[
+        productController::class,
+        'editBrand'
+    ])->name('editBrand');
+    
+    //brand delete
+    Route::get('/brand/delete/{id}',[
+        productController::class,
+        'delBrand'
+    ])->name('delBrand');
+
+        //category 
+
+    Route::get('/create/category',[
+        productController::class,
+        'addCategory'
+    ])->name('addCategory');
+
+    //category save
+    Route::post('/save/category',[
+        productController::class,
+        'saveCategory'
+    ])->name('saveCategory');
+
+    //category edit
+    Route::get('/category/edit/{id}',[
+        productController::class,
+        'editCategory'
+    ])->name('editCategory');
+    
+    //category delete
+    Route::get('/category/delete/{id}',[
+        productController::class,
+        'delCategory'
+    ])->name('delCategory');
+
+        //productUnit 
+
+    Route::get('/create/productUnit',[
+        productController::class,
+        'addProductUnit'
+    ])->name('addProductUnit');
+
+    //productUnit save
+    Route::post('/save/productUnit',[
+        productController::class,
+        'saveProductUnit'
+    ])->name('saveProductUnit');
+
+    //productUnit edit
+    Route::get('/productUnit/edit/{id}',[
+        productController::class,
+        'editProductUnit'
+    ])->name('editProductUnit');
+    
+    //productUnit delete
+    Route::get('/productUnit/delete/{id}',[
+        productController::class,
+        'delProductUnit'
+    ])->name('delProductUnit');
 
     //endProduct
 

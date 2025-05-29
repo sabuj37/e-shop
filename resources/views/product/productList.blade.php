@@ -35,6 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @if(!empty($listItem) && $listItem->count()>0 ) @foreach($listItem as $productList)
                             <tr>
                                 <td>
                                     <div class="checkbox d-inline-block">
@@ -42,18 +43,18 @@
                                         <label for="checkbox2" class="mb-0"></label>
                                     </div>
                                 </td>
-                                <td>Sabuj</td>
-                                <td>Psc</td>
-                                <td>646556</td>
-                                <td>Best</td>
-                                <td>emotional</td>
-                                <td>1231</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
+                                <td>{{$productList->name}}</td>
+                                <td>{{$productList->unitName}}</td>
+                                <td>{{$productList->barCode}}</td>
+                                <td>{{$productList->category}}</td>
+                                <td>{{$productList->brand}}</td>
+                                <td>sob gola plus hoye asbe</td>
+                                <td>{{$productList->purchasePrice}}</td>
+                                <td>{{$productList->sellingPrice}}</td>
+                                <td>{{$productList->wholesale}}</td>
+                                <td>sob theke besi dam</td>
+                                <td>sob theke besi dam</td>
+                                <td>sob theke besi dam</td>
                                 <td><div class="d-flex align-items-center list-action">
                                     
                                     <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
@@ -62,6 +63,8 @@
                                         href="#"><i class="ri-delete-bin-line mr-0"></i></a>
                                 </div></td>
                             </tr>
+                        @endforeach 
+                        @endif
                         </tbody>
                     </table>
                 </div>

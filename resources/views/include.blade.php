@@ -113,7 +113,7 @@
                           </a>
                           <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                   <li class="">
-                                          <a href="{{route('newProduct')}}">
+                                          <a href="{{route('addProduct')}}">
                                               <i class="las la-minus"></i><span>New Product</span>
                                           </a>
                                   </li>
@@ -703,6 +703,17 @@
             </div>
         </div>
     </footer>
+    <script>
+        $(document).ready(function() {
+            $(".alert").fadeTo(2000, 500).slideUp(500, function() {
+                $(".alert").slideUp(500);
+            });
+        });
+    </script>
+    <script
+  src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+  type="module"
+></script>
     <!-- Backend Bundle JavaScript -->
     <script src="{{asset('/public/eshop/')}}/assets/js/backend-bundle.min.js"></script>
     
