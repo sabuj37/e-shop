@@ -91,6 +91,18 @@ class coustomerSupplier extends Controller
         return view('customer&supplier.addSupplier',['profile'=>$data]);
     }
 
+    
+    //delete customer
+    public function delSupplier($id){
+        $data = Supplier::find($id);
+        if(!empty($data)):
+            $data->delete();
+            return back()->with('success','Data delete successfully');
+        else:
+            return back()->with('error','Data failed to delete');
+        endif;
+    }
+
 
     // balancesheet
     public function balancesheet(){

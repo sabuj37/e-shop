@@ -17,8 +17,12 @@
                             <div class="form-group">
                                 <label for="supplierName" class="form-label">Supplier *</label>
                                 <select id="supplierName" class="form-control">
-                                    <option selected>Supplier *</option>
-                                    <option>...</option>
+                                  <!--  form option show proccessing -->
+                                  @if(!empty($supplierList) && count($supplierList)>0)
+                                  @foreach($supplierList as $supplierData)
+                                    <option value="{{$supplierData->id}}">{{$supplierData->name}}</option>
+                                    @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -39,10 +43,15 @@
                         </div>
                         <div class="col-md-10">
                             <div class="form-group">
+                                
                                 <label for="product" class="form-label">Product *</label>
                                 <select id="product" name="product" class="form-control">
-                                    <option selected>select product</option>
-                                    <option>...</option>
+                                   <!--  form option show proccessing -->
+                                  @if(!empty($productList) && count($productList)>0)
+                                  @foreach($productList as $productData)
+                                    <option value="{{$productData->id}}">{{$productData->name}}</option>
+                                    @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -51,8 +60,6 @@
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newProduct"><i class="las la-plus mr-2"></i>New Product</button>
                         </div>
                     </div>
-                    <button type="save" class="btn btn-primary mr-2">Add Customer</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
                 </form>
             </div>
         </div>
@@ -223,82 +230,197 @@
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                    <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="supplier name" />
-                    </div>
-                    <div class="col-md-4">
-                        <label for="maobile" class="form-label">Mobile</label>
-                        <input type="text" class="form-control" id="maobile" name="maobile" placeholder="phone number" />
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="contactType" class="form-label">Contact Type</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>customer type</option>
-                                <option>...</option>
-                            </select>
+                    <form action="{{route('saveSupplier')}}" method="POST" >
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Name *</label>
+                                    <input type="text" class="form-control" placeholder="Enter Name"  id="fullName" name="fullName"   required />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" class="form-control" placeholder="Enter Email" id="mail" name="mail"    required />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Phone Number *</label>
+                                    <input type="text" class="form-control" placeholder="Enter Phone Number" id="mobile" name="mobile"   required />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputState" class="form-label">Country *</label>
+                                    
+                                    <input type="text" class="form-control" placeholder="Enter The Country" id="country" name="country"   required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputState" class="form-label">State *</label>
+                                    
+                                    <input type="text" class="form-control" placeholder="Enter The State" id="state" name="state"   required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputState" class="form-label">City *</label>
+                                
+                                    <input type="text" class="form-control" placeholder="Enter The City" id="city" name="city"   required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputState" class="form-label">Aria *</label>
+                                
+                                    <input type="text" class="form-control" placeholder="Enter The Aria" id="aria" name="aria"   required />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-8">
-                        <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="you address" />
-                    </div>
-                    <div class="col-md-4">
-                        <label for="mail" class="form-label">Email</label>
-                        <input type="mail" class="form-control" id="mail" name="mail" placeholder="optional" />
-                    </div>
+                        <button type="submit" class="btn btn-primary mr-2">Add Supplier</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </form>
                 </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
-                <button type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
 </div>
 <!-- new product Modal -->
 <div class="modal fade" id="newProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="newProduct" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fs-5" id="newProduct">Create Supplier</h5>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                    <div class="card-body">
+
                 <div class="row">
-                    <div class="col-md-4">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="supplier name" />
-                    </div>
-                    <div class="col-md-4">
-                        <label for="maobile" class="form-label">Mobile</label>
-                        <input type="text" class="form-control" id="maobile" name="maobile" placeholder="phone number" />
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="contactType" class="form-label">Contact Type</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>customer type</option>
-                                <option>...</option>
-                            </select>
+                    <form action="{{route('saveProduct')}}" method="POST">
+                    @csrf
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Prodct Name *</label>
+                                <input type="text" class="form-control" placeholder="Enter Name" id="name" name="name"  required />
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Brand Name *</label>
+                                <label for="brand" class="form-label"></label>
+                                <select id="brand" class="form-control" name="brand">
+                                  
+                                  <!--  form option show proccessing -->
+                                  @if(!empty($brandList) && count($brandList)>0)
+                                  @foreach($brandList as $brandData)
+                                    <option value="{{$brandData->id}}">{{$brandData->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Product Category</label>
+                                <label for="category" class="form-label"></label>
+                                <select id="category" class="form-control" name="category" >
+                                 
+                                  <!--  form option show proccessing -->
+                                  @if(!empty($categoryList) && count($categoryList)>0)
+                                  @foreach($categoryList as $categoryData)
+                                    <option value="{{$categoryData->id}}">{{$categoryData->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Product Unit</label>
+                                <label for="unitName" class="form-label"></label>
+                                <select id="unitName" class="form-control" name="unitName" >
+                                 
+                                  <!--  form option show proccessing -->
+                                  @if(!empty($productUnitList) && count($productUnitList)>0)
+                                  @foreach($productUnitList as $productUnitData)
+                                    <option value="{{$productUnitData->id}}">{{$productUnitData->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="quantity" class="form-label">Alert Quantity</label>
+                                <input type="text" class="form-control" placeholder="Optional" id="quantity" name="quantity"  />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="details" class="form-label">Deatils</label>
+                                <input type="text" class="form-control" id="details" placeholder="Optional" name="details" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="barCode" class="form-label">Barcode</label>
+                                <input type="text" class="form-control" id="barCode" placeholder="Optional" name="barCode"  />
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="you address" />
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Current Stock *</label>
+                                <input type="text" class="form-control" placeholder="current stock" id="currentStock" name="currentStock"  required />
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Purchase Price *</label>
+                                <input type="number" class="form-control" placeholder="purchase amount" id="purchasePrice" name="purchasePrice"  required />
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Selling Price *</label>
+                                <input type="number" class="form-control" placeholder="selling amount" id="sellingPrice" name="sellingPrice"  required />
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Wholesale *</label>
+                                <input type="number" class="form-control" placeholder="wholesale amount" id="wholesale" name="wholesale" required />
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="mail" class="form-label">Email</label>
-                        <input type="mail" class="form-control" id="mail" name="mail" placeholder="optional" />
-                    </div>
+                    <button type="submit" class="btn btn-primary mt-4 mr-2"> Add Product</button>
+                    <button type="reset" class="btn btn-danger mt-4 mr-2">Reset</button>
+                </form>
                 </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
         </div>
     </div>
 </div>

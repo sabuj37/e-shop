@@ -117,6 +117,12 @@ Route::middleware(['posAdmin'])->group(function(){
         coustomerSupplier::class,
         'editSupplier'
     ])->name('editSupplier');
+
+    //Product delete
+    Route::get('/supplier/delete/{id}',[
+        coustomerSupplier::class,
+        'delSupplier'
+    ])->name('delSupplier');
     //Coustomer&supplier Controller end
 
 
