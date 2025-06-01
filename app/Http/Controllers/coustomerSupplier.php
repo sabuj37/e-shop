@@ -109,6 +109,30 @@ class coustomerSupplier extends Controller
         return  view('customer&supplier');
     }
 
+    public function createSupplier(Request $req){
+        $data = new Supplier();
 
+        $data->name          = $req->fullName;
+        $data->mail          = $req->email;
+        $data->mobile        = $req->phoneNumber;
+        $data->country       = $req->country;
+        $data->state         = $req->state;
+        $data->city          = $req->city;
+        $data->aria          = $req->area;
+        
+        $option = "";
 
+        if($data->save()):
+            $getData = Supplier::orderBy('id','DESC')->get();
+            if(!empty($getData)):
+                foreach($getData as $d):
+                    $option .= '<option value="'.$d->id.'">'.$d->name.'</option>';
+                endforeach;
+            endif;
+
+            return ['data'=> $option, 'message'=>'Success! Form successfully submit'];
+        else:
+            return ['data'=> $option, 'message'=>'Error !  There was an error. Please try agin'];
+        endif;
+    }
 }
