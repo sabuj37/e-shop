@@ -271,6 +271,6 @@ Route::middleware(['posAdmin'])->group(function(){
         Route::get('/balance/sheet',[
         coustomerSupplier::class,
         'balancesheet'
-    ])->name('expebalancesheet');
+    ])->name('balancesheet');
     // end_balancesheet
 });

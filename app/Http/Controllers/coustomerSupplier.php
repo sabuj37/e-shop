@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Supplier;
+use App\Models\balancesheet;
 
 class coustomerSupplier extends Controller
 {
@@ -106,7 +107,7 @@ class coustomerSupplier extends Controller
 
     // balancesheet
     public function balancesheet(){
-        return  view('customer&supplier');
+        return  view('customer&supplier.balancesheet');
     }
 
 
