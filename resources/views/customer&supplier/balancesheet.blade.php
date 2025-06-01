@@ -1,7 +1,7 @@
 @extends('include') @section('backTitle')Expense Type @endsection @section('container')
 <div class="row">
     <div class="col-12">
-        <h2>Creat Transection</h2>
+        <h3>Creat Transection</h3>
     </div>
 </div>
 <div class="row">
@@ -46,17 +46,17 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 mt-3">
-                                <h3 class="">Add Discount</h3>
+                                <h5 class="">Add Discount</h5>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="payment">Discount Received *</label>
                                     <input type="text" id="payment" class="form-control" placeholder="0" required />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="Received">Discount*</label>
                                     <input type="text" id="Received" class="form-control" placeholder="0" required />
