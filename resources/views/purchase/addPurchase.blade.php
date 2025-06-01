@@ -25,6 +25,7 @@
                                     @endif
                                 </select>
                             </div>
+                            
                         </div>
                         <div class="col-md-2 mt-4 p-0">
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier"><i class="las la-plus mr-2"></i>New Supplier</button>
