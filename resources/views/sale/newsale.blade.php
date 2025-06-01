@@ -14,7 +14,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-1 mt-3 p-0 ">
+                    <div class="col-md-2 mt-3 p-0 ">
                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customer"><i class="las la-plus mr-2"></i>customer</button>
                     </div>
 
@@ -173,6 +173,7 @@
                                 <textarea class="form-control" aria-label="With textarea"></textarea>
                             </div>
                         </div>
+                    <button type="submit" class="btn btn-primary mr-2">@if(isset($profile)) Update @else Add @endif Supplier</button>
                     </form>
                 </div>
             </div>
