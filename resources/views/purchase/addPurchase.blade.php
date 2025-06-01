@@ -132,10 +132,10 @@
         </div>
     </div>
 </div>
-    </div>
-    <div class="col-md-4">
-        <div class="row">
-<div class="col-12">
+</div>
+<div class="col-md-4">
+    <div class="row">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="header-title">
@@ -236,27 +236,27 @@
             <div class="modal-body">
                     <div class="card-body">
                 <div class="row">
-                    <form action="{{route('saveSupplier')}}" method="POST" >
+                    <form action="#" method="POST" id="supplierForm">
                         @csrf
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Name *</label>
-                                    <input type="text" class="form-control" placeholder="Enter Name"  id="fullName" name="fullName"   required />
+                                    <input type="text" class="form-control" placeholder="Enter Name"  id="fullName" name="fullName" id="fullName"  required />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email *</label>
-                                    <input type="email" class="form-control" placeholder="Enter Email" id="mail" name="mail"    required />
+                                    <input type="email" id="customerMail" class="form-control" placeholder="Enter Email" name="mail"    required />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Phone Number *</label>
-                                    <input type="text" class="form-control" placeholder="Enter Phone Number" id="mobile" name="mobile"   required />
+                                    <input type="text" class="form-control" placeholder="Enter Phone Number" id="mobile" name="mobile" required />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -264,32 +264,32 @@
                                 <div class="form-group">
                                     <label for="inputState" class="form-label">Country *</label>
                                     
-                                    <input type="text" class="form-control" placeholder="Enter The Country" id="country" name="country"   required />
+                                    <input type="text" class="form-control" placeholder="Enter The Country" id="country" name="country" required />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputState" class="form-label">State *</label>
                                     
-                                    <input type="text" class="form-control" placeholder="Enter The State" id="state" name="state"   required />
+                                    <input type="text" class="form-control" placeholder="Enter The State" id="state" name="state" required />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputState" class="form-label">City *</label>
                                 
-                                    <input type="text" class="form-control" placeholder="Enter The City" id="city" name="city"   required />
+                                    <input type="text" class="form-control" placeholder="Enter The City" id="city" name="city" required />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputState" class="form-label">Aria *</label>
                                 
-                                    <input type="text" class="form-control" placeholder="Enter The Aria" id="aria" name="aria"   required />
+                                    <input type="text" class="form-control" placeholder="Enter The Aria" id="area" name="aria" required />
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mr-2">Add Supplier</button>
+                        <button type="button" class="btn btn-primary mr-2" id="add-supplier">Add Supplier</button>
                         <button type="reset" class="btn btn-danger">Reset</button>
                     </form>
                 </div>
@@ -459,3 +459,35 @@
 </div>
 
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).on('click','#add-supplier', function(){
+    
+    var name = $('#fullName').val();
+    var mail = $('#userMail').val();
+    var phone = $('#mobile').val();
+    var country = $('#country').val();
+    var state = $('#state').val();
+    var city = $('#city').val();
+    var area = $('#area').val();
+    $.ajax({
+        method: 'get',
+
+        url: '{{ route('createSupplier') }}',
+
+        data: { fullName: name, email: mail, phoneNumber: phone, country: country, state: state, city: city, area: area },
+
+        contentType: 'html',
+
+        success: function(result) {
+            console.log("message: ", result.message);
+            // console.log("data: ", result.data);
+            $('#supplier').modal('hide');
+            document.getElementById("supplierForm").reset();
+            $('#supplierName').html(result.data); 
+        },
+
+    });
+})
+
+</script>

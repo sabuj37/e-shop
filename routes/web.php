@@ -112,6 +112,12 @@ Route::middleware(['posAdmin'])->group(function(){
         'saveSupplier'
     ])->name('saveSupplier');
 
+    // submit supplier by ajax
+    Route::get('/supplier/save',[
+        coustomerSupplier::class,
+        'createSupplier'
+    ])->name('createSupplier');
+
     //supplier edit
     Route::get('/supplier/edit/{id}',[
         coustomerSupplier::class,
@@ -271,6 +277,6 @@ Route::middleware(['posAdmin'])->group(function(){
         Route::get('/balance/sheet',[
         coustomerSupplier::class,
         'balancesheet'
-    ])->name('expebalancesheet');
+    ])->name('balancesheet');
     // end_balancesheet
 });

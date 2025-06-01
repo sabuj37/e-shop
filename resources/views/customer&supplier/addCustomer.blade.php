@@ -203,7 +203,7 @@
                         <td>not entry</td>
                         <td>
                             <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                    href="#"><i class="ri-eye-line mr-0 "></i></a></td>
+                                    href="{{route('balancesheet')}}"><i class="ri-eye-line mr-0 "></i></a></td>
                         <td>
                             <div class="d-flex align-items-center list-action">
                                 
@@ -231,8 +231,8 @@
                         <td>Cumilla</td>
                         <td>10000</td>
                         <td>10.10.2025</td>
-                        <td><a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                    href="#"><i class="ri-eye-line mr-0"></i></a></td>
+                        <td><a class="badge badge-info mr-2"  title="" 
+                                    href="{{route('balancesheet')}}"><i class="ri-eye-line mr-0"></i></a></td>
                         <td>
                             <div class="d-flex align-items-center list-action">
                                 
