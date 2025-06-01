@@ -124,6 +124,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    
                 </div>
             </form>
             </div>
@@ -208,6 +209,8 @@
                                 <textarea class="form-control" aria-label="With textarea"></textarea>
                             </div>
                         </div>
+                        
+                    <button type="submit" class="btn btn-primary mr-2">@if(isset($profile)) Update @else Add @endif Supplier</button>
                     </form>
                 </div>
             </div>
