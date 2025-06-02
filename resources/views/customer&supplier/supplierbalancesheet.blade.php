@@ -87,8 +87,8 @@
 </div>
 <div class="row">
     <div class="col-4">
-        <h5>Mr Green</h5>
-        <p>01880375361</p>
+        <h5>Virtual It Professional</h5>
+        <p>017849898</p>
         <p>Burichong</p>
     </div>
     <div class="col-6 mt-2">
