@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Supplier;
 use App\Models\balancesheet;
+use App\Models\supplierbalancesheet;
 
 class coustomerSupplier extends Controller
 {
@@ -108,6 +109,10 @@ class coustomerSupplier extends Controller
     // balancesheet
     public function balancesheet(){
         return  view('customer&supplier.balancesheet');
+    }
+
+     public function supplierbalancesheet(){
+        return  view('customer&supplier.supplierbalancesheet');
     }
 
     public function createSupplier(Request $req){
