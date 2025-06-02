@@ -110,6 +110,8 @@ class coustomerSupplier extends Controller
         return  view('customer&supplier.balancesheet');
     }
 
+    
+    // submit supplier by ajax
     public function createSupplier(Request $req){
         $data = new Supplier();
 

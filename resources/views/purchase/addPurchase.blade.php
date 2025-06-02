@@ -45,8 +45,8 @@
                         <div class="col-md-10">
                             <div class="form-group">
                                 
-                                <label for="product" class="form-label">Product *</label>
-                                <select id="product" name="product" class="form-control">
+                                <label for="productName" class="form-label">Product *</label>
+                                <select id="productName"  class="form-control">
                                    <!--  form option show proccessing -->
                                   @if(!empty($productList) && count($productList)>0)
                                   @foreach($productList as $productData)
@@ -103,7 +103,7 @@
                                     Ac
                                 </td>
                                 <td>
-                                    <button type="reset" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button>
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier2">Add</button>
                                 </td>
                                 <td>
                                 <input type="text" class="form-control" id="reference" name="reference" /></td>
@@ -242,7 +242,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Name *</label>
-                                    <input type="text" class="form-control" placeholder="Enter Name"  id="fullName" name="fullName" id="fullName"  required />
+                                    <input type="text" class="form-control" placeholder="Enter Name"  id="fullName" name="fullName"  required />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -306,28 +306,27 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fs-5" id="newProduct">Create Supplier</h5>
+                <h5 class="modal-title fs-5">Create Product</h5>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                     <div class="card-body">
 
                 <div class="row">
-                    <form action="{{route('saveProduct')}}" method="POST">
+                    <form action="#" method="POST" id="productForm">
                     @csrf
                     <div class="row align-items-center">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Prodct Name *</label>
-                                <input type="text" class="form-control" placeholder="Enter Name" id="name" name="name"  required />
-                                <div class="help-block with-errors"></div>
+                                <label>Product Name *</label>
+                                <input type="text" class="form-control" placeholder="Enter Name" id="productNameModal" required />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Brand Name *</label>
-                                <label for="brand" class="form-label"></label>
-                                <select id="brand" class="form-control" name="brand">
+                                <label for="brandName" class="form-label"></label>
+                                <select id="brandName" class="form-control" >
                                   
                                   <!--  form option show proccessing -->
                                   @if(!empty($brandList) && count($brandList)>0)
@@ -341,8 +340,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Product Category</label>
-                                <label for="category" class="form-label"></label>
-                                <select id="category" class="form-control" name="category" >
+                                <label for="categoryName" class="form-label"></label>
+                                <select id="categoryName" class="form-control" >
                                  
                                   <!--  form option show proccessing -->
                                   @if(!empty($categoryList) && count($categoryList)>0)
@@ -356,8 +355,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Product Unit</label>
-                                <label for="unitName" class="form-label"></label>
-                                <select id="unitName" class="form-control" name="unitName" >
+                                <label for="unit" class="form-label"></label>
+                                <select id="unit" class="form-control" >
                                  
                                   <!--  form option show proccessing -->
                                   @if(!empty($productUnitList) && count($productUnitList)>0)
@@ -370,20 +369,20 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="quantity" class="form-label">Alert Quantity</label>
-                                <input type="text" class="form-control" placeholder="Optional" id="quantity" name="quantity"  />
+                                <label for="quantityName" class="form-label">Alert Quantity</label>
+                                <input type="text" class="form-control" placeholder="Optional" id="quantityName"  />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="details" class="form-label">Deatils</label>
-                                <input type="text" class="form-control" id="details" placeholder="Optional" name="details" />
+                                <label for="detailsName" class="form-label">Deatils</label>
+                                <input type="text" class="form-control" id="detailsName" placeholder="Optional"  />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="barCode" class="form-label">Barcode</label>
-                                <input type="text" class="form-control" id="barCode" placeholder="Optional" name="barCode"  />
+                                <label for="barCodeNum" class="form-label">Barcode</label>
+                                <input type="text" class="form-control" id="barCodeNum" placeholder="Optional"/>
                             </div>
                         </div>
                     </div>
@@ -391,33 +390,33 @@
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Current Stock *</label>
-                                <input type="text" class="form-control" placeholder="current stock" id="currentStock" name="currentStock"  required />
+                                <input type="text" class="form-control" placeholder="current stock" id="currentStockNum"   required />
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Purchase Price *</label>
-                                <input type="number" class="form-control" placeholder="purchase amount" id="purchasePrice" name="purchasePrice"  required />
+                                <input type="number" class="form-control" placeholder="purchase amount" id="purchasePriceAmount"  required />
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Selling Price *</label>
-                                <input type="number" class="form-control" placeholder="selling amount" id="sellingPrice" name="sellingPrice"  required />
+                                <input type="number" class="form-control" placeholder="selling amount" id="sellingPriceAmount"  required />
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Wholesale *</label>
-                                <input type="number" class="form-control" placeholder="wholesale amount" id="wholesale" name="wholesale" required />
+                                <input type="number" class="form-control" placeholder="wholesale amount" id="wholesaleAmount"  required />
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-4 mr-2"> Add Product</button>
+                    <button type="button" class="btn btn-primary mt-4 mr-2" id="add-product"> Add Product</button>
                     <button type="reset" class="btn btn-danger mt-4 mr-2">Reset</button>
                 </form>
                 </div>
@@ -428,35 +427,83 @@
         </div>
     </div>
 </div>
-
-<!-- seral madal -->
- <div class="modal fade" id="serialModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="serialModal" aria-hidden="true">
+<!-- new supplier Modal -->
+<div class="modal fade" id="supplier2" data-backdrop="static" data-keyboard="false" tabindex="-2" aria-labelledby="supplier2" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fs-5" id="serialModal">Manage Serial Numbers</h5>
+                <h5 class="modal-title fs-5" id="supplier">Create Supplier</h5>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                    <div class="card-body">
                 <div class="row">
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" id="serialNmuber" name="serialNmuber" placeholder="" />
-                    </div>
-                    <div class="col-4 p-0 ">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Removed</button>
-                    </div>
-                    <div class="mt-2">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Add Serial Number</button>
-                    </div>
+                    <form action="#" method="POST" id="supplierForm">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Name *</label>
+                                    <input type="text" class="form-control" placeholder="Enter Name"  id="fullName" name="fullName"  required />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" id="customerMail" class="form-control" placeholder="Enter Email" name="mail"    required />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Phone Number *</label>
+                                    <input type="text" class="form-control" placeholder="Enter Phone Number" id="mobile" name="mobile" required />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputState" class="form-label">Country *</label>
+                                    
+                                    <input type="text" class="form-control" placeholder="Enter The Country" id="country" name="country" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputState" class="form-label">State *</label>
+                                    
+                                    <input type="text" class="form-control" placeholder="Enter The State" id="state" name="state" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputState" class="form-label">City *</label>
+                                
+                                    <input type="text" class="form-control" placeholder="Enter The City" id="city" name="city" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputState" class="form-label">Aria *</label>
+                                
+                                    <input type="text" class="form-control" placeholder="Enter The Aria" id="area" name="aria" required />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mr-2" id="add-supplier">Add Supplier</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </form>
                 </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
-                <button type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
 </div>
+
 
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -489,5 +536,49 @@ $(document).on('click','#add-supplier', function(){
 
     });
 })
+
+$(document).on('click','#add-product',function(){
+    var fullName = $('#productNameModal').val();
+    var brand = $('#brandName').val();
+    var category = $('#categoryName').val();
+    var unitName = $('#unit').val();
+    var quantity = $('#quantityNmae').val();
+    var details = $('#detailsName').val();
+    var barCode = $('#barCodeNum').val();
+    var currentStock = $('#currentStockNum').val();
+    var purchasePrice =$('#purchasePriceAmount').val();
+    var sellingPrice= $('#sellingPriceAmount').val();
+    var wholesale =$('#wholesaleAmount').val();
+
+    $.ajax({
+        method: 'get',
+        url: '{{route('createProduct')}}',
+
+        data: {
+            fullName        :fullName,
+            brand           :brand,
+            category        :category,
+            unitName        :unitName,
+            quantity        :quantity,
+            details         :details,
+            barCode          :barCode,
+            currentStock     :currentStock,
+            purchasePrice :purchasePrice,
+            sellingPrice  :sellingPrice,
+            wholesale     :wholesale,
+        },
+
+        contentType: 'html',
+
+        success: function(result){
+            // console.log("message: ",result.message);
+
+            $('#newProduct').modal('hide');
+            document.getElementById("productForm").reset();
+            $('#productName').html(result.data);    
+        },
+    });
+})
+
 
 </script>

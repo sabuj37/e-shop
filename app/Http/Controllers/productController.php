@@ -65,6 +65,38 @@ class productController extends Controller
         endif;
     }
 
+    
+    // submit product by ajax
+    public function createProduct(Request $req){
+            $data = new Product();
+            $data->name          = $req->fullName;
+            $data->brand         = $req->brand;
+            $data->category      = $req->category;
+            $data->unitName      = $req->unitName;
+            $data->quantity      = $req->quantity;
+            $data->details       = $req->details;
+            $data->barCode       = $req->barCode;
+            $data->currentStock  = $req->currentStock;
+            $data->purchasePrice = $req->purchasePrice;
+            $data->sellingPrice  = $req->sellingPrice;
+            $data->wholesale     = $req->wholesale;
+            
+            $option="";
+
+            if($data->save()):
+                $getData = Product::orderBy('id','DESC')->get();
+                if(!empty($getData)):
+                    foreach($getData as $d):
+                        $option .='<option value="'.$d->id.'">'.$d->name.'</option>';
+                    endforeach;
+                endif;
+                
+                return ['data' => $option, 'message'=>'Success ! Form successfully subjmit.'];
+            else:
+                return ['data' => $option, 'message'=>'Error ! There is an error. Please try agin.'];
+            endif;
+    }
+
     //product list page
     public function productlist(){
         $productUnit = ProductUnit::orderBy('id','DESC')->get();

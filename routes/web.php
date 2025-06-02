@@ -100,6 +100,8 @@ Route::middleware(['posAdmin'])->group(function(){
         'delCustomer'
     ])->name('delCustomer');
 
+    //supplier---------------------------
+
       //supplier add
     Route::get('/add/supplier',[
         coustomerSupplier::class,
@@ -132,7 +134,7 @@ Route::middleware(['posAdmin'])->group(function(){
     //Coustomer&supplier Controller end
 
 
-    //Product 
+    //Product -------------------------
 
     Route::get('/new/product',[
         productController::class,
@@ -163,7 +165,14 @@ Route::middleware(['posAdmin'])->group(function(){
         'productlist'
     ])->name('productlist');
 
-    //brand 
+    // submit product by ajax
+    Route::get('/product/save',[
+        productController::class,
+        'createProduct'
+    ])->name('createProduct');
+
+
+    //brand -----------------------------
 
     Route::get('/create/brand',[
         productController::class,
@@ -188,14 +197,14 @@ Route::middleware(['posAdmin'])->group(function(){
         'delBrand'
     ])->name('delBrand');
 
-        //category 
-
+        //category ----------------------
+    
     Route::get('/create/category',[
         productController::class,
         'addCategory'
     ])->name('addCategory');
 
-    //category save
+    //category save for
     Route::post('/save/category',[
         productController::class,
         'saveCategory'
@@ -213,7 +222,7 @@ Route::middleware(['posAdmin'])->group(function(){
         'delCategory'
     ])->name('delCategory');
 
-        //productUnit 
+        //productUnit --------------------------
 
     Route::get('/create/productUnit',[
         productController::class,
@@ -240,7 +249,8 @@ Route::middleware(['posAdmin'])->group(function(){
 
     //endProduct
 
-    //purchase str
+    //purchase str-------------------------
+
     Route::get('/add/purchase',[
         purchase::class,
         'addPurchase'
@@ -253,14 +263,15 @@ Route::middleware(['posAdmin'])->group(function(){
     //Purchase end
     
 
-    //sale start
+    //sale start--------------------------
+
     Route::get('/new/sale',[
         saleController::class,
         'newsale'
     ])->name('newsale');
     //sale end
 
-    // expense
+    // expense------------------------
 
     Route::get('/expense/type',[
         expenseController::class,
@@ -273,7 +284,8 @@ Route::middleware(['posAdmin'])->group(function(){
     ])->name('expense');
     // endexpense
 
-    // balance_sheet
+    // balance_sheet------------------------
+
         Route::get('/balance/sheet',[
         coustomerSupplier::class,
         'balancesheet'
