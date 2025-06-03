@@ -44,14 +44,17 @@
                             </div>
                             <div class="col-6">
                                 <label>Select Product*</label>
-                                <label for="inputState" class="form-label"></label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Customer</option>
-                                    <option>...</option>
+                                <select id="productName"  class="form-control">
+                                   <!--  form option show proccessing -->
+                                  @if(!empty($productList) && count($productList)>0)
+                                  @foreach($productList as $productData)
+                                    <option value="{{$productData->id}}">{{$productData->name}}</option>
+                                    @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="col-md-3 mt-4   ">
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customer">Reset Product</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customerModal">Reset Product</button>
                             </div>
                             <div class="col-8">
                                 <label for="note">Note</label>
@@ -186,59 +189,100 @@
 </div>
 
 <!-- start_model -->
-                    <div class="modal fade" id="customer" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="customer" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h6 class="modal-title fs-5" id="customer">Creat Customer</h6>
-                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+ <div class="modal fade" id="customerModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="customerModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title fs-5" id="customerModal">Creat Customer</h6>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{route('saveCustomer')}}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Name *</label>
+                                        <input type="text" class="form-control" placeholder="Enter Name" id="fullName" name="fullName" required />
+                                        <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <label for="formGroupExampleInput" class="form-label">Name</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Category name" />
-                                                        </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label">Accoount Receivable *</label>
 
-                                                        <div class="col-4">
-                                                            <label for="mobile" class="form-label">Mobile</label>
-                                                            <input type="text" class="form-control" id="mobile" placeholder="Enter Category name" />
-                                                        </div>
+                                        <input type="number" class="form-control" placeholder="Enter Accoount Receivable Amount" id="accReceivable" name="accReceivable" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label">Accoount Payable *</label>
 
-                                                        <div class="col-4">
-                                                            <label for="formGroupExampleInput" class="form-label">Name</label>
-                                                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Category name" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-8 mt-2">
-                                                            <label for="addres" class="form-label">Addrass</label>
-                                                            <input type="Address" class="form-control" id="Address" placeholder="Give Address" />
-                                                        </div>
+                                        <input type="number" class="form-control" placeholder="Enter Accoount Payable Amount" id="accPayable" name="accPayable" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Email *</label>
+                                        <input type="email" class="form-control" placeholder="Enter Email" id="mail" name="mail" required />
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Phone Number *</label>
+                                        <input type="text" class="form-control" placeholder="Enter Phone Number" id="mobile" name="mobile" required />
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label">Country *</label>
 
-                                                        <div class="col-4 mt-2">
-                                                            <label for="email" class="form-label">Email</label>
-                                                            <input type="email" class="form-control" id="email" placeholder="Enter your Email" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
-                                            <button type="button" class="btn btn-primary">Save</button>
-                                        </div>
+                                        <input type="text" class="form-control" placeholder="Enter The Country" id="country" name="country" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label">State *</label>
+
+                                        <input type="text" class="form-control" placeholder="Enter The State" id="state" name="state" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label">City *</label>
+
+                                        <input type="text" class="form-control" placeholder="Enter The City" id="city" name="city" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="inputState" class="form-label">Aria *</label>
+
+                                        <input type="text" class="form-control" placeholder="Enter The Aria" id="aria" name="aria" required />
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <button type="button" class="btn btn-primary mr-2 "  id="add-customer">Add Customer</button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </form>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+                        <button type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                    <!-- end_model -->
+<!-- end_model -->
+
+
 
 
 
