@@ -1,7 +1,6 @@
 @extends('include') @section('backTitle') purchase @endsection @section('container')
 <div class="row">
     <div class="col-md-8">
-    
 <div class="row">
     <div class="col-md-12 col-12">
         <div class="card">
@@ -103,7 +102,7 @@
                                     Ac
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier2">Add</button>
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button>
                                 </td>
                                 <td>
                                 <input type="text" class="form-control" id="reference" name="reference" /></td>
@@ -224,7 +223,40 @@
 
 
 <!-- Page end  -->
+<!--  serial -->
 
+<div class="modal fade" id="serialModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="serialModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title fs-5" id="serialModal">New Serial</h6>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="POST">
+                    @csrf
+                        <div class=" p-0">
+                            <label for="serialNumber" class="form-label">Serial Number</label>
+                        </div>
+                        <div class="row ">
+                            <div class=" col-10 mb-3">
+                                <input type="" class="form-control" id="serialNumber" name="serialNumber" placeholder="Enter Product Unit name" />
+                            </div>
+                            <div class="col-1 mt-1  p-0">
+                                <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#">
+                                <i class="ri-delete-bin-line mr-0"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- new supplier Modal -->
 <div class="modal fade" id="supplier" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="supplier" aria-hidden="true">
     <div class="modal-dialog">
@@ -427,85 +459,13 @@
         </div>
     </div>
 </div>
-<!-- new supplier Modal -->
-<div class="modal fade" id="supplier2" data-backdrop="static" data-keyboard="false" tabindex="-2" aria-labelledby="supplier2" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fs-5" id="supplier">Create Supplier</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                    <div class="card-body">
-                <div class="row">
-                    <form action="#" method="POST" id="supplierForm">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Name *</label>
-                                    <input type="text" class="form-control" placeholder="Enter Name"  id="fullName" name="fullName"  required />
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Email *</label>
-                                    <input type="email" id="customerMail" class="form-control" placeholder="Enter Email" name="mail"    required />
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Phone Number *</label>
-                                    <input type="text" class="form-control" placeholder="Enter Phone Number" id="mobile" name="mobile" required />
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="inputState" class="form-label">Country *</label>
-                                    
-                                    <input type="text" class="form-control" placeholder="Enter The Country" id="country" name="country" required />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="inputState" class="form-label">State *</label>
-                                    
-                                    <input type="text" class="form-control" placeholder="Enter The State" id="state" name="state" required />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="inputState" class="form-label">City *</label>
-                                
-                                    <input type="text" class="form-control" placeholder="Enter The City" id="city" name="city" required />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="inputState" class="form-label">Aria *</label>
-                                
-                                    <input type="text" class="form-control" placeholder="Enter The Aria" id="area" name="aria" required />
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary mr-2" id="add-supplier">Add Supplier</button>
-                        <button type="reset" class="btn btn-danger">Reset</button>
-                    </form>
-                </div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+
 
 
 @endsection
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
 $(document).on('click','#add-supplier', function(){
