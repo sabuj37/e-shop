@@ -100,6 +100,13 @@ Route::middleware(['posAdmin'])->group(function(){
         'delCustomer'
     ])->name('delCustomer');
 
+    
+    // submit supplier by ajax
+    Route::get('/customer/save',[
+        coustomerSupplier::class,
+        'createCustomer'
+    ])->name('createCustomer');
+
     //supplier---------------------------
 
       //supplier add
@@ -126,7 +133,7 @@ Route::middleware(['posAdmin'])->group(function(){
         'editSupplier'
     ])->name('editSupplier');
 
-    //Product delete
+    //supplier delete
     Route::get('/supplier/delete/{id}',[
         coustomerSupplier::class,
         'delSupplier'
@@ -197,6 +204,13 @@ Route::middleware(['posAdmin'])->group(function(){
         'delBrand'
     ])->name('delBrand');
 
+    
+    // submit brand by ajax
+    Route::get('/brand/save',[
+        productController::class,
+        'createBrand'
+    ])->name('createBrand');
+
         //category ----------------------
     
     Route::get('/create/category',[
@@ -222,6 +236,13 @@ Route::middleware(['posAdmin'])->group(function(){
         'delCategory'
     ])->name('delCategory');
 
+    
+    // submit category by ajax
+    Route::get('/category/save',[
+        productController::class,
+        'createCategory'
+    ])->name('createCategory');
+
         //productUnit --------------------------
 
     Route::get('/create/productUnit',[
@@ -246,6 +267,13 @@ Route::middleware(['posAdmin'])->group(function(){
         productController::class,
         'delProductUnit'
     ])->name('delProductUnit');
+
+    
+    // submit productUnit by ajax
+    Route::get('/productUnit/save',[
+        productController::class,
+        'createProductUnit'
+    ])->name('createProductUnit');
 
     //endProduct
 

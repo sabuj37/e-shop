@@ -10,7 +10,7 @@
                                 <div class="form-group">
                                     <label>Select Customer *</label>
                                     <label for="inputState" class="form-label"></label>
-                                <select id="supplierName" class="form-control">
+                                <select id="customerName" class="form-control">
                                     <!--  form option show proccessing -->
                                   @if(!empty($customerList) && count($customerList)>0)
                                   @foreach($customerList as $customerData)
@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2 mt-3 p-0">
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customer"><i class="las la-plus mr-2"></i>customer</button>
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customerModal"><i class="las la-plus mr-2"></i>customer</button>
                             </div>
 
                             <div class="col-md-3">
@@ -54,7 +54,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3 mt-4   ">
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#customerModal">Reset Product</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#">Reset Product</button>
                             </div>
                             <div class="col-8">
                                 <label for="note">Note</label>
@@ -199,7 +199,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('saveCustomer')}}" method="POST">
+                        <form action="" method="POST" id="customerForm">
                             @csrf
                             <div class="row">
                                 <div class="col-md-4">
@@ -207,20 +207,6 @@
                                         <label>Name *</label>
                                         <input type="text" class="form-control" placeholder="Enter Name" id="fullName" name="fullName" required />
                                         <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="inputState" class="form-label">Accoount Receivable *</label>
-
-                                        <input type="number" class="form-control" placeholder="Enter Accoount Receivable Amount" id="accReceivable" name="accReceivable" required />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="inputState" class="form-label">Accoount Payable *</label>
-
-                                        <input type="number" class="form-control" placeholder="Enter Accoount Payable Amount" id="accPayable" name="accPayable" required />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -260,9 +246,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="inputState" class="form-label">Aria *</label>
+                                        <label for="inputState" class="form-label">Area *</label>
 
-                                        <input type="text" class="form-control" placeholder="Enter The Aria" id="aria" name="aria" required />
+                                        <input type="text" class="form-control" placeholder="Enter The area" id="area" name="area" required />
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +258,6 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
-                        <button type="button" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>
@@ -281,9 +266,42 @@
 </div>
 
 <!-- end_model -->
+@endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).on('click','#add-customer', function(){
+    
+    var name = $('#fullName').val();
+    var gmail = $('#mail').val();
+    var phone = $('#mobile').val();
+    var country = $('#country').val();
+    var city = $('#city').val();
+    var state = $('#state').val();
+    var area = $('#area').val();
+    $.ajax({
+        method: 'get',
 
+        url: '{{ route('createCustomer') }}',
 
+        data: { fullName:       name,
+                mail:           gmail,  
+                mobile:         phone, 
+                country:        country, 
+                city:           city, 
+                state:          state ,
+                area:           area ,
+              },
 
+        contentType: 'html',
 
+        success: function(result) {
+            console.log("message: ", result.message);
+            // console.log("data: ", result.data);
+            $('#customerModal').modal('hide');
+            document.getElementById("customerForm").reset();
+            $('#customerName').html(result.data); 
+        },
 
-            @endsection
+    });
+})
+</script>

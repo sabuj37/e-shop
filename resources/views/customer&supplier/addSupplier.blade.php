@@ -24,7 +24,7 @@
                     $country        = $profile->country;
                     $state          = $profile->state;
                     $city           = $profile->city;
-                    $aria           = $profile->aria;
+                    $area           = $profile->area;
                     $profileId      = $profile->id;
                 else:
                     $name           ='';
@@ -35,7 +35,7 @@
                     $country        ='';
                     $state          ='';
                     $city           ='';
-                    $aria           ='';
+                    $area           ='';
                     $profileId      = '';
                 endif;
             @endphp
@@ -109,9 +109,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputState" class="form-label">Aria *</label>
+                                <label for="area" class="form-label">Area *</label>
                                
-                                <input type="text" class="form-control" placeholder="Enter The Aria" id="aria" name="aria" value="{{$aria}}"  required />
+                                <input type="text" class="form-control" placeholder="Enter The Area" id="area" name="area" value="{{$area}}"  required />
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                         </td>
                         <td>{{$supplierList->accReceivable}}</td>
                         <td>{{$supplierList->mobile}}</td>
-                        <td>{{$supplierList->aria}}</td>
+                        <td>{{$supplierList->area}}</td>
                         <td>{{$supplierList->accPayable}}</td>
                         <td>not entry</td>
                         <td>

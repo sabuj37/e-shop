@@ -146,6 +146,28 @@ class productController extends Controller
     }
 
 
+    // submit Brand by ajax
+    public function createBrand(Request $req){
+            $data = new Brand();
+            $data->name     = $req->name;
+            
+            $option="";
+
+            if($data->save()):
+                $getData = Brand::orderBy('id','DESC')->get();
+                if(!empty($getData)):
+                    foreach($getData as $d):
+                        $option .='<option value="'.$d->id.'">'.$d->name.'</option>';
+                    endforeach;
+                endif;
+                
+                return ['data' => $option, 'message'=>'Success ! Form successfully subjmit.'];
+            else:
+                return ['data' => $option, 'message'=>'Error ! There is an error. Please try agin.'];
+            endif;
+    }
+
+
     //addCategory
     public function addCategory(){
       $data = Brand::orderBy('id','DESC')->get();
@@ -184,6 +206,27 @@ class productController extends Controller
         else:
             return back()->with('error','Data failed to delete');
         endif;
+    }
+
+    // submit Category by ajax
+    public function createCategory(Request $req){
+            $data = new Category();
+            $data->name     = $req->name;
+            
+            $option="";
+
+            if($data->save()):
+                $getData = Category::orderBy('id','DESC')->get();
+                if(!empty($getData)):
+                    foreach($getData as $d):
+                        $option .='<option value="'.$d->id.'">'.$d->name.'</option>';
+                    endforeach;
+                endif;
+                
+                return ['data' => $option, 'message'=>'Success ! Form successfully subjmit.'];
+            else:
+                return ['data' => $option, 'message'=>'Error ! There is an error. Please try agin.'];
+            endif;
     }
 
 
@@ -225,4 +268,26 @@ class productController extends Controller
             return back()->with('error','Data failed to delete');
         endif;
     }
+
+    // submit ProductUnit by ajax
+    public function createProductUnit(Request $req){
+            $data = new ProductUnit();
+            $data->name     = $req->name;
+            
+            $option="";
+
+            if($data->save()):
+                $getData = ProductUnit::orderBy('id','DESC')->get();
+                if(!empty($getData)):
+                    foreach($getData as $d):
+                        $option .='<option value="'.$d->id.'">'.$d->name.'</option>';
+                    endforeach;
+                endif;
+                
+                return ['data' => $option, 'message'=>'Success ! Form successfully subjmit.'];
+            else:
+                return ['data' => $option, 'message'=>'Error ! There is an error. Please try agin.'];
+            endif;
+    }
+
 }

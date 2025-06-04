@@ -30,7 +30,7 @@ class coustomerSupplier extends Controller
             $data->country       = $req->country;
             $data->state         = $req->state;
             $data->city          = $req->city;
-            $data->aria          = $req->aria;
+            $data->area          = $req->area;
 
             if($data->save()):
                 return redirect(route('addCustomer'))->with('success','Success !  Customer profile created successfully');
@@ -56,6 +56,34 @@ class coustomerSupplier extends Controller
         endif;
     }
 
+     // submit customer by ajax
+    public function createCustomer(Request $req){
+        $data = new Customer();
+
+            $data->name          = $req->fullName;
+            $data->mail          = $req->mail;
+            $data->mobile        = $req->mobile;
+            $data->country       = $req->country;
+            $data->state         = $req->state;
+            $data->city          = $req->city;
+            $data->area          = $req->area;
+        
+        $option = "";
+
+        if($data->save()):
+            $getData = Customer::orderBy('id','DESC')->get();
+            if(!empty($getData)):
+                foreach($getData as $d):
+                    $option .= '<option value="'.$d->id.'">'.$d->name.'</option>';
+                endforeach;
+            endif;
+
+            return ['data'=> $option, 'message'=>'Success! Form successfully submit'];
+        else:
+            return ['data'=> $option, 'message'=>'Error !  There was an error. Please try agin'];
+        endif;
+    }
+
     // add supplier
     public function addSupplier(){
         $data = Supplier::orderBy('id','DESC')->get();
@@ -77,7 +105,7 @@ class coustomerSupplier extends Controller
             $data->country       = $req->country;
             $data->state         = $req->state;
             $data->city          = $req->city;
-            $data->aria          = $req->aria;
+            $data->area          = $req->area;
 
             if($data->save()):
                 return redirect(route('addSupplier'))->with('success','Success !  Supplier profile created successfully');
@@ -93,7 +121,7 @@ class coustomerSupplier extends Controller
     }
 
     
-    //delete customer
+    //delete supplier
     public function delSupplier($id){
         $data = Supplier::find($id);
         if(!empty($data)):
@@ -121,7 +149,7 @@ class coustomerSupplier extends Controller
         $data->country       = $req->country;
         $data->state         = $req->state;
         $data->city          = $req->city;
-        $data->aria          = $req->area;
+        $data->area          = $req->area;
         
         $option = "";
 

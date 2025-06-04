@@ -48,7 +48,7 @@
                     $country        = $profile->country;
                     $state          = $profile->state;
                     $city           = $profile->city;
-                    $aria           = $profile->aria;
+                    $area           = $profile->area;
                     $profileId      = $profile->id;
                 else:
                     $name           ='';
@@ -59,7 +59,7 @@
                     $country        ='';
                     $state          ='';
                     $city           ='';
-                    $aria           ='';
+                    $area           ='';
                     $profileId      = '';
                 endif;
             @endphp
@@ -84,7 +84,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputState" class="form-label">Accoount Receivable *</label>
+                                <label for="accReceivable" class="form-label">Accoount Receivable *</label>
                                 
                                 <input type="number" class="form-control" placeholder="Enter Accoount Receivable Amount" id="accReceivable" name="accReceivable" value="{{$accReceivable}}"  required />
                             </div>
@@ -133,9 +133,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="inputState" class="form-label">Aria *</label>
+                                <label for="inputState" class="form-label">Area *</label>
                                
-                                <input type="text" class="form-control" placeholder="Enter The Aria" id="aria" name="aria" value="{{$aria}}"  required />
+                                <input type="text" class="form-control" placeholder="Enter The Area" id="area" name="area" value="{{$area}}"  required />
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                         </td>
                         <td>{{$customerList->accReceivable}}</td>
                         <td>{{$customerList->mobile}}</td>
-                        <td>{{$customerList->aria}}</td>
+                        <td>{{$customerList->area}}</td>
                         <td>{{$customerList->accPayable}}</td>
                         <td>not entry</td>
                         <td>

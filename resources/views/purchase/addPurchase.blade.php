@@ -281,7 +281,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email *</label>
-                                    <input type="email" id="customerMail" class="form-control" placeholder="Enter Email" name="mail"    required />
+                                    <input type="email" id="userMail" class="form-control" placeholder="Enter Email" name="mail"    required />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -315,9 +315,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="inputState" class="form-label">Aria *</label>
+                                    <label for="area" class="form-label">Area *</label>
                                 
-                                    <input type="text" class="form-control" placeholder="Enter The Aria" id="area" name="aria" required />
+                                    <input type="text" class="form-control" placeholder="Enter The Area" id="area" name="area" required />
                                 </div>
                             </div>
                         </div>
