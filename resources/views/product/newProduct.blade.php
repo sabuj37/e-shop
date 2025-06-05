@@ -55,13 +55,13 @@
                             </div>
                         </div>
                         <div class="col-md-1 mt-4 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#brandCreate">Brand</button>
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#createBrand" >Brand</button>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Product Category</label>
                                 <label for="category" class="form-label"></label>
-                                <select id="category" class="form-control" name="category" >
+                                <select id="categoryList" class="form-control" name="category" >
                                     <!-- update from single data  show proccess -->
                                   @php
                                   $updateCategory = \App\Models\Category::find($category);
@@ -79,13 +79,13 @@
                             </div>
                         </div>
                         <div class="col-md-1 mt-4 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Category">Category</button>
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#categoryModal" >Category</button>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Product Unit</label>
                                 <label for="unitName" class="form-label"></label>
-                                <select id="unitName" class="form-control" name="unitName" ">
+                                <select id="unitName" class="form-control" name="unitName" >
                                     <!-- update from single data  show proccess -->
                                   @php
                                   $updateProductUnit = \App\Models\ProductUnit::find($unitName);
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mt-4 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#unit">Product unit</button>
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productUnitModal" >Product unit</button>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -241,22 +241,22 @@
 
 <!-- brand modal -->
 <!-- Modal -->
-<div class="modal fade" id="brandCreate" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="brandCreate" aria-hidden="true">
+<div class="modal fade" id="createBrand" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="createBrand" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title fs-5" id="brandCreate">Creat Brand</h6>
+                <h6 class="modal-title fs-5">Creat Brand</h6>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('saveBrand')}}" method="POST">
+                <form action="#" method="POST" id="brandForm">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Brand Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter brand name" />
+                        <label for="brandName" class="form-label">Brand Name</label>
+                        <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Enter brand name" />
                     </div>
                   
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="saveBrand">Save</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -267,21 +267,21 @@
 </div>
 
 <!-- category modal -->
-<div class="modal fade" id="Category" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="Category" aria-hidden="true">
+<div class="modal fade" id="categoryModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="categoryModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title fs-5" id="Category">Creat Category</h6>
+                <h6 class="modal-title fs-5">Creat Category</h6>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('saveCategory')}}" method="POST">
+                <form action="" method="POST" id="categoryForm">
                     @csrf
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">Category</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" name="name" placeholder="Enter Category name" />
+                    <label for="categoryName" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter Category name" />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="add-category">Save</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -293,21 +293,21 @@
 
 <!-- product unit -->
 
-<div class="modal fade" id="unit" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="unit" aria-hidden="true">
+<div class="modal fade" id="productUnitModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="productUnitModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title fs-5" id="unit">Preoduct Unit</h6>
+                <h6 class="modal-title fs-5" >Preoduct Unit</h6>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('saveProductUnit')}}" method="POST">
+                <form action="" method="POST" id="productUnitForm">
                     @csrf
                 <div class="mb-3">
-                    <label for="unit" class="form-label">Product Unit</label>
-                    <input type="text" class="form-control" id="unit" name="name" placeholder="Enter Product Unit name" />
+                    <label for="productUnitName" class="form-label">Product Unit</label>
+                    <input type="text" class="form-control" id="productUnitName" name="productUnitName" placeholder="Enter Product Unit name" />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="add-productUnit">Save</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -318,3 +318,77 @@
 </div>
 
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).on('click','#saveBrand', function(){
+    
+    var name = $('#brandName').val();
+    $.ajax({
+        method: 'get',
+
+        url: '{{ route('createBrand') }}',
+
+        data: { name: name, },
+
+        contentType: 'html',
+
+        success: function(result) {
+            console.log("message: ", result.message);
+            // console.log("data: ", result.data);
+            $('#createBrand').modal('hide');
+            document.getElementById("brandForm").reset();
+            $('#brand').html(result.data); 
+        },
+
+    });
+})
+
+
+$(document).on('click','#add-category', function(){
+    
+    var name = $('#categoryName').val();
+    $.ajax({
+        method: 'get',
+
+        url: '{{ route('createCategory') }}',
+
+        data: { name: name, },
+
+        contentType: 'html',
+
+        success: function(result) {
+            console.log("message: ", result.message);
+            // console.log("data: ", result.data);
+            $('#categoryModal').modal('hide');
+            document.getElementById("categoryForm").reset();
+            $('#categoryList').html(result.data); 
+        },
+
+    });
+})
+
+
+$(document).on('click','#add-productUnit', function(){
+    
+    var name = $('#productUnitName').val();
+    $.ajax({
+        method: 'get',
+
+        url: '{{ route('createProductUnit') }}',
+
+        data: { name: name, },
+
+        contentType: 'html',
+
+        success: function(result) {
+            console.log("message: ", result.message);
+            // console.log("data: ", result.data);
+            $('#productUnitModal').modal('hide');
+            document.getElementById("productUnitForm").reset();
+            $('#unitName').html(result.data); 
+        },
+
+    });
+})
+</script>
