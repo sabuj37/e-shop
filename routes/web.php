@@ -303,8 +303,33 @@ Route::middleware(['posAdmin'])->group(function(){
 
     Route::get('/expense/type',[
         expenseController::class,
-        'expensetype'
-    ])->name('expensetype');
+        'addExpense'
+    ])->name('addExpense');
+
+    //expense save for
+    Route::post('/save/expense',[
+        expenseController::class,
+        'saveExpense'
+    ])->name('saveExpense');
+
+    //expense edit
+    Route::get('/expense/edit/{id}',[
+        expenseController::class,
+        'editExpense'
+    ])->name('editExpense');
+    
+    //expense delete
+    Route::get('/expense/delete/{id}',[
+        expenseController::class,
+        'delExpense'
+    ])->name('delExpense');
+
+    
+    // submit Expense by ajax
+    Route::get('/expense/save',[
+        expenseController::class,
+        'createExpense'
+    ])->name('createExpense');
 
     Route::get('/expense',[
         expenseController::class,

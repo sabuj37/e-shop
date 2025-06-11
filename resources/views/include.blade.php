@@ -125,17 +125,17 @@
                                           </a>
                                   </li>
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('addBrand')}}">
                                               <i class="las la-minus"></i><span>Brand</span>
                                           </a>
                                   </li>
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('addCategory')}}">
                                               <i class="las la-minus"></i><span>Category</span>
                                           </a>
                                   </li>
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('addProductUnit')}}">
                                               <i class="las la-minus"></i><span>Unit</span>
                                           </a>
                                   </li>
@@ -282,7 +282,7 @@
                           </a>
                           <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                   <li class="">
-                                          <a href="{{route('expensetype')}}">
+                                          <a href="{{route('addExpense')}}">
                                               <i class="las la-minus"></i><span>Expense type</span>
                                           </a>
                                   </li>

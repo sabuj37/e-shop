@@ -109,7 +109,7 @@ class productController extends Controller
     //addBrand
     public function addBrand(){
       $data = Brand::orderBy('id','DESC')->get();
-      return view('product.addBrand',['listItem'=>$data]);
+      return view('product.brand',['listItem'=>$data]);
    }
     //save Brand
     public function saveBrand(Request $req){
@@ -121,7 +121,7 @@ class productController extends Controller
             $data->name          = $req->name;
 
             if($data->save()):
-                return redirect(route('addProduct'))->with('success','Success !  Customer profile created successfully');
+                return redirect(route('addBrand'))->with('success','Success !  Customer profile created successfully');
             else:
                 return back()->with('error','Error !  There was an error. Please try agin');
             endif;
@@ -131,7 +131,7 @@ class productController extends Controller
     //edit Brand
      public function editBrand($id){
         $data = Brand::find($id);
-        return view('product.addBrand',['profile'=>$data]);
+        return view('product.brand',['profile'=>$data]);
     }
 
     //delete Brand
@@ -170,8 +170,8 @@ class productController extends Controller
 
     //addCategory
     public function addCategory(){
-      $data = Brand::orderBy('id','DESC')->get();
-      return view('product.addCategory',['listItem'=>$data]);
+      $data = Category::orderBy('id','DESC')->get();
+      return view('product.category',['listItem'=>$data]);
    }
 
     //save Category
@@ -184,7 +184,7 @@ class productController extends Controller
             $data->name          = $req->name;
 
             if($data->save()):
-                return redirect(route('addProduct'))->with('success','Success !  Customer profile created successfully');
+                return redirect(route('addCategory'))->with('success','Success !  Customer profile created successfully');
             else:
                 return back()->with('error','Error !  There was an error. Please try agin');
             endif;
@@ -194,7 +194,7 @@ class productController extends Controller
     //edit Category
      public function editCategory($id){
         $data = Category::find($id);
-        return view('product.addCategory',['profile'=>$data]);
+        return view('product.category',['profile'=>$data]);
     }
 
     //delete Category
@@ -233,7 +233,7 @@ class productController extends Controller
     //addProductUnit
     public function addProductUnit(){
       $data = Brand::orderBy('id','DESC')->get();
-      return view('product.addProductUnit',['listItem'=>$data]);
+      return view('product.productUnit',['listItem'=>$data]);
    }
     //save ProductUnit
     public function saveProductUnit(Request $req){
@@ -245,7 +245,7 @@ class productController extends Controller
             $data->name          = $req->name;
 
             if($data->save()):
-                return redirect(route('addProduct'))->with('success','Success !  Customer profile created successfully');
+                return redirect(route('addProductUnit'))->with('success','Success !  Customer profile created successfully');
             else:
                 return back()->with('error','Error !  There was an error. Please try agin');
             endif;
@@ -255,7 +255,7 @@ class productController extends Controller
     //edit ProductUnit
      public function editProductUnit($id){
         $data = ProductUnit::find($id);
-        return view('product.addProductUnit',['profile'=>$data]);
+        return view('product.productUnit',['profile'=>$data]);
     }
 
     //delete ProductUnit

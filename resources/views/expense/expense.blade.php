@@ -10,17 +10,20 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Expense type*</label>
-                                    <label for="inputState" class="form-label"></label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>expense type</option>
-                                        <option>...</option>
-                                    </select>
+                                    <label for="expense" class="form-label"></label>
+                                    <select id="expense" class="form-control" name="expense">
+                                  <!--  form option show proccessing -->
+                                  @if(!empty($expenseList) && count($expenseList)>0)
+                                  @foreach($expenseList as $expenseData)
+                                    <option value="{{$expenseData->id}}">{{$expenseData->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
                                 </div>
                             </div>
-                            <div class="col-md-2 mt-3 p-0">
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customer"><i class="las la-plus mr-2"></i>Expense type</button>
+                            <div class="col-md-1 mt-4 p-0">
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#createExpense" >Expense type</button>
                             </div>
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="amount">Amount*</label>
@@ -111,6 +114,60 @@
 </table>
 
 </div>
+
+
+<!-- brand modal -->
+<!-- Modal -->
+<div class="modal fade" id="createExpense" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="createExpense" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title fs-5">Creat Expense</h6>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="POST" id="expenseForm">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="expenseName" class="form-label">Expense Name</label>
+                        <input type="text" class="form-control" id="expenseName" name="expenseName" placeholder="Enter expense name" />
+                    </div>
+                  
+                <button type="button" class="btn btn-primary" id="saveExpense">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).on('click','#saveExpense', function(){
+    
+    var name = $('#expenseName').val();
+    $.ajax({
+        method: 'get',
+
+        url: '{{ route('createExpense') }}',
+
+        data: { name: name, },
+
+        contentType: 'html',
+
+        success: function(result) {
+            console.log("message: ", result.message);
+            // console.log("data: ", result.data);
+            $('#createExpense').modal('hide');
+            document.getElementById("expenseForm").reset();
+            $('#expense').html(result.data); 
+        },
+
+    });
+})
+</script>
 
 
 

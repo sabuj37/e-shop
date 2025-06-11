@@ -1,6 +1,6 @@
 @extends('include') 
 
-@section('backTitle')Expense Type @endsection @section('container')
+@section('backTitle')Category Type @endsection @section('container')
 <div class="row">
     <div class="col-12">
         @if(session()->has('success'))
@@ -24,14 +24,14 @@
         $profileId      = '';
     endif;
 @endphp
-    <form action="{{route('saveExpense')}}" method="POST" >
+    <form action="{{route('saveCategory')}}" method="POST" >
     @csrf
 <div class="row">
     <input type="hidden" name="profileId" value="{{ $profileId }}">
     <div class="col-md-4">
-        <input type="text" class="form-control" placeholder="Enter expense name" aria-label="name"  name ="name" value="{{$name}}" />
+        <input type="text" class="form-control" placeholder="Enter category name" aria-label="name"  name ="name" value="{{$name}}" />
         <div class=" d-md-flex justify-content-md-end mt-2">
-            <button class="btn btn-primary btn-sm" type="submit">@if(isset($profile)) Update @else Add @endif Expense </button>
+            <button class="btn btn-primary btn-sm" type="submit">@if(isset($profile)) Update @else Add @endif Category </button>
         </div>
     </div>
 </div>
@@ -47,13 +47,13 @@
                         <label for="checkbox1" class="mb-0"></label>
                     </div>
                 </th>
-                <th scope="">Expense</th>
+                <th scope="">Category</th>
                 <th scope="">Action</th>
             </tr>
         </thead>
         <tbody>
             @if(!empty($listItem))
-            @foreach($listItem as $expenseList)
+            @foreach($listItem as $categoryList)
             <tr>
                  <td>
                     <div class="checkbox d-inline-block">
@@ -61,11 +61,11 @@
                         <label for="checkbox2" class="mb-0"></label>
                     </div>
                 </td>
-                <td> {{$expenseList->name}}</td>
+                <td> {{$categoryList->name}}</td>
                 <td>
                     <div class="d-flex list-action">
-                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="{{route('editExpense',['id'=>$expenseList->id])}}"><i class="ri-pencil-line mr-0"></i>Edit</a>
-                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="{{route('delExpense',['id'=>$expenseList->id])}}"><i class="ri-delete-bin-line mr-0"></i>Delete</a>
+                        <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="{{route('editCategory',['id'=>$categoryList->id])}}"><i class="ri-pencil-line mr-0"></i>Edit</a>
+                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="{{route('delCategory',['id'=>$categoryList->id])}}"><i class="ri-delete-bin-line mr-0"></i>Delete</a>
                     </div>
                 </td>
             </tr>
