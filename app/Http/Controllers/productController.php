@@ -232,7 +232,7 @@ class productController extends Controller
 
     //addProductUnit
     public function addProductUnit(){
-      $data = Brand::orderBy('id','DESC')->get();
+      $data = ProductUnit::orderBy('id','DESC')->get();
       return view('product.productUnit',['listItem'=>$data]);
    }
     //save ProductUnit
