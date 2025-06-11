@@ -235,24 +235,22 @@
             <div class="modal-body">
                 <form action="#" method="POST">
                     @csrf
-                        <div class=" p-0">
+                        <div class="p-0">
                             <label for="serialNumber" class="form-label">Serial Number</label>
                         </div>
-                        <div class="row ">
-                            <div class=" col-10 mb-3">
-                                <input type="" class="form-control" id="serialNumber" name="serialNumber" placeholder="Enter Product Unit name" />
-                            </div>
-                            <div class="col-1 mt-1  p-0">
-                                <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#">
-                                <i class="ri-delete-bin-line mr-0"></i>
-                                </a>
+                        <div id="serialNumberBox">
+                            <div class="row">
+                                <div class="col-10 mb-3">
+                                    <input type="" class="form-control" name="serialNumber[]" placeholder="Enter serial number" />
+                                </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-success btn-sm rounded-0" id="add-serial">Add Serial</button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
@@ -468,8 +466,23 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+$(document).on('click','#add-serial', function(){
+    var i = 1;
+    if(i<=10){
+        var serialField = "'#serialField"+i+"'";
+        var serial = '<div class="row" id="serialField'+i+'"><div class="col-10 mb-3"><input type="" class="form-control" name="serialNumber[]" placeholder="Enter serial number" /></div><div class="col-1 mt-1  p-0"><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="delete serial number" onclick="remove('+serialField+')" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></div></div>';
+        $('#serialNumberBox').append(serial);
+    }else{
+        alert('Max number of serial added');
+    }
+    i++;
+});
+
+function remove(e){
+    $(e).remove();
+};
+
 $(document).on('click','#add-supplier', function(){
-    
     var name = $('#fullName').val();
     var mail = $('#userMail').val();
     var phone = $('#mobile').val();

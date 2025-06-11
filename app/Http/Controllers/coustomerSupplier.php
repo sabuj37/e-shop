@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Supplier;
 use App\Models\balancesheet;
+use Alert;
 
 class coustomerSupplier extends Controller
 {
@@ -33,9 +34,11 @@ class coustomerSupplier extends Controller
             $data->area          = $req->area;
 
             if($data->save()):
-                return redirect(route('addCustomer'))->with('success','Success !  Customer profile created successfully');
+                Alert::success('Success!','Customer profile created successfully');
+                return redirect(route('addCustomer'));
             else:
-                return back()->with('error','Error !  There was an error. Please try agin');
+                Alert::error('Failed!','Customer profile creation failed');
+                return back();
             endif;
     }
 
