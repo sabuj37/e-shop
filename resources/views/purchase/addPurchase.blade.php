@@ -45,8 +45,9 @@
                             <div class="form-group">
                                 
                                 <label for="productName" class="form-label">Product *</label>
-                                <select id="productName"  class="form-control">
+                                <select id="productName" onchange="productSelect()" class="form-control">
                                    <!--  form option show proccessing -->
+                                    <option value="">Select</option>
                                   @if(!empty($productList) && count($productList)>0)
                                   @foreach($productList as $productData)
                                     <option value="{{$productData->id}}">{{$productData->name}}</option>
@@ -68,59 +69,41 @@
         <div class="card">
             <div class="card-body">
                 <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
-                <div class="rounded mb-3 table-responsive product-table">
-                    <table class="data-tables table mb-0 table-bordered">
+                <div class="mb-3 table-responsive product-table">
+                    <table class="table mb-0 table-bordered rounded-0">
                         <thead class="bg-white text-uppercase">
                             <tr>
-                                <th>
-                                    <div class="checkbox d-inline-block">
-                                        <input type="checkbox" class="checkbox-input" id="checkbox1" />
-                                        <label for="checkbox1" class="mb-0"></label>
-                                    </div>
-                                </th>
-                                <th>Product</th>
+                                <th>Product Name</th>
                                 <th>Serial</th>
-                                <th>Warranty</th>
+                                <th>Warranty(Y)</th>
                                 <th>QTY</th>
-                                <th>Buying Prize</th>
-                                <th>Profit Margin %</th>
+                                <th>Buy Price</th>
+                                <th>Profit %</th>
                                 <th>DP/RP</th>
-                                <th>DP profit Margin %</th>
+                                <th>DP Profit %</th>
                                 <th>Total</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="productDetails">
                             <tr>
                                 <td>
-                                    <div class="checkbox d-inline-block">
-                                        <input type="checkbox" class="checkbox-input" id="checkbox2" />
-                                        <label for="checkbox2" class="mb-0"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    Ac
+                                    <input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button>
                                 </td>
                                 <td>
-                                <input type="text" class="form-control" id="reference" name="reference" /></td>
+                                <input type="text" class="form-control" id="warrenty" name="warrenty" /></td>
                                 <td>
-                                <input type="text" class="form-control" id="reference" name="reference" /></td>
+                                <input type="text" class="form-control" id="qty" name="qty" /></td>
                                 <td>
-                                <input type="text" class="form-control" id="reference" name="reference" /></td>
+                                <input type="text" class="form-control" id="buyingPrice" name="buyingPrice" /></td>
                                 <td>
-                                <input type="text" class="form-control" id="reference" name="reference" /></td>
+                                <input type="text" class="form-control" id="profitMargin" name="profitMargin" /></td>
                                 <td>00</td>
                                 <td>
-                                <input type="text" class="form-control" id="reference" name="reference" /></td>
+                                <input type="text" class="form-control" id="discountProfitMargin" name="discountProfitMargin" /></td>
                                 <td>00</td>
-                                <td>
-                                    <div class="list-action">
-                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                    </div>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -466,6 +449,28 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+function productSelect(){
+    var product = $("#productName").val();
+    $.ajax({
+        method: 'get',
+
+        url: '{{ url('/') }}/product/details/'+product,
+
+        // data: { productId: product },
+
+        contentType: 'html',
+
+        success: function(result) {
+            console.log("message: ", result.message);
+            var field = '<tr><td><input type="text" class="form-control" name="selectProductName" value="'+result.productName+'" id="selectProductName" readonly></td><td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button></td><td><input type="text" class="form-control" id="warrenty" name="warrenty"/></td><td><input type="text" class="form-control" id="qty" name="qty"/></td><td><input type="text" class="form-control" value="'+result.buyPrice+'" id="buyingPrice" name="buyingPrice" readonly/></td><td><input type="text" class="form-control" id="profitMargin" name="profitMargin"/></td><td>00</td><td><input type="text" class="form-control" id="discountProfitMargin" name="discountProfitMargin"/></td><td>00</td></tr>';
+            // document.getElementById("supplierForm").reset();
+            $('#productDetails').html(field); 
+        },
+
+    });
+    
+    // $('#productDetails').html(data); 
+}
 $(document).on('click','#add-serial', function(){
     var i = 1;
     if(i<=10){
