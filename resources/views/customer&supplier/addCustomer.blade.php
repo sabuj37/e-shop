@@ -1,43 +1,12 @@
 @extends('include') 
 @section('backTitle') addCoustomer @endsection @section('container')
 
-<div class="col-4">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="div">
-                    <dotlottie-player src="https://lottie.host/627a9420-8a1e-4d7e-b48f-25fc9dbc21f7/LZhGtIdB6j.lottie" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay> </dotlottie-player>
-                </div>
-                <div class="">
-                    <h5>Success</h5>
-                    <p></p>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="col-12">
+    @include('sweetalert::alert')
 </div>
-
-
-
-
-
-
-
 <div class="row">
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-12">
-                @if(session()->has('success'))
-                    <div class="alert alert-success w-100">
-                        {{ session()->get('success') }}
-                    </div>
-                @endif
-                @if(session()->has('error'))
-                    <div class="alert alert-danger w-100">
-                        {{ session()->get('error') }}
-                    </div>
-                @endif
-            </div>
             @php
                 if(isset($profile)):
                     $name           = $profile->name;

@@ -8,6 +8,7 @@ use App\Http\Controllers\purchase;
 use App\Http\Controllers\saleController;
 use App\Http\Controllers\userInfo;
 use App\Http\Controllers\expenseController;
+use App\Http\Controllers\JqueryController;
 
 //user info str
 Route::get('/login',[
@@ -351,6 +352,13 @@ Route::middleware(['posAdmin'])->group(function(){
         coustomerSupplier::class,
         'supplierbalancesheet'
     ])->name('supplierbalancesheet');
+
+
+    // jquery routes are goes here
+    Route::get('product/details/{id}',[
+        JqueryController::class,
+        'getProductDetails'
+    ])->name('getProductDetails');
 
     // endsupplierbalance
 });

@@ -86,6 +86,7 @@ class productController extends Controller
             if($data->save()):
                 $getData = Product::orderBy('id','DESC')->get();
                 if(!empty($getData)):
+                    $option .='<option value="">Select</option>';
                     foreach($getData as $d):
                         $option .='<option value="'.$d->id.'">'.$d->name.'</option>';
                     endforeach;
@@ -156,6 +157,7 @@ class productController extends Controller
             if($data->save()):
                 $getData = Brand::orderBy('id','DESC')->get();
                 if(!empty($getData)):
+                    $option .='<option value="">Select</option>';
                     foreach($getData as $d):
                         $option .='<option value="'.$d->id.'">'.$d->name.'</option>';
                     endforeach;
