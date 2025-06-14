@@ -124,36 +124,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Current Stock *</label>
-                                <input type="text" class="form-control" placeholder="current stock" id="currentStock" name="currentStock" value="{{ $currentStock }}" required />
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Purchase Price *</label>
-                                <input type="number" class="form-control" placeholder="purchase amount" id="purchasePrice" name="purchasePrice" value="{{ $purchasePrice }}" required />
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Selling Price *</label>
-                                <input type="number" class="form-control" placeholder="selling amount" id="sellingPrice" name="sellingPrice" value="{{ $sellingPrice }}" required />
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Wholesale *</label>
-                                <input type="number" class="form-control" placeholder="wholesale amount" id="wholesale" name="wholesale" value="{{ $wholesale }}" required />
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                    </div>
                     <button type="submit" class="btn btn-primary mt-4 mr-2">@if(isset($profile)) Update @else Add @endif Product</button>
                     <button type="reset" class="btn btn-danger mt-4 mr-2">Reset</button>
                     @if(isset($profile))

@@ -1,71 +1,72 @@
 @extends('include') @section('backTitle') purchase @endsection @section('container')
 <div class="row">
-    <div class="col-md-8">
-<div class="row">
-    <div class="col-md-12 col-12">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <div class="header-title">
-                    <h4 class="card-title">Create New Purchase</h4>
-                </div>
-            </div>
-            <div class="card-body">
-                <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
-                    <div class="row align-items-center">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="supplierName" class="form-label">Supplier *</label>
-                                <select id="supplierName" class="form-control">
-                                  <!--  form option show proccessing -->
-                                  @if(!empty($supplierList) && count($supplierList)>0)
-                                  @foreach($supplierList as $supplierData)
-                                    <option value="{{$supplierData->id}}">{{$supplierData->name}}</option>
-                                    @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-2 mt-4 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier"><i class="las la-plus mr-2"></i>New Supplier</button>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="date" class="form-label">Date *</label>
-                                <input type="date" class="form-control" id="date" name="date" />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="reference" class="form-label">Reference *</label>
-                                <input type="text" class="form-control" id="reference" name="reference" />
-                            </div>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                
-                                <label for="productName" class="form-label">Product *</label>
-                                <select id="productName" onchange="productSelect()" class="form-control">
-                                   <!--  form option show proccessing -->
-                                    <option value="">Select</option>
-                                  @if(!empty($productList) && count($productList)>0)
-                                  @foreach($productList as $productData)
-                                    <option value="{{$productData->id}}">{{$productData->name}}</option>
-                                    @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2 mt-4 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newProduct"><i class="las la-plus mr-2"></i>New Product</button>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Create New Purchase</h4>
                         </div>
                     </div>
-                </form>
+                    <div class="card-body">
+                        <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="supplierName" class="form-label">Supplier *</label>
+                                        <select id="supplierName" class="form-control">
+                                        <!--  form option show proccessing -->
+                                        @if(!empty($supplierList) && count($supplierList)>0)
+                                        @foreach($supplierList as $supplierData)
+                                            <option value="{{$supplierData->id}}">{{$supplierData->name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-2 mt-4 p-0">
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier"><i class="las la-plus mr-2"></i>New Supplier</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="date" class="form-label">Date *</label>
+                                        <input type="date" class="form-control" id="date" name="date" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="reference" class="form-label">Reference *</label>
+                                        <input type="text" class="form-control" id="reference" name="reference" />
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="productName" class="form-label">Product *</label>
+                                        <select id="productName" onchange="productSelect()" class="form-control">
+                                        <!--  form option show proccessing -->
+                                            <option value="">Select</option>
+                                        @if(!empty($productList) && count($productList)>0)
+                                        @foreach($productList as $productData)
+                                            <option value="{{$productData->id}}">{{$productData->name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 mt-4 p-0">
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newProduct"><i class="las la-plus mr-2"></i>New Product</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-12 col-sm-12 col-lg-12">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
@@ -75,13 +76,14 @@
                             <tr>
                                 <th>Product Name</th>
                                 <th>Serial</th>
-                                <th>Warranty(Y)</th>
-                                <th>QTY</th>
+                                <th>Purchase Qty</th>
+                                <th>Current Stock</th>
                                 <th>Buy Price</th>
+                                <th>Sale Price(Ex. Vat)</th>
+                                <th>Vat Include</th>
+                                <th>Sale Price(Inc. Vat)</th>
                                 <th>Profit %</th>
-                                <th>DP/RP</th>
-                                <th>DP Profit %</th>
-                                <th>Total</th>
+                                <th>Total Price</th>
                             </tr>
                         </thead>
                         <tbody id="productDetails">
@@ -89,118 +91,97 @@
                                 <td>
                                     <input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly>
                                 </td>
+                                <td>-</td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button>
+                                    <input type="text" class="form-control" id="qty" name="qty" />
                                 </td>
                                 <td>
-                                <input type="text" class="form-control" id="warrenty" name="warrenty" /></td>
+                                    <input type="text" class="form-control" id="currentStock" name="currentStock" readonly />
+                                </td>
                                 <td>
-                                <input type="text" class="form-control" id="qty" name="qty" /></td>
+                                    <input type="text" class="form-control" id="buyingPrice" name="buyingPrice" />
+                                </td>
                                 <td>
-                                <input type="text" class="form-control" id="buyingPrice" name="buyingPrice" /></td>
+                                    <input type="text" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" />
+                                </td>
                                 <td>
-                                <input type="text" class="form-control" id="profitMargin" name="profitMargin" /></td>
-                                <td>00</td>
+                                    <select name="vatStatus" id="vatStatus" class="form-control">
+                                        <option value="1" >Y</option>
+                                        <option value="0">N</option>
+                                    </select>
+                                </td>
                                 <td>
-                                <input type="text" class="form-control" id="discountProfitMargin" name="discountProfitMargin" /></td>
-                                <td>00</td>
+                                    <input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly />
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" id="profitMargin" name="profitMargin" />
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly />
+                                </td>
                             </tr>
                         </tbody>
                     </table>
-                    
                 </div>
             </form>
             </div>
         </div>
     </div>
-</div>
-</div>
-<div class="col-md-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="header-title">
-                        <h6 class="card-title">Create Purchase</h6>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="header-title">
+                            <h6 class="card-title">Other Details</h6>
+                        </div>
+                        <div class="mb-3 table-responsive product-table">
+                            <table class="table mb-0 table-bordered rounded-0">
+                                <thead class="bg-white text-uppercase">
+                                    <tr>
+                                        <th>Discount Type</th>
+                                        <th>Discount Amount</th>
+                                        <th>Discount Parcent</th>
+                                        <th>Grand Total</th>
+                                        <th>Paid Amount</th>
+                                        <th>Due Amount</th>
+                                        <th>Special Note</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productDetails">
+                                    <tr>
+                                        <td>
+                                            <select name="vatStatus" id="vatStatus" class="form-control">
+                                                <option value="Amount">Amount</option>
+                                                <option value="Parcent">Parcent</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="discountAmount" name="discountAmount" readonly />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="discountPercent" name="discountPercent" readonly />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="grandTotal" name="grandTotal" />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly />
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="specialNote" name="specialNote"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <form action="">
-                        <div class="row mb-2 align-items-center">
-                            <div class="col-4">
-                                <label for="totalAmount" class="col-form-label">Total:</label>
-                            </div>
-                            <div class="col-sm-8">
-                                <input type="email" class="form-control" id="totalAmount" name="totalAmount">
-                            </div>
-                        </div>
-                        <div class="row mb-2  text-center">
-                            <div class="col-6">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="discountRadio"  checked>
-                                <label class="form-check-label" for="discountRadio" name="discountRadio">
-                                Discount
-                                </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="discountPerRadio" checked>
-                                <label class="form-check-label" for="discountPerRadio" naame="discountPerRadio">
-                                Discount %
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row mb-2 align-items-center">
-                            <div class="col-6">
-                                <label for="discountAmount" class="col-form-label">Discount Amount:</label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="discountAmount" name="discountAmount">
-                            </div>
-                        </div>
-                        <div class="row mb-2 align-items-center">
-                            <div class="col-6">
-                                <label for="discountPer" class="col-form-label">Discount %:</label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="discountPer" name="discountPer">
-                            </div>
-                        </div>
-                        <div class="row mb-2 align-items-center">
-                            <div class="col-6">
-                                <label for="grandTotal" class="col-form-label">Grand Total:</label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="grandTotal" name="grandTotal">
-                            </div>
-                        </div>
-                        <div class="row mb-2 align-items-center">
-                            <div class="col-6">
-                                <label for="paidAmount" class="col-form-label">Paid Amount:</label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="paidAmount" name="paidAmount">
-                            </div>
-                        </div>
-                        <div class="row mb-2 align-items-center">
-                            <div class="col-6">
-                                <label for="dueAmount" class="col-form-label">Due Amount:</label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="dueAmount" name="dueAmount">
-                            </div>
-                        </div>
-                        <div class="row mb-2 align-items-center">
-                            <div class="col-12">
-                                <label for="note" class="col-form-label">Note:</label>
-                                <textarea class="form-control" aria-label="With textarea"></textarea>
-                            </div>
-                        </div>
-                        
-                    <button type="submit" class="btn btn-primary mr-2">@if(isset($profile)) Update @else Add @endif Supplier</button>
-                    </form>
                 </div>
             </div>
-    </div>
         </div>
-        
-    
     </div>
 </div>
 
@@ -462,12 +443,12 @@ function productSelect(){
 
         success: function(result) {
             console.log("message: ", result.message);
-            var field = '<tr><td><input type="text" class="form-control" name="selectProductName" value="'+result.productName+'" id="selectProductName" readonly></td><td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button></td><td><input type="text" class="form-control" id="warrenty" name="warrenty"/></td><td><input type="text" class="form-control" id="qty" name="qty"/></td><td><input type="text" class="form-control" value="'+result.buyPrice+'" id="buyingPrice" name="buyingPrice" readonly/></td><td><input type="text" class="form-control" id="profitMargin" name="profitMargin"/></td><td>00</td><td><input type="text" class="form-control" id="discountProfitMargin" name="discountProfitMargin"/></td><td>00</td></tr>';
+            var field = '<tr><td><input type="text" class="form-control" name="selectProductName" value="'+result.productName+'" id="selectProductName" readonly></td><td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button></td><td><input type="text" class="form-control" id="qty" name="qty"/></td><td><input type="text" class="form-control" id="currentStock" name="currentStock" readonly/></td><td><input type="text" class="form-control" id="buyingPrice" name="buyingPrice"/></td><td><input type="text" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat"/></td><td><select name="vatStatus" id="vatStatus" class="form-control"><option value="1">Yes</option><option value="0">No</option></select></td><td><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td><input type="number" class="form-control" id="profitMargin" name="profitMargin"/></td><td><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
             // document.getElementById("supplierForm").reset();
             $('#productDetails').html(field); 
         },
         error:function(){
-            var field = '<tr><td><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button></td><td><input type="text" class="form-control" id="warrenty" name="warrenty"/></td><td><input type="text" class="form-control" id="qty" name="qty"/></td><td><input type="text" class="form-control" value="" id="buyingPrice" name="buyingPrice" readonly/></td><td><input type="text" class="form-control" id="profitMargin" name="profitMargin"/></td><td>00</td><td><input type="text" class="form-control" id="discountProfitMargin" name="discountProfitMargin"/></td><td>00</td></tr>';
+            var field = '<tr><td><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td>-</td><td><input type="text" class="form-control" id="qty" name="qty"/></td><td><input type="text" class="form-control" id="currentStock" name="currentStock" readonly/></td><td><input type="text" class="form-control" id="buyingPrice" name="buyingPrice"/></td><td><input type="text" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat"/></td><td><select name="vatStatus" id="vatStatus" class="form-control"><option value="1">Yes</option><option value="0">No</option></select></td><td><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td><input type="number" class="form-control" id="profitMargin" name="profitMargin"/></td><td><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
             // document.getElementById("supplierForm").reset();
             $('#productDetails').html(field); 
         }
