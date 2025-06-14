@@ -29,7 +29,7 @@
 <div class="row">
     <input type="hidden" name="profileId" value="{{ $profileId }}">
     <div class="col-md-4">
-        <input type="text" class="form-control" placeholder="Enter category name" aria-label="name"  name ="name" value="{{$name}}" />
+        <input type="text" class="form-control" placeholder="Enter product unit name" aria-label="name"  name ="name" value="{{$name}}" />
         <div class=" d-md-flex justify-content-md-end mt-2">
             <button class="btn btn-primary btn-sm" type="submit">@if(isset($profile)) Update @else Add @endif Product Unit </button>
         </div>
