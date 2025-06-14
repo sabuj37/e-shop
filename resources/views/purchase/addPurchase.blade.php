@@ -466,6 +466,11 @@ function productSelect(){
             // document.getElementById("supplierForm").reset();
             $('#productDetails').html(field); 
         },
+        error:function(){
+            var field = '<tr><td><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button></td><td><input type="text" class="form-control" id="warrenty" name="warrenty"/></td><td><input type="text" class="form-control" id="qty" name="qty"/></td><td><input type="text" class="form-control" value="" id="buyingPrice" name="buyingPrice" readonly/></td><td><input type="text" class="form-control" id="profitMargin" name="profitMargin"/></td><td>00</td><td><input type="text" class="form-control" id="discountProfitMargin" name="discountProfitMargin"/></td><td>00</td></tr>';
+            // document.getElementById("supplierForm").reset();
+            $('#productDetails').html(field); 
+        }
 
     });
     
