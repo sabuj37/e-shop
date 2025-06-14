@@ -9,6 +9,7 @@ use App\Http\Controllers\saleController;
 use App\Http\Controllers\userInfo;
 use App\Http\Controllers\expenseController;
 use App\Http\Controllers\JqueryController;
+use App\Http\Controllers\reportController;
 
 //user info str
 Route::get('/login',[
@@ -361,4 +362,26 @@ Route::middleware(['posAdmin'])->group(function(){
     ])->name('getProductDetails');
 
     // endsupplierbalance
+
+
+    //Report------------------------
+
+    //stock report
+    Route::get('stock/report/',[
+        reportController::class,
+        'addStockReport'
+    ])->name('addStockReport');
+
+    //sales report
+    Route::get('sales/report/',[
+        reportController::class,
+        'addSalesReport'
+    ])->name('addSalesReport');
+
+    //top customer  report
+    Route::get('top-customer/report/',[
+        reportController::class,
+        'addTopCustomerReport'
+    ])->name('addTopCustomerReport');
+
 });

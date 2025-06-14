@@ -315,17 +315,17 @@
                                                   </a>
                                               </li>
                                               <li class="">
-                                                  <a href="">
+                                                  <a href="{{route('addStockReport')}}">
                                                       <i class="las la-minus"></i><span>Stock Report</span>
                                                   </a>
                                               </li>
                                               <li class="">
-                                                  <a href="">
+                                                  <a href="{{route('addSalesReport')}}">
                                                       <i class="las la-minus"></i><span>Sale Report</span>
                                                   </a>
                                               </li>
                                               <li class="">
-                                                  <a href="">
+                                                  <a href="{{route('addTopCustomerReport')}}">
                                                       <i class="las la-minus"></i><span>Top Customer</span>
                                                   </a>
                                               </li>
