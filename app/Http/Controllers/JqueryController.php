@@ -17,7 +17,7 @@ class JqueryController extends Controller
 
         if($getData->count()>0):
             $purchaseHistory    = PurchaseProduct::find($getData->id);
-            $stockHistory       = ProductStock::where(['productId'=>$getData->id])->get();
+            $stockHistory       = ProductStock::where(['productId'=>$getData->id])->first();
             if($stockHistory->count()>0):
                 $currentStock   = $stockHistory->currentStock;
             else:
@@ -25,7 +25,7 @@ class JqueryController extends Controller
             endif;
 
             $productName = $getData->name;
-            $buyingPrice = $getData->purchasePrice;
+            // $buyingPrice = $getData->purchasePrice;
             // $productName = $getData->name;
             return ['productName' => $productName,'currentStock' => $currentStock, 'message'=>'Success ! Form successfully subjmit.'];
         else:
