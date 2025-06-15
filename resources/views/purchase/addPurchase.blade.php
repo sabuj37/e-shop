@@ -1,5 +1,5 @@
 @extends('include') @section('backTitle') purchase @endsection @section('container')
-<div class="row">
+<form action="#" id="purchaseAdd" class="row">
     <div class="col-12">
         <div class="row">
             <div class="col-md-12 col-12">
@@ -12,10 +12,17 @@
                     <div class="card-body">
                         <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
                             <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="date" class="form-label">Date *</label>
+                                        <input type="date" class="form-control" id="date" name="date" />
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="supplierName" class="form-label">Supplier *</label>
-                                        <select id="supplierName" class="form-control">
+                                        <select id="supplierName" onchange="actProductList()" class="form-control" required>
+                                        <option value="">-</option>
                                         <!--  form option show proccessing -->
                                         @if(!empty($supplierList) && count($supplierList)>0)
                                         @foreach($supplierList as $supplierData)
@@ -24,40 +31,39 @@
                                             @endif
                                         </select>
                                     </div>
-                                    
                                 </div>
                                 <div class="col-md-2 mt-4 p-0">
                                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier"><i class="las la-plus mr-2"></i>New Supplier</button>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="date" class="form-label">Date *</label>
-                                        <input type="date" class="form-control" id="date" name="date" />
+                                        <label for="invoice" class="form-label">Invoice *</label>
+                                        <input type="text" class="form-control" id="invoice" name="invoice" />
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="reference" class="form-label">Reference *</label>
-                                        <input type="text" class="form-control" id="reference" name="reference" />
-                                    </div>
-                                </div>
-                                <div class="col-md-10">
+                                <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="productName" class="form-label">Product *</label>
-                                        <select id="productName" onchange="productSelect()" class="form-control">
+                                        <select id="productName" onchange="productSelect()" class="form-control" required disabled>
                                         <!--  form option show proccessing -->
                                             <option value="">Select</option>
                                         @if(!empty($productList) && count($productList)>0)
                                         @foreach($productList as $productData)
                                             <option value="{{$productData->id}}">{{$productData->name}}</option>
-                                            @endforeach
-                                            @endif
+                                        @endforeach
+                                        @endif
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="col-md-2 mt-4 p-0">
                                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newProduct"><i class="las la-plus mr-2"></i>New Product</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="reference" class="form-label">Reference *</label>
+                                        <input type="text" class="form-control" id="reference" name="reference" />
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -88,38 +94,40 @@
                         </thead>
                         <tbody id="productDetails">
                             <tr>
-                                <td>
-                                    <input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly>
+                                <td width="20%">
+                                    <input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly />
                                 </td>
-                                <td>-</td>
-                                <td>
-                                    <input type="text" class="form-control" id="qty" name="qty" />
+                                <td width="8%">
+                                    -
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control" id="currentStock" name="currentStock" readonly />
+                                <td width="9%">
+                                    <input type="number" class="form-control" id="qty" name="qty" readonly />
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control" id="buyingPrice" name="buyingPrice" />
+                                <td width="9%">
+                                    <input type="number" class="form-control" id="currentStock" name="currentStock" readonly />
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" />
+                                <td width="9%">
+                                    <input type="number" class="form-control" id="buyingPrice" name="buyingPrice" readonly />
                                 </td>
-                                <td>
-                                    <select name="vatStatus" id="vatStatus" class="form-control">
-                                        <option value="1" >Y</option>
-                                        <option value="0">N</option>
+                                <td width="9%">
+                                    <input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" readonly />
+                                </td>
+                                <td width="9%">
+                                    <select name="vatStatus" id="vatStatus" class="form-control" readonly>
+                                        <option value="">-</option>
                                     </select>
                                 </td>
-                                <td>
+                                <td width="9%">
                                     <input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly />
                                 </td>
-                                <td>
-                                    <input type="number" class="form-control" id="profitMargin" name="profitMargin" />
+                                <td width="9%">
+                                    <input type="number" class="form-control" id="profitMargin" name="profitMargin" readonly />
                                 </td>
-                                <td>
+                                <td width="9%">
                                     <input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly />
                                 </td>
                             </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -152,6 +160,7 @@
                                     <tr>
                                         <td>
                                             <select name="vatStatus" id="vatStatus" class="form-control">
+                                                <option value="">-</option>
                                                 <option value="Amount">Amount</option>
                                                 <option value="Parcent">Parcent</option>
                                             </select>
@@ -183,42 +192,41 @@
             </div>
         </div>
     </div>
-</div>
+    
+    <!--  serial number model -->
 
-
-<!-- Page end  -->
-<!--  serial -->
-
-<div class="modal fade" id="serialModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="serialModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title fs-5" id="serialModal">New Serial</h6>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="#" method="POST">
-                    @csrf
-                        <div class="p-0">
-                            <label for="serialNumber" class="form-label">Serial Number</label>
-                        </div>
-                        <div id="serialNumberBox">
-                            <div class="row">
-                                <div class="col-10 mb-3">
-                                    <input type="" class="form-control" name="serialNumber[]" placeholder="Enter serial number" />
-                                </div>
+    <div class="modal fade" id="serialModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="serialModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title fs-5">New Serial</h6>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="resetSerial">
+                    <div class="p-0">
+                        <label for="serialNumber" class="form-label">Serial Number</label>
+                    </div>
+                    <div id="serialNumberBox">
+                        <div class="row">
+                            <div class="col-10 mb-3">
+                                <input type="" class="form-control" name="serialNumber[]" placeholder="Enter serial number" />
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success btn-sm rounded-0" id="add-serial">Add Serial</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <button type="button" class="btn btn-success btn-sm rounded-0" id="add-serial">Add Serial</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="resetSerial()" class="btn btn-warning" data-dismiss="modal">Clear</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
+
+
+<!-- Page end  -->
 <!-- new supplier Modal -->
 <div class="modal fade" id="supplier" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="supplier" aria-hidden="true">
     <div class="modal-dialog">
@@ -380,36 +388,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Current Stock *</label>
-                                <input type="text" class="form-control" placeholder="current stock" id="currentStockNum"   required />
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Purchase Price *</label>
-                                <input type="number" class="form-control" placeholder="purchase amount" id="purchasePriceAmount"  required />
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Selling Price *</label>
-                                <input type="number" class="form-control" placeholder="selling amount" id="sellingPriceAmount"  required />
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Wholesale *</label>
-                                <input type="number" class="form-control" placeholder="wholesale amount" id="wholesaleAmount"  required />
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                    </div>
                     <button type="button" class="btn btn-primary mt-4 mr-2" id="add-product"> Add Product</button>
                     <button type="reset" class="btn btn-danger mt-4 mr-2">Reset</button>
                 </form>
@@ -430,6 +408,65 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+// price calculation
+function priceCalculation(){
+    let vatSts      = $("#vatStatus").val();
+    if(vatSts == 1){
+        console.log(vatSts);
+        let vat             = 15;
+        let salePrice       = parseInt($("#salingPriceWithoutVat").val());
+        let buyPrice        = parseInt($("#buyingPrice").val());
+
+        let totalVat        = parseInt((salePrice*15)/100);
+        let newPrice        = parseInt(salePrice+totalVat);
+        let profitValue     = parseInt((newPrice-buyPrice));
+        let profitMargin    = parseInt((profitValue/buyPrice)*100);
+
+        $("#salingPriceWithVat").val(newPrice);
+        $("#profitMargin").val(profitMargin);
+    }else{
+        let salePrice       = parseInt($("#salingPriceWithoutVat").val());
+        let buyPrice        = parseInt($("#buyingPrice").val());
+        let profitValue     = parseInt((salePrice-buyPrice));
+        let profitMargin    = parseInt((profitValue/buyPrice)*100);
+
+        $("#salingPriceWithVat").val('');
+        $("#profitMargin").val(profitMargin);
+    }
+}
+
+// profit calculation
+
+function profitCalculation(){
+    let vatSts      = $("#vatStatus").val();
+    if(vatSts === 1){
+        let vat             = 15;
+        let salePrice       = parseInt($("#salingPriceWithoutVat").val());
+        let buyPrice        = parseInt($("#buyingPrice").val());
+        let profit          = parseInt($("#profitMargin").val());
+
+        let profitAmount    = parseInt((buyPrice/100)*profit);
+        let priceValueWOVat = parseInt(buyPrice+profitAmount);
+
+        let totalVat        = parseInt((priceValueWOVat*15)/100);
+        let newPrice        = parseInt(priceValueWOVat+totalVat);
+
+        $("#salingPriceWithVat").val(newPrice);
+        $("#salingPriceWithoutVat").val(priceValueWOVat);
+    }else{
+        let salePrice       = parseInt($("#salingPriceWithoutVat").val());
+        let buyPrice        = parseInt($("#buyingPrice").val());
+        let profit          = parseInt($("#profitMargin").val());
+
+        let profitAmount    = parseInt((buyPrice/100)*profit);
+        let priceValueWOVat = parseInt(buyPrice+profitAmount);
+
+
+        $("#salingPriceWithVat").val('');
+        $("#salingPriceWithoutVat").val(priceValueWOVat);
+    }
+}
+
 function productSelect(){
     var product = $("#productName").val();
     $.ajax({
@@ -443,12 +480,12 @@ function productSelect(){
 
         success: function(result) {
             console.log("message: ", result.message);
-            var field = '<tr><td><input type="text" class="form-control" name="selectProductName" value="'+result.productName+'" id="selectProductName" readonly></td><td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button></td><td><input type="text" class="form-control" id="qty" name="qty"/></td><td><input type="text" class="form-control" id="currentStock" name="currentStock" readonly/></td><td><input type="text" class="form-control" id="buyingPrice" name="buyingPrice"/></td><td><input type="text" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat"/></td><td><select name="vatStatus" id="vatStatus" class="form-control"><option value="1">Yes</option><option value="0">No</option></select></td><td><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td><input type="number" class="form-control" id="profitMargin" name="profitMargin"/></td><td><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
+            var field = '<tr><td width="20%"><input type="text" class="form-control" name="selectProductName" value="'+result.productName+'" id="selectProductName" readonly></td><td width="8%"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button></td><td width="9%"><input type="number" class="form-control" id="qty" name="qty"/></td><td width="9%"><input type="number" class="form-control" id="currentStock" name="currentStock" value="'+result.currentStock+'" readonly/></td><td width="9%"><input type="number" class="form-control" id="buyingPrice" name="buyingPrice"/></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" onkeyup="priceCalculation()"/></td><td width="9%"><select name="vatStatus" id="vatStatus" onchange="priceCalculation()" class="form-control"><option value="">-</option><option value="1">Yes</option><option value="0">No</option></select></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td width="9%"><input type="number" class="form-control" id="profitMargin" onkeyup="profitCalculation()" name="profitMargin"/></td><td width="9%"><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
             // document.getElementById("supplierForm").reset();
             $('#productDetails').html(field); 
         },
         error:function(){
-            var field = '<tr><td><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td>-</td><td><input type="text" class="form-control" id="qty" name="qty"/></td><td><input type="text" class="form-control" id="currentStock" name="currentStock" readonly/></td><td><input type="text" class="form-control" id="buyingPrice" name="buyingPrice"/></td><td><input type="text" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat"/></td><td><select name="vatStatus" id="vatStatus" class="form-control"><option value="1">Yes</option><option value="0">No</option></select></td><td><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td><input type="number" class="form-control" id="profitMargin" name="profitMargin"/></td><td><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
+            var field = '<tr><td width="20%"><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td width="8%">-</td><td width="9%"><input type="number" class="form-control" id="qty" name="qty" readonly/></td><td width="9%"><input type="number" class="form-control" id="currentStock" name="currentStock" readonly/></td><td width="9%"><input type="number" class="form-control" id="buyingPrice" name="buyingPrice" readonly/></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" readonly/></td><td width="9%"><select name="vatStatus" id="vatStatus" class="form-control" readonly><option value="">-</option></select></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td width="9%"><input type="number" class="form-control" id="profitMargin" name="profitMargin" readonly/></td><td width="9%"><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
             // document.getElementById("supplierForm").reset();
             $('#productDetails').html(field); 
         }
@@ -472,6 +509,26 @@ $(document).on('click','#add-serial', function(){
 function remove(e){
     $(e).remove();
 };
+
+function resetSerial(){
+    var serial = '<div class="row" id="serialField0"><div class="col-10 mb-3"><input type="" class="form-control" name="serialNumber[]" placeholder="Enter serial number" /></div><div class="col-1 mt-1  p-0"></div></div>';
+    $('#serialNumberBox').html(serial);
+}
+
+function actProductList(){
+    var data = $('#supplierName').val();
+    if(data === ""){ 
+        // reset the product list
+        var field = '<tr><td width="20%"><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td width="8%">-</td><td width="9%"><input type="number" class="form-control" id="qty" name="qty"/></td><td width="9%"><input type="number" class="form-control" id="currentStock" name="currentStock" readonly/></td><td width="9%"><input type="number" class="form-control" id="buyingPrice" name="buyingPrice"/></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat"/></td><td width="9%"><select name="vatStatus" id="vatStatus" class="form-control"><option value="">-</option><option value="1">Yes</option><option value="0">No</option></select></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td width="9%"><input type="number" class="form-control" id="profitMargin" name="profitMargin"/></td><td width="9%"><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
+        $('#productDetails').html(field); 
+        // reset the product
+        $('#productName option:selected').prop("selected", false);
+        // disable the product
+        $('#productName').attr('disabled','disabled');
+    }else{
+        $('#productName').removeAttr('disabled');
+    };
+}
 
 $(document).on('click','#add-supplier', function(){
     var name = $('#fullName').val();
