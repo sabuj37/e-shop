@@ -26,7 +26,7 @@
                     @csrf
                     <div class="row align-items-center">
                         <input type="hidden" name="profileId" value="{{ $profileId }}" />
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Prodct Name *</label>
                                 <input type="text" class="form-control" placeholder="Enter Name" id="name" name="name" value="{{ $name }}" required />
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="col-md-1 mt-4 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#createBrand" >Brand</button>
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#createBrand" ><i class="las la-plus mr-2"></i>Brand</button>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -78,8 +78,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-1 mt-4 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#categoryModal" >Category</button>
+                        <div class="col-md-2 mt-4 p-0">
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#categoryModal" ><i class="las la-plus mr-2"></i>Category</button>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mt-4 p-0">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productUnitModal" >Product unit</button>
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productUnitModal" ><i class="las la-plus mr-2"></i>Product unit</button>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
