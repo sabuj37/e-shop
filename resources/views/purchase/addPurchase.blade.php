@@ -159,20 +159,20 @@
                                 <tbody id="productDetails">
                                     <tr>
                                         <td>
-                                            <select name="vatStatus" id="vatStatus" class="form-control">
+                                            <select name="discountStatus" id="discountStatus" onchange="discountType()" class="form-control">
                                                 <option value="">-</option>
-                                                <option value="Amount">Amount</option>
-                                                <option value="Parcent">Parcent</option>
+                                                <option value="1">Amount</option>
+                                                <option value="2">Parcent</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountAmount" name="discountAmount" readonly />
+                                            <input type="number" class="form-control" id="discountAmount" onkeyup="discountSystem()" name="discountAmount" readonly />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountPercent" name="discountPercent" readonly />
+                                            <input type="number" class="form-control" id="discountPercent" onkeyup="discountSystem()" name="discountPercent" readonly />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="grandTotal" name="grandTotal" />
+                                            <input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="paidAmount" name="paidAmount" />
@@ -408,6 +408,54 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+
+// other details part
+function discountType(){
+    let discountSts      = $("#discountStatus").val();
+    if(discountSts == 1){
+        console.log(discountSts)
+        $('#discountAmount').removeAttr('readonly');
+        $('#discountPercent').attr('readonly','readonly');
+    }else if(discountSts == 2){
+        $('#discountAmount').attr('readonly','readonly');
+        $('#discountPercent').removeAttr('readonly');
+    }else{
+        console.log(discountSts)
+        $('#discountAmount').attr('readonly','readonly');
+        $('#discountPercent').attr('readonly','readonly');
+    }
+}
+
+// discount details
+function discountSystem(){
+    let amount      = parseInt($("#discountAmount").val());
+    let parcent     = parseInt($("#discountPercent").val());
+    let gTotal  = parseInt($("#totalPrice").val());
+    
+
+    if(amount != ""){
+        let totalAmount     = parseInt(gTotal-amount);
+        let dstPercent      = parseInt(100/gTotal)*amount;
+        $('#grandTotal').val(totalAmount);
+        $('#dueAmount').val(totalAmount);
+        $('#discountPercent').val(dstPercent);
+    }else if(parcent != ''){
+        let amount      = parseInt(parcent*gTotal)/100;
+        let totalAmount = parseInt(gTotal-amount);
+        $('#grandTotal').val(totalAmount);
+        $('#dueAmount').val(totalAmount);
+        $('#discountAmount').val(amount);
+    }else{
+        $('#discountAmount').attr('readonly','readonly');
+        $('#discountPercent').attr('readonly','readonly');
+        $('#grandTotal').val(gTotal);
+        $('#dueAmount').val(gTotal);
+        $('#discountPercent').val('');
+        $('#discountAmount').val('');
+    }
+}
+
+
 // total price calculation
 function totalPriceCalculate(){
     let buyPrice    = parseInt($("#buyingPrice").val());
@@ -415,6 +463,8 @@ function totalPriceCalculate(){
     let total       = parseInt(buyPrice*qty);
 
     $("#totalPrice").val(total);
+    $("#grandTotal").val(total);
+    $("#dueAmount").val(total);
 }
 
 // price calculation
@@ -448,7 +498,7 @@ function priceCalculation(){
 
 function profitCalculation(){
     let vatSts      = $("#vatStatus").val();
-    if(vatSts === 1){
+    if(vatSts == 1){
         let vat             = 15;
         let salePrice       = parseInt($("#salingPriceWithoutVat").val());
         let buyPrice        = parseInt($("#buyingPrice").val());
@@ -526,7 +576,7 @@ function resetSerial(){
 
 function actProductList(){
     var data = $('#supplierName').val();
-    if(data === ""){ 
+    if(data == ""){ 
         // reset the product list
         var field = '<tr><td width="20%"><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td width="8%">-</td><td width="9%"><input type="number" class="form-control" id="qty" name="qty"/></td><td width="9%"><input type="number" class="form-control" id="currentStock" name="currentStock" readonly/></td><td width="9%"><input type="number" class="form-control" id="buyingPrice" name="buyingPrice"/></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat"/></td><td width="9%"><select name="vatStatus" id="vatStatus" class="form-control"><option value="">-</option><option value="1">Yes</option><option value="0">No</option></select></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td width="9%"><input type="number" class="form-control" id="profitMargin" name="profitMargin"/></td><td width="9%"><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
         $('#productDetails').html(field); 
