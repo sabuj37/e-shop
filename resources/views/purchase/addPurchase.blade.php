@@ -166,16 +166,16 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountAmount" onkeyup="discountSystem()" name="discountAmount" readonly />
+                                            <input type="number" class="form-control" id="discountAmount" onkeyup="discountAmount()" name="discountAmount" readonly />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountPercent" onkeyup="discountSystem()" name="discountPercent" readonly />
+                                            <input type="number" class="form-control" id="discountPercent" onkeyup="discountParcent()" name="discountPercent" readonly />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" />
+                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" onkeyup="dueCalculate()" />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly />
@@ -427,31 +427,67 @@ function discountType(){
 }
 
 // discount details
-function discountSystem(){
-    let amount      = parseInt($("#discountAmount").val());
+function discountAmount(){
+    $('#discountPercent').val('');
+    let dstAmount   = parseInt($("#discountAmount").val());
+    let paidAmt     = parseInt($("#paidAmount").val());
     let parcent     = parseInt($("#discountPercent").val());
-    let gTotal  = parseInt($("#totalPrice").val());
+    let gTotal      = parseInt($("#totalPrice").val());
+    let finalAmount = parseInt(gTotal-dstAmount);
+    let dueAmt      = parseInt(finalAmount-paidAmt);
     
 
-    if(amount != ""){
-        let totalAmount     = parseInt(gTotal-amount);
-        let dstPercent      = parseInt(100/gTotal)*amount;
+    if(dstAmount >0){
+        let totalAmount     = parseInt(gTotal-dstAmount);
+        let dstPercent      = parseInt((100/gTotal)*dstAmount);
         $('#grandTotal').val(totalAmount);
-        $('#dueAmount').val(totalAmount);
+        $('#dueAmount').val(dueAmount);
         $('#discountPercent').val(dstPercent);
-    }else if(parcent != ''){
-        let amount      = parseInt(parcent*gTotal)/100;
-        let totalAmount = parseInt(gTotal-amount);
-        $('#grandTotal').val(totalAmount);
-        $('#dueAmount').val(totalAmount);
-        $('#discountAmount').val(amount);
     }else{
-        $('#discountAmount').attr('readonly','readonly');
-        $('#discountPercent').attr('readonly','readonly');
         $('#grandTotal').val(gTotal);
-        $('#dueAmount').val(gTotal);
+        $('#dueAmount').val(dueAmt);
         $('#discountPercent').val('');
         $('#discountAmount').val('');
+    }
+}
+// dicount parcent calculate
+function discountParcent(){
+    $('#discountAmount').val('');
+    let dstAmount   = parseInt($("#discountAmount").val());
+    let paidAmt     = parseInt($("#paidAmount").val());
+    let parcent     = parseInt($("#discountPercent").val());
+    let gTotal      = parseInt($("#totalPrice").val());
+    let finalAmount = parseInt(gTotal-dstAmount);
+    let dueAmt      = parseInt(finalAmount-paidAmt);
+    
+
+    if(parcent >0){
+        let discountAmt     = parseInt((parcent*gTotal)/100);
+        let totalAmount     = parseInt(gTotal-discountAmt);
+        $('#grandTotal').val(totalAmount);
+        $('#dueAmount').val(dueAmt);
+        $('#discountAmount').val(discountAmt);
+    }else{
+        $('#grandTotal').val(gTotal);
+        $('#dueAmount').val(dueAmt);
+        $('#discountPercent').val('');
+        $('#discountAmount').val('');
+    }
+}
+// due calculate
+function dueCalculate(){
+    // $('#discountAmount').val('');
+    let paidAmount          = parseInt($("#paidAmount").val());
+    let gTotal          = parseInt($("#totalPrice").val());
+    let dstAmount       = parseInt($("#discountAmount").val());
+    let finalAmount     = parseInt(gTotal-dstAmount);  
+
+    if(paidAmount >0){
+        let totalAmount     = parseInt(finalAmount-paidAmount);
+        $('#dueAmount').val(totalAmount);
+    }else{
+        $('#dueAmount').val(finalAmount);
+        $('#paidAmount').val('');
     }
 }
 
