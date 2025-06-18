@@ -175,7 +175,7 @@
                                             <input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" onkeyup="dueCalculate()" />
+                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0" onkeyup="dueCalculate()" />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly />
@@ -431,21 +431,24 @@ function discountAmount(){
     $('#discountPercent').val('');
     let dstAmount   = parseInt($("#discountAmount").val());
     let paidAmt     = parseInt($("#paidAmount").val());
-    let parcent     = parseInt($("#discountPercent").val());
+    // let parcent     = parseInt($("#discountPercent").val());
     let gTotal      = parseInt($("#totalPrice").val());
-    let finalAmount = parseInt(gTotal-dstAmount);
-    let dueAmt      = parseInt(finalAmount-paidAmt);
-    
+    console.log(paidAmt);
 
     if(dstAmount >0){
-        let totalAmount     = parseInt(gTotal-dstAmount);
+        let finalAmount = parseInt(gTotal-dstAmount);
+        let dueAmt = parseInt(finalAmount);
+        if(paidAmt>0){
+            let dueAmt      = parseInt(finalAmount-paidAmt);
+        }
+
         let dstPercent      = parseInt((100/gTotal)*dstAmount);
-        $('#grandTotal').val(totalAmount);
-        $('#dueAmount').val(dueAmount);
+        $('#grandTotal').val(finalAmount);
+        $('#dueAmount').val(dueAmt);
         $('#discountPercent').val(dstPercent);
     }else{
         $('#grandTotal').val(gTotal);
-        $('#dueAmount').val(dueAmt);
+        $('#dueAmount').val(gTotal);
         $('#discountPercent').val('');
         $('#discountAmount').val('');
     }
