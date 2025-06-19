@@ -1,6 +1,6 @@
 @extends('include') @section('backTitle')new products @endsection @section('container')
 <div class="row">
-    <div class="col-8">
+    <div class="col-12">
         <div class="row">
             <div class="col-md-12 col-12">
                 <div class="card">
@@ -8,9 +8,16 @@
                         <div class="row align-items-center">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="date" class="form-control" placeholder="" required />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>Select Customer *</label>
-                                    <label for="inputState" class="form-label"></label>
-                                <select id="customerName" class="form-control">
+                                    <label for="customerName" class="form-label"></label>
+                                <select id="customerName" class="form-control" onchange="actProductList()">
                                     <!--  form option show proccessing -->
                                   @if(!empty($customerList) && count($customerList)>0)
                                   @foreach($customerList as $customerData)
@@ -23,15 +30,12 @@
                             <div class="col-md-2 mt-3 p-0">
                                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customerModal"><i class="las la-plus mr-2"></i>customer</button>
                             </div>
-
-                            <div class="col-md-3">
+                            <div class="col-md-3 ">
                                 <div class="form-group">
-                                    <label>Date</label>
-                                    <input type="date" class="form-control" placeholder="" required />
-                                    <div class="help-block with-errors"></div>
+                                    <label for="invoice" class="form-label">Invoice *</label>
+                                    <input type="text" class="form-control" id="invoice" name="invoice" />
                                 </div>
                             </div>
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Reference *</label>
@@ -39,10 +43,8 @@
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
-                            <div class="col-md-1 mt-3 p-0">
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customer">Profit</button>
-                            </div>
                             <div class="col-6">
+                                <div class="form-group">
                                 <label>Select Product*</label>
                                 <select id="productName"  class="form-control">
                                    <!--  form option show proccessing -->
@@ -53,8 +55,12 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-md-3 mt-4   ">
+                            </div>
+                            <div class="col-md-2  mt-3">
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#">Reset Product</button>
+                            </div>
+                            <div class="col-md-1 mt-3 p-0">
+                                <button type="button" class="btn btn-success btn-sm w-100" data-toggle="modal" data-target="#customer">Profit</button>
                             </div>
                             <div class="col-8">
                                 <label for="note">Note</label>
@@ -66,8 +72,8 @@
             </div>
         </div>
          <div class="card ">
-            <div class="card-body table-responsive">
-                <table class=" data-tables table mb-0 table-bordered ">
+            <div class="card-body table-responsive  product-table">
+                <table class="  table mb-0 table-bordered rounded-0">
                     <thead class="bg-white text-uppercase">
                         <tr>
                             <th>#</th>
@@ -88,37 +94,38 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <input type="text" class="form-control" placeholder="Enter Name" required />
+                            <td ></td>
+                            <td width="20%"></td>
+                            <td width="15%">
+                                
                             </td>
-                            <td>
-                                <select id="inputState" class="form-control">
+                            <td width="20%">
+                                <select id="inputState" class="form-control w-100">
                                     <option selected>Customer</option>
-                                    <option>...</option>
+                                    <option>dddddddddd.</option>
                                 </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control" placeholder="Enter Name" required />
+                            <td width="10%">
+                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
                             </td>
-                            <td>
-                                <input type="text" class="form-control" placeholder="Enter Name" required />
+                            <td width="10%">
+                                <input type="number" class="form-control" placeholder="Enter Name" required />
                             </td>
-                            <td>
-                                <input type="text" class="form-control" placeholder="Enter Name" required />
+                            <td width="20%">
+                                <input type="number" class="form-control" placeholder="Enter Name" required />
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td width="20%">
+                                <input type="number" class="form-control" placeholder="Enter Name" required />
+                            </td>
                             <td>
                                 <div class="d-flex align-items-center list-action">
-                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="ri-pencil-line mr-0"></i></a>
                                     <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                </div>
+                                </div></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
                             </td>
                         </tr>
                     </tbody>
@@ -126,61 +133,65 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
-       <div class="row">
+    <div class="col-12">
+        <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="">
-                            <div class="row mb-2 align-items-center"></div>
-                            <div class="row mb-2 align-items-center">
-                                <div class="col-6">
-                                    <label for="discountAmount" class="col-form-label">Total:</label>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="discountAmount" name="discountAmount" />
-                                </div>
-                            </div>
-                            <div class="row mb-2 align-items-center">
-                                <div class="col-6">
-                                    <label for="discountPer" class="col-form-label">Discount %:</label>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="discountPer" name="discountPer" />
-                                </div>
-                            </div>
-                            <div class="row mb-2 align-items-center">
-                                <div class="col-6">
-                                    <label for="grandTotal" class="col-form-label">Grand Total:</label>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="grandTotal" name="grandTotal" />
-                                </div>
-                            </div>
-                            <div class="row mb-2 align-items-center">
-                                <div class="col-6">
-                                    <label for="paidAmount" class="col-form-label">Recevied Amount:</label>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="paidAmount" name="paidAmount" />
-                                </div>
-                            </div>
-                            <div class="row mb-2 align-items-center">
-                                <div class="col-6">
-                                    <label for="dueAmount" class="col-form-label">Due Amount:</label>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="dueAmount" name="dueAmount" />
-                                </div>
-                            </div>
-                            <div class="row mb-2 align-items-center">
-                                <div class="col-12">
-                                    <label for="note" class="col-form-label">Note:</label>
-                                    <textarea class="form-control" aria-label="With textarea"></textarea>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary mr-2">@if(isset($profile)) Update @else Add @endif Supplier</button>
-                        </form>
+                        <div class="header-title">
+                            <h6 class="card-title">Other Details</h6>
+                        </div>
+                        <div class="mb-3 table-responsive product-table">
+                            <table class="table mb-0 table-bordered rounded-0">
+                                <thead class="bg-white text-uppercase">
+                                    <tr>
+                                        <th>Total</th>
+                                        <th>Discount Type</th>
+                                        <th>Discount Amount</th>
+                                        <th>Discount Parcent</th>
+                                        <th>Grand Total</th>
+                                        <th>Paid Amount</th>
+                                        <th>Due Amount</th>
+                                        <th>Special Note</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productDetails">
+                                    <tr>
+                                        <td>
+                                            <input type="number" class="form-control" id="totalAmount" name="totalAmount"  />
+                                        </td>
+                                        <td>
+                                            <select name="discountStatus" id="discountStatus"  class="form-control">
+                                                <option value="">-</option>
+                                                <option value="1">Amount</option>
+                                                <option value="2">Parcent</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="discountPercent"  name="discountPercent"  />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="grandTotal" name="grandTotal"  />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0"  />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="dueAmount" name="dueAmount"  />
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="specialNote" name="specialNote"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                <div class=" d-md-flex  mt-2">
+                    <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                </div>
                     </div>
                 </div>
             </div>
