@@ -156,10 +156,10 @@
                                         <th>Special Note</th>
                                     </tr>
                                 </thead>
-                                <tbody id="productDetails">
+                                <tbody id="discountDetails">
                                     <tr>
                                         <td>
-                                            <select name="discountStatus" id="discountStatus" onchange="discountType()" class="form-control">
+                                            <select name="discountStatus" id="discountStatus" onchange="discountType()" class="form-control" disabled>
                                                 <option value="">-</option>
                                                 <option value="1">Amount</option>
                                                 <option value="2">Parcent</option>
@@ -175,13 +175,13 @@
                                             <input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0" onkeyup="dueCalculate()" />
+                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0" onkeyup="dueCalculate()" readonly />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly />
                                         </td>
                                         <td>
-                                            <textarea class="form-control" id="specialNote" name="specialNote"></textarea>
+                                            <textarea class="form-control" id="specialNote" name="specialNote" readonly></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -459,23 +459,25 @@ function discountAmount(){
 // dicount parcent calculate
 function discountParcent(){
     $('#discountAmount').val('');
-    let dstAmount   = parseInt($("#discountAmount").val());
+    // let dstAmount   = parseInt($("#discountAmount").val());
     let paidAmt     = parseInt($("#paidAmount").val());
     let parcent     = parseInt($("#discountPercent").val());
     let gTotal      = parseInt($("#totalPrice").val());
-    let finalAmount = parseInt(gTotal-dstAmount);
-    let dueAmt      = parseInt(finalAmount-paidAmt);
-    
+    console.log(paidAmt);
 
     if(parcent >0){
-        let discountAmt     = parseInt((parcent*gTotal)/100);
-        let totalAmount     = parseInt(gTotal-discountAmt);
-        $('#grandTotal').val(totalAmount);
+        let dstAmount   = parseInt((gTotal*parcent)/100);
+        let finalAmount = parseInt(gTotal-dstAmount);
+        let dueAmt      = parseInt(finalAmount);
+        if(paidAmt>0){
+            let dueAmt      = parseInt(finalAmount-paidAmt);
+        }
+        $('#grandTotal').val(finalAmount);
         $('#dueAmount').val(dueAmt);
-        $('#discountAmount').val(discountAmt);
+        $('#discountAmount').val(dstAmount);
     }else{
         $('#grandTotal').val(gTotal);
-        $('#dueAmount').val(dueAmt);
+        $('#dueAmount').val(gTotal);
         $('#discountPercent').val('');
         $('#discountAmount').val('');
     }
@@ -584,11 +586,24 @@ function productSelect(){
             var field = '<tr><td width="20%"><input type="text" class="form-control" name="selectProductName" value="'+result.productName+'" id="selectProductName" readonly></td><td width="8%"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button></td><td width="9%"><input type="number" class="form-control" id="qty" name="qty"/></td><td width="9%"><input type="number" class="form-control" id="currentStock" name="currentStock" value="'+result.currentStock+'" readonly/></td><td width="9%"><input type="number" class="form-control" id="buyingPrice" name="buyingPrice" onkeyup="totalPriceCalculate()" /></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" onkeyup="priceCalculation()"/></td><td width="9%"><select name="vatStatus" id="vatStatus" onchange="priceCalculation()" class="form-control"><option value="">-</option><option value="1">Yes</option><option value="0">No</option></select></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td width="9%"><input type="number" class="form-control" id="profitMargin" onkeyup="profitCalculation()" name="profitMargin"/></td><td width="9%"><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
             // document.getElementById("supplierForm").reset();
             $('#productDetails').html(field); 
+            $('#discountStatus').removeAttr('disabled');
+            $('#paidAmount').removeAttr('readonly');
+            $('#specialNote').removeAttr('readonly');
+            $('#discountStatus option:selected').prop("selected", false);
+            $('#grandTotal').val('');
+            $('#dueAmount').val('');
+            $('#specialNote').val('');
+            $('#paidAmount').val('');
+            $('#discountAmount').val('');
+            $('#discountPercent').val('');
         },
         error:function(){
             var field = '<tr><td width="20%"><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td width="8%">-</td><td width="9%"><input type="number" class="form-control" id="qty" name="qty" readonly/></td><td width="9%"><input type="number" class="form-control" id="currentStock" name="currentStock" readonly/></td><td width="9%"><input type="number" class="form-control" id="buyingPrice" name="buyingPrice" readonly/></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" readonly/></td><td width="9%"><select name="vatStatus" id="vatStatus" class="form-control" readonly><option value="">-</option></select></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td width="9%"><input type="number" class="form-control" id="profitMargin" name="profitMargin" readonly/></td><td width="9%"><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
+            // disount field decleration
+            let discountField = '<tr><td><select name="discountStatus" id="discountStatus" onchange="discountType()" class="form-control" disabled><option value="">-</option><option value="1">Amount</option><option value="2">Parcent</option></select></td><td><input type="number" class="form-control" id="discountAmount" onkeyup="discountAmount()" name="discountAmount" readonly/></td><td><input type="number" class="form-control" id="discountPercent" onkeyup="discountParcent()" name="discountPercent" readonly/></td><td><input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly/></td><td><input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0" onkeyup="dueCalculate()" readonly /></td><td><input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly/></td><td><textarea class="form-control" id="specialNote" name="specialNote" readonly ></textarea></td></tr>';
             // document.getElementById("supplierForm").reset();
             $('#productDetails').html(field); 
+            $('#discountDetails').html(discountField); 
         }
 
     });
@@ -626,8 +641,14 @@ function actProductList(){
         $('#productName option:selected').prop("selected", false);
         // disable the product
         $('#productName').attr('disabled','disabled');
+        // disount field decleration
+        let discountField = '<tr><td><select name="discountStatus" id="discountStatus" onchange="discountType()" class="form-control" disabled><option value="">-</option><option value="1">Amount</option><option value="2">Parcent</option></select></td><td><input type="number" class="form-control" id="discountAmount" onkeyup="discountAmount()" name="discountAmount" readonly/></td><td><input type="number" class="form-control" id="discountPercent" onkeyup="discountParcent()" name="discountPercent" readonly/></td><td><input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly/></td><td><input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0" onkeyup="dueCalculate()" readonly /></td><td><input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly/></td><td><textarea class="form-control" id="specialNote" name="specialNote" readonly ></textarea></td></tr>';
+        $('#discountDetails').html(discountField); 
     }else{
         $('#productName').removeAttr('disabled');
+        // $('#discountStatus').removeAttr('disabled');
+        // $('#paidAmount').removeAttr('readonly');
+        // $('#specialNote').removeAttr('readonly');
     };
 }
 
