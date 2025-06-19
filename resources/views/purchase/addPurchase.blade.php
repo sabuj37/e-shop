@@ -131,7 +131,7 @@
                         </tbody>
                     </table>
                 </div>
-            </form>
+                </form>
             </div>
         </div>
     </div>
@@ -187,6 +187,9 @@
                                 </tbody>
                             </table>
                         </div>
+                <div class=" d-md-flex  mt-2">
+                    <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                </div>
                     </div>
                 </div>
             </div>
