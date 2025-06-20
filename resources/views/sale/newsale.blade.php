@@ -17,7 +17,7 @@
                                 <div class="form-group">
                                     <label>Select Customer *</label>
                                     <label for="customerName" class="form-label"></label>
-                                <select id="customerName" class="form-control" onchange="actProductList()">
+                                <select id="customerName" class="form-control" onchange="actProductList()" required>
                                     <!--  form option show proccessing -->
                                   @if(!empty($customerList) && count($customerList)>0)
                                   @foreach($customerList as $customerData)
@@ -73,10 +73,13 @@
         </div>
          <div class="card ">
             <div class="card-body table-responsive  product-table">
+                <div class="header-title">
+                    <h6 class="card-title">Product Details</h6>
+                </div>
                 <table class="  table mb-0 table-bordered rounded-0">
                     <thead class="bg-white text-uppercase">
                         <tr>
-                            <th>Product</th>
+                            <th>Product Name</th>
                             <th>Purchase Date</th>
                             <th>Serial</th>
                             <th>Qty</th>
@@ -88,28 +91,25 @@
                     <tbody>
                         <tr>
                             <td width="20%">
-                                <input type="text" class="form-control" id="discountAmount"  name="discountAmount"  />
+                                <input type="text" class="form-control" id="selectProductName"  name="selectProductName"  readonly/>
                             </td>
                             <td width="15%">
-                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
+                                <input type="number" class="form-control" id="purchaseDate"  name="purchaseDate"  readonly/>
                             </td>
                             <td width="20%">
-                                <select id="inputState" class="form-control w-100">
-                                    <option selected>Customer</option>
-                                    <option>dddddddddd.</option>
-                                </select>
+                                -
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
+                                <input type="number" class="form-control" id="qty"  name="qty"  readonly/>
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" placeholder="Enter Name" required />
+                                <input type="number" class="form-control" placeholder="" id="warranty"  name="warranty" required readonly/>
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" placeholder="Enter Name" required />
+                                <input type="number" class="form-control" placeholder="" id="purchase"  name="purchase" required  readonly/>
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" placeholder="Enter Name" required />
+                                <input type="number" class="form-control" placeholder=""  id="purchaseTotal"  name="purchaseTotal" required  readonly/>
                             </td>
                         </tr>
                     </tbody>
@@ -117,7 +117,9 @@
             </div>
         </div>
          <div class="card ">
-            <div class="card-body table-responsive  product-table">
+            <div class="card-body table-responsive  product-table"> <div class="header-title">
+                    <h6 class="card-title">Sale Details</h6>
+                </div>
                 <table class="  table mb-0 table-bordered rounded-0">
                     <thead class="bg-white text-uppercase">
                         <tr>
@@ -131,21 +133,21 @@
                     <tbody>
                         <tr>
                             <td width="15%">
-                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
+                                <input type="number" class="form-control" id="salePrice"  name="salePrice"  readonly/>
                             </td>
                             <td width="15%">
-                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
+                                <input type="number" class="form-control" id="totalSalePrice"  name="totalSalePrice"  readonly/>
                                 
                             </td>
                             <td width="10%">
-                               <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
+                               <input type="number" class="form-control" id="mrp"  name="mrp" readonly />
                             </td>
                             </td>
                             <td width="10%">
-                               <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
+                               <input type="number" class="form-control" id="profitMargin"  name="profitMargin"  readonly/>
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
+                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  readonly/>
                             </td>
                         </tr>
                     </tbody>
@@ -178,7 +180,7 @@
                                 <tbody id="productDetails">
                                     <tr>
                                         <td>
-                                            <input type="number" class="form-control" id="totalAmount" name="totalAmount"  />
+                                            <input type="number" class="form-control" id="totalSalePrice" name="totalSalePrice" readonly  />
                                         </td>
                                         <td>
                                             <select name="discountStatus" id="discountStatus"  class="form-control">
@@ -300,6 +302,9 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+
+//add customer----------
+
 $(document).on('click','#add-customer', function(){
     
     var name = $('#fullName').val();
@@ -335,4 +340,15 @@ $(document).on('click','#add-customer', function(){
 
     });
 })
+
+// actProductList ()------
+
+function actProductList(){
+    var data = $('#customerName').val();
+    
+    if(data=""){
+        //reset the product list
+
+    }
+}
 </script>
