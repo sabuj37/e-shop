@@ -32,4 +32,8 @@ class JqueryController extends Controller
             return ['productName' => "",'currentStock' =>"", 'message'=>'Error ! There is an error. Please try agin.'];
         endif;
     }
+
+    public function getSaleProductDetails($id){
+        $getProductData = Product::find($id);
+    }
 }

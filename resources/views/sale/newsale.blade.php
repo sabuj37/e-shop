@@ -372,11 +372,13 @@ function actProductList(){
 
     function productSelect(){
         var = $("#productName").val();
-        $.ajax({
-            method: 'get',
 
-            url: '{{}}'
-        });
+        
+        // $.ajax({
+        //     method: 'get',
+
+        //     url: '{{}}'
+        // });
 
     }
 }
