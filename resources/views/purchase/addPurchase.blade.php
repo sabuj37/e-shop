@@ -1,5 +1,6 @@
 @extends('include') @section('backTitle') purchase @endsection @section('container')
-<form action="#" id="purchaseAdd" class="row">
+<form id="savePurchase" class="row">
+    @csrf
     <div class="col-12">
         <div class="row">
             <div class="col-md-12 col-12">
@@ -10,63 +11,61 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
-                            <div class="row align-items-center">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="date" class="form-label">Date *</label>
-                                        <input type="date" class="form-control" id="date" name="date" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="supplierName" class="form-label">Supplier *</label>
-                                        <select id="supplierName" onchange="actProductList()" class="form-control" required>
-                                        <option value="">-</option>
-                                        <!--  form option show proccessing -->
-                                        @if(!empty($supplierList) && count($supplierList)>0)
-                                        @foreach($supplierList as $supplierData)
-                                            <option value="{{$supplierData->id}}">{{$supplierData->name}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 mt-4 p-0">
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier"><i class="las la-plus mr-2"></i>New Supplier</button>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="invoice" class="form-label">Invoice *</label>
-                                        <input type="text" class="form-control" id="invoice" name="invoice" />
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="form-group">
-                                        <label for="productName" class="form-label">Product *</label>
-                                        <select id="productName" onchange="productSelect()" class="form-control" required disabled>
-                                        <!--  form option show proccessing -->
-                                            <option value="">Select</option>
-                                        @if(!empty($productList) && count($productList)>0)
-                                        @foreach($productList as $productData)
-                                            <option value="{{$productData->id}}">{{$productData->name}}</option>
-                                        @endforeach
-                                        @endif
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2 mt-4 p-0">
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newProduct"><i class="las la-plus mr-2"></i>New Product</button>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="reference" class="form-label">Reference *</label>
-                                        <input type="text" class="form-control" id="reference" name="reference" />
-                                    </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="date" class="form-label">Date *</label>
+                                    <input type="date" class="form-control" id="date" name="date" />
                                 </div>
                             </div>
-                        </form>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="supplierName" class="form-label">Supplier *</label>
+                                    <select id="supplierName" onchange="actProductList()" class="form-control" required>
+                                    <option value="">-</option>
+                                    <!--  form option show proccessing -->
+                                    @if(!empty($supplierList) && count($supplierList)>0)
+                                    @foreach($supplierList as $supplierData)
+                                        <option value="{{$supplierData->id}}">{{$supplierData->name}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2 mt-4 p-0">
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#supplier"><i class="las la-plus mr-2"></i>New Supplier</button>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="invoice" class="form-label">Invoice *</label>
+                                    <input type="text" class="form-control" id="invoice" name="invoice" />
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label for="productName" class="form-label">Product *</label>
+                                    <select id="productName" name="productName" onchange="productSelect()" class="form-control" required disabled>
+                                    <!--  form option show proccessing -->
+                                        <option value="">Select</option>
+                                    @if(!empty($productList) && count($productList)>0)
+                                    @foreach($productList as $productData)
+                                        <option value="{{$productData->id}}">{{$productData->name}}</option>
+                                    @endforeach
+                                    @endif
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 mt-4 p-0">
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#newProduct"><i class="las la-plus mr-2"></i>New Product</button>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="reference" class="form-label">Reference *</label>
+                                    <input type="text" class="form-control" id="reference" name="reference" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,7 +74,6 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form action="https://templates.iqonic.design/posdash/html/backend/page-list-customers.html" data-toggle="validator">
                 <div class="mb-3 table-responsive product-table">
                     <table class="table mb-0 table-bordered rounded-0">
                         <thead class="bg-white text-uppercase">
@@ -131,7 +129,6 @@
                         </tbody>
                     </table>
                 </div>
-                </form>
             </div>
         </div>
     </div>
@@ -166,10 +163,10 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountAmount" onkeyup="discountAmount()" name="discountAmount" readonly />
+                                            <input type="number" class="form-control" id="discountAmount" onkeyup="discountAmountChange()" name="discountAmount" readonly />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountPercent" onkeyup="discountParcent()" name="discountPercent" readonly />
+                                            <input type="number" class="form-control" id="discountPercent" onkeyup="discountPercentChange()" name="discountPercent" readonly />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly />
@@ -187,9 +184,9 @@
                                 </tbody>
                             </table>
                         </div>
-                <div class=" d-md-flex  mt-2">
-                    <button class="btn btn-primary btn-sm" type="submit">Save</button>
-                </div>
+                        <div id="saveButton" class="d-none  mt-2">
+                            <button class="btn btn-primary btn-sm" onclick="savePurchase()" type="button">Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -411,6 +408,19 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+function savePurchase(e){
+    let token = document.body.querySelector('input[name="_token"]');
+    var formData = $('#savePurchase').serialize();
+    $.ajax({
+        type:'post',
+        url:"{{ route('savePurchase') }}",
+        data: formData,
+        success:function(result)
+        {
+            console.log(result.purchaseHistory);
+        }
+    });
+}
 
 // other details part
 function discountType(){
@@ -419,18 +429,21 @@ function discountType(){
         console.log(discountSts)
         $('#discountAmount').removeAttr('readonly');
         $('#discountPercent').attr('readonly','readonly');
+        $('#saveButton').removeClass('d-none');
     }else if(discountSts == 2){
         $('#discountAmount').attr('readonly','readonly');
         $('#discountPercent').removeAttr('readonly');
+        $('#saveButton').removeClass('d-none');
     }else{
         console.log(discountSts)
         $('#discountAmount').attr('readonly','readonly');
         $('#discountPercent').attr('readonly','readonly');
+        $('#saveButton').addClass('d-none');
     }
 }
 
 // discount details
-function discountAmount(){
+function discountAmountChange(){
     $('#discountPercent').val('');
     let dstAmount   = parseInt($("#discountAmount").val());
     let paidAmt     = parseInt($("#paidAmount").val());
@@ -457,7 +470,7 @@ function discountAmount(){
     }
 }
 // dicount parcent calculate
-function discountParcent(){
+function discountPercentChange(){
     $('#discountAmount').val('');
     // let dstAmount   = parseInt($("#discountAmount").val());
     let paidAmt     = parseInt($("#paidAmount").val());
@@ -574,14 +587,13 @@ function productSelect(){
     var product = $("#productName").val();
     $.ajax({
         method: 'get',
-
         url: '{{ url('/') }}/product/details/'+product,
 
         // data: { productId: product },
 
         contentType: 'html',
 
-        success: function(result) {
+        success:function(result) {
             console.log("message: ", result.message);
             var field = '<tr><td width="20%"><input type="text" class="form-control" name="selectProductName" value="'+result.productName+'" id="selectProductName" readonly></td><td width="8%"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#serialModal">Add</button></td><td width="9%"><input type="number" class="form-control" id="qty" name="qty"/></td><td width="9%"><input type="number" class="form-control" id="currentStock" name="currentStock" value="'+result.currentStock+'" readonly/></td><td width="9%"><input type="number" class="form-control" id="buyingPrice" name="buyingPrice" onkeyup="totalPriceCalculate()" /></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" onkeyup="priceCalculation()"/></td><td width="9%"><select name="vatStatus" id="vatStatus" onchange="priceCalculation()" class="form-control"><option value="">-</option><option value="1">Yes</option><option value="0">No</option></select></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td width="9%"><input type="number" class="form-control" id="profitMargin" onkeyup="profitCalculation()" name="profitMargin"/></td><td width="9%"><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
             // document.getElementById("supplierForm").reset();
@@ -598,7 +610,7 @@ function productSelect(){
             $('#discountPercent').val('');
         },
         error:function(){
-            var field = '<tr><td width="20%"><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td width="8%">-</td><td width="9%"><input type="number" class="form-control" id="qty" name="qty" readonly/></td><td width="9%"><input type="number" class="form-control" id="currentStock" name="currentStock" readonly/></td><td width="9%"><input type="number" class="form-control" id="buyingPrice" name="buyingPrice" readonly/></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" readonly/></td><td width="9%"><select name="vatStatus" id="vatStatus" class="form-control" readonly><option value="">-</option></select></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td width="9%"><input type="number" class="form-control" id="profitMargin" name="profitMargin" readonly/></td><td width="9%"><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
+            let field = '<tr><td width="20%"><input type="text" class="form-control" name="selectProductName" value="" id="selectProductName" readonly></td><td width="8%">-</td><td width="9%"><input type="number" class="form-control" id="qty" name="qty" readonly/></td><td width="9%"><input type="number" class="form-control" id="currentStock" name="currentStock" readonly/></td><td width="9%"><input type="number" class="form-control" id="buyingPrice" name="buyingPrice" readonly/></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" readonly/></td><td width="9%"><select name="vatStatus" id="vatStatus" class="form-control" readonly><option value="">-</option></select></td><td width="9%"><input type="number" class="form-control" id="salingPriceWithVat" name="salingPriceWithVat" readonly/></td><td width="9%"><input type="number" class="form-control" id="profitMargin" name="profitMargin" readonly/></td><td width="9%"><input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly/></td></tr>';
             // disount field decleration
             let discountField = '<tr><td><select name="discountStatus" id="discountStatus" onchange="discountType()" class="form-control" disabled><option value="">-</option><option value="1">Amount</option><option value="2">Parcent</option></select></td><td><input type="number" class="form-control" id="discountAmount" onkeyup="discountAmount()" name="discountAmount" readonly/></td><td><input type="number" class="form-control" id="discountPercent" onkeyup="discountParcent()" name="discountPercent" readonly/></td><td><input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly/></td><td><input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0" onkeyup="dueCalculate()" readonly /></td><td><input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly/></td><td><textarea class="form-control" id="specialNote" name="specialNote" readonly ></textarea></td></tr>';
             // document.getElementById("supplierForm").reset();
@@ -610,6 +622,7 @@ function productSelect(){
     
     // $('#productDetails').html(data); 
 }
+
 $(document).on('click','#add-serial', function(){
     var i = 1;
     if(i<=10){
