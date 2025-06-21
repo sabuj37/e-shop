@@ -18,6 +18,7 @@
                                     <label>Select Customer *</label>
                                     <label for="customerName" class="form-label"></label>
                                 <select id="customerName" class="form-control" onchange="actProductList()" required>
+                                        <option value="">-</option>
                                     <!--  form option show proccessing -->
                                   @if(!empty($customerList) && count($customerList)>0)
                                   @foreach($customerList as $customerData)
@@ -46,8 +47,9 @@
                             <div class="col-6">
                                 <div class="form-group">
                                 <label>Select Product*</label>
-                                <select id="productName"  class="form-control">
+                                <select id="productName" name="productName" onchange="productSelect()" class="form-control" required disabled >
                                    <!--  form option show proccessing -->
+                                            <option value="">Select</option>
                                   @if(!empty($productList) && count($productList)>0)
                                   @foreach($productList as $productData)
                                     <option value="{{$productData->id}}">{{$productData->name}}</option>
@@ -88,28 +90,28 @@
                             <th>Purchase Total</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id ="productDetails">
                         <tr>
                             <td width="20%">
-                                <input type="text" class="form-control" id="selectProductName"  name="selectProductName"  readonly/>
+                                <input type="text" class="form-control" id="selectProductName"  name="selectProductName"  />
                             </td>
                             <td width="15%">
-                                <input type="number" class="form-control" id="purchaseDate"  name="purchaseDate"  readonly/>
+                                <input type="number" class="form-control" id="purchaseDate"  name="purchaseDate"  />
                             </td>
                             <td width="20%">
                                 -
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" id="qty"  name="qty"  readonly/>
+                                <input type="number" class="form-control" id="qty"  name="qty"  />
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" placeholder="" id="warranty"  name="warranty" required readonly/>
+                                <input type="number" class="form-control" placeholder="" id="warranty"  name="warranty" required />
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" placeholder="" id="purchase"  name="purchase" required  readonly/>
+                                <input type="number" class="form-control" placeholder="" id="purchase"  name="purchase" required  />
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" placeholder=""  id="purchaseTotal"  name="purchaseTotal" required  readonly/>
+                                <input type="number" class="form-control" placeholder=""  id="purchaseTotal"  name="purchaseTotal" required  />
                             </td>
                         </tr>
                     </tbody>
@@ -130,24 +132,24 @@
                             <th>DP</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id ="saleDetails">
                         <tr>
                             <td width="15%">
-                                <input type="number" class="form-control" id="salePrice"  name="salePrice"  readonly/>
+                                <input type="number" class="form-control" id="salePrice"  name="salePrice"  />
                             </td>
                             <td width="15%">
-                                <input type="number" class="form-control" id="totalSalePrice"  name="totalSalePrice"  readonly/>
+                                <input type="number" class="form-control" id="totalSalePrice"  name="totalSalePrice"  />
                                 
                             </td>
                             <td width="10%">
-                               <input type="number" class="form-control" id="mrp"  name="mrp" readonly />
+                               <input type="number" class="form-control" id="mrp"  name="mrp"  />
                             </td>
                             </td>
                             <td width="10%">
-                               <input type="number" class="form-control" id="profitMargin"  name="profitMargin"  readonly/>
+                               <input type="number" class="form-control" id="profitMargin"  name="profitMargin"  />
                             </td>
                             <td width="10%">
-                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  readonly/>
+                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
                             </td>
                         </tr>
                     </tbody>
@@ -177,13 +179,13 @@
                                         <th>Special Note</th>
                                     </tr>
                                 </thead>
-                                <tbody id="productDetails">
+                                <tbody id="otherDetails">
                                     <tr>
                                         <td>
-                                            <input type="number" class="form-control" id="totalSalePrice" name="totalSalePrice" readonly  />
+                                            <input type="number" class="form-control" id="totalSalePrice" name="totalSalePrice"   />
                                         </td>
                                         <td>
-                                            <select name="discountStatus" id="discountStatus"  class="form-control">
+                                            <select name="discountStatus" id="discountStatus"  class="form-control" >
                                                 <option value="">-</option>
                                                 <option value="1">Amount</option>
                                                 <option value="2">Parcent</option>
@@ -205,7 +207,7 @@
                                             <input type="number" class="form-control" id="dueAmount" name="dueAmount"  />
                                         </td>
                                         <td>
-                                            <textarea class="form-control" id="specialNote" name="specialNote"></textarea>
+                                            <textarea class="form-control" id="specialNote" name="specialNote" ></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -346,8 +348,37 @@ $(document).on('click','#add-customer', function(){
 function actProductList(){
     var data = $('#customerName').val();
     
-    if(data=""){
+    if(data == ""){
         //reset the product list
+        var productField = '<tr><td width="20%"><input type="text" class="form-control" id="selectProductName" name="selectProductName" readonly/></td><td width="15%"><input type="number" class="form-control" id="purchaseDate" name="purchaseDate" readonly/></td><td width="20%">-</td><td width="10%"><input type="number" class="form-control" id="qty" name="qty" readonly/></td><td width="10%"><input type="number" class="form-control" placeholder="" id="warranty" name="warranty" required readonly/></td><td width="10%"><input type="number" class="form-control" placeholder="" id="purchase" name="purchase" required readonly/></td><td width="10%"><input type="number" class="form-control" placeholder="" id="purchaseTotal" name="purchaseTotal" required readonly/></tr>';
+
+        var saleField = '<tr></td><td width="15%"><input type="number" class="form-control" id="salePrice" name="salePrice" readonly/></td><td width="15%"><input type="number" class="form-control" id="totalSalePrice" name="totalSalePrice" readonly/></td><td width="10%"><input type="number" class="form-control" id="mrp" name="mrp" readonly/></td></td><td width="10%"><input type="number" class="form-control" id="profitMargin" name="profitMargin" readonly/></td><td width="10%"><input type="number" class="form-control" id="discountAmount" name="discountAmount" readonly/></td></tr>';
+
+        var otherField = '<td><input type="number" class="form-control" id="totalSalePrice" name="totalSalePrice" readonly/></td><td><select name="discountStatus" id="discountStatus" class="form-control" readonly><option value="">-</option><option value="1">Amount</option><option value="2">Parcent</option></select></td><td><input type="number" class="form-control" id="discountAmount" name="discountAmount" readonly/></td><td><input type="number" class="form-control" id="discountPercent" name="discountPercent" readonly/></td><td><input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly/></td><td><input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0" readonly/></td><td><input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly/></td><td><textarea class="form-control" id="specialNote" name="specialNote" readonly></textarea></td>';
+        $('#productDetails').html(productField);
+        $('#saleDetails').html(saleField);
+        $('#otherDetails').html(otherField);
+
+        $('#productName option:selected').prop("selected", false);
+        //reset the product
+        $('#productName').attr('disabled','disabled');
+
+    }else{
+        
+        $('#productName').removeAttr('disabled');
+    };
+
+    //productSelect()-----------
+
+    function productSelect(){
+        var = $("#productName").val();
+
+        
+        // $.ajax({
+        //     method: 'get',
+
+        //     url: '{{}}'
+        // });
 
     }
 }

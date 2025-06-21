@@ -34,6 +34,10 @@ class JqueryController extends Controller
         endif;
     }
 
+    public function getSaleProductDetails($id){
+        $getProductData = Product::find($id);
+    }
+
     public function savePurchase(Request $requ){
         // return $requ;
                     // return $serial = count($requ->serialNumber);
