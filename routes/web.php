@@ -389,4 +389,17 @@ Route::middleware(['posAdmin'])->group(function(){
         'addTopCustomerReport'
     ])->name('addTopCustomerReport');
 
+    //receivable report
+    Route::get('receivable/report/',[
+        reportController::class,
+        'addRceivableReport'
+    ])->name('addRceivableReport');
+
+    
+    //Payble report
+    Route::get('payble/report/',[
+        reportController::class,
+        'addPaybleReport'
+    ])->name('addPaybleReport');
+
 });

@@ -1,4 +1,4 @@
-@extends('include') @section('backTitle')Expense Type @endsection @section('container')
+@extends('include') @section('backTitle')Top customer report@endsection @section('container')
 <div class="row">
     <div class="col-12 mb-3">
         <h4>Top Customer List</h4>

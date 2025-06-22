@@ -1,4 +1,4 @@
-@extends('include') @section('backTitle')Expense Type @endsection @section('container')
+@extends('include') @section('backTitle')Stock report @endsection @section('container')
 <div class="row">
     <div class="col-lg-3 col-md-3 ">
         <div class="card">

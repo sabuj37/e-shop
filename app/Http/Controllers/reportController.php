@@ -20,5 +20,16 @@ class reportController extends Controller
     public function addTopCustomerReport(){
         return view('report.topCustomerReport');
     }
+    
+      // receivable Report
+    public function addRceivableReport(){
+        return view('report.receivableReport');
+    }
+
+    
+      // payble Report
+    public function addPaybleReport(){
+        return view('report.paybleReport');
+    }
 
 }

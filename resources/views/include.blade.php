@@ -330,12 +330,12 @@
                                                   </a>
                                               </li>
                                               <li class="">
-                                                  <a href="">
+                                                  <a href="{{route('addRceivableReport')}}">
                                                       <i class="las la-minus"></i><span>Receivable</span>
                                                   </a>
                                               </li>
                                               <li class="">
-                                                  <a href="">
+                                                  <a href="{{route('addPaybleReport')}}">
                                                       <i class="las la-minus"></i><span>Payable</span>
                                                   </a>
                                               </li>
