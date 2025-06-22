@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_stocks', function (Blueprint $table) {
             $table->id();
+            $table->string('purchaseId')->nullable();
             $table->string('productId')->nullable();
             $table->string('currentStock')->nullable();
             $table->timestamps();

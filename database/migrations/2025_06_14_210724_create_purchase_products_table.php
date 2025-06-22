@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('purchase_products', function (Blueprint $table) {
             $table->id();
             $table->string('productName')->nullable();
+            $table->string('supplier')->nullable();
+            $table->string('purchase_date')->nullable();
+            $table->string('invoice')->nullable();
+            $table->string('reference')->nullable();
             $table->string('qty')->nullable();
             $table->string('buyPrice')->nullable();
             $table->string('salePriceExVat')->nullable();

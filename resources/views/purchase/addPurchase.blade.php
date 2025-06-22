@@ -1,5 +1,10 @@
 @extends('include') @section('backTitle') purchase @endsection @section('container')
-<form id="savePurchase" class="row">
+
+<div class="col-12">
+    @include('sweetalert::alert')
+</div>
+
+<form action="{{ route('savePurchase') }}" class="row" method="POST">
     @csrf
     <div class="col-12">
         <div class="row">
@@ -15,13 +20,13 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="date" class="form-label">Date *</label>
-                                    <input type="date" class="form-control" id="date" name="date" />
+                                    <input type="date" class="form-control" id="date" name="purchaseDate" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="supplierName" class="form-label">Supplier *</label>
-                                    <select id="supplierName" onchange="actProductList()" class="form-control" required>
+                                    <select id="supplierName" name="supplierName" onchange="actProductList()" class="form-control" required>
                                     <option value="">-</option>
                                     <!--  form option show proccessing -->
                                     @if(!empty($supplierList) && count($supplierList)>0)
@@ -38,7 +43,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="invoice" class="form-label">Invoice *</label>
-                                    <input type="text" class="form-control" id="invoice" name="invoice" />
+                                    <input type="text" class="form-control" id="invoice" name="invoiceData" />
                                 </div>
                             </div>
                             <div class="col-md-7">
@@ -62,7 +67,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="reference" class="form-label">Reference *</label>
-                                    <input type="text" class="form-control" id="reference" name="reference" />
+                                    <input type="text" class="form-control" id="reference" name="refData" />
                                 </div>
                             </div>
                         </div>
@@ -185,7 +190,7 @@
                             </table>
                         </div>
                         <div id="saveButton" class="d-none  mt-2">
-                            <button class="btn btn-primary btn-sm" onclick="savePurchase()" type="button">Save</button>
+                            <button class="btn btn-primary btn-sm" type="submit">Save</button>
                         </div>
                     </div>
                 </div>

@@ -40,15 +40,19 @@ class JqueryController extends Controller
 
     public function savePurchase(Request $requ){
         // return $requ;
-                    // return $serial = count($requ->serialNumber);
-        $purchaseHistory    = PurchaseProduct::where(['productName'=>$requ->productName])->first();
-        if(!empty($purchaseHistory)):
-            $data = $purchaseHistory;
-            return ['purchaseHistory'=>$data];
+        // return $serial = count($requ->serialNumber);
+        $purchaseHistory    = PurchaseProduct::where(['productName'=>$requ->productName,'qty'=>$requ->qty,'supplier'=>$requ->supplierName,'purchase_date'=>$requ->purchaseDate])->get();
+        if($purchaseHistory->count()>0):
+            Alert::error('Opps! Purchase history already exist');
+            return back();
         else:
             $purchase = new PurchaseProduct();
 
             $purchase->productName      = $requ->productName;
+            $purchase->supplier         = $requ->supplierName;
+            $purchase->purchase_date    = $requ->purchaseDate;
+            $purchase->invoice          = $requ->invoiceData;
+            $purchase->reference        = $requ->refData;
             $purchase->qty              = $requ->qty;
             $purchase->buyPrice         = $requ->buyingPrice;
             $purchase->salePriceExVat   = $requ->salingPriceWithoutVat;
@@ -64,7 +68,7 @@ class JqueryController extends Controller
             $purchase->dueAmount        = $requ->dueAmount;
             $purchase->specialNote      = $requ->specialNote;
             if($purchase->save()):
-                if(count($requ->serialNumber)>0):
+                if($requ->serialNumber  && count($requ->serialNumber)>0):
                     $serial = count($requ->serialNumber);
                     $i = 0;
                     while($i<$serial){
@@ -89,10 +93,10 @@ class JqueryController extends Controller
                     $prevStock->save();
                 endif;
                 $message = Alert::success('Success!','Data saved successfully');
-                return ['message'=>$message];
+                return back();
             else:
                 $message = Alert::error('Sorry!','Data failed to save');
-                return ['message'=>$message];
+                return back();
             endif;
         endif;
     }
