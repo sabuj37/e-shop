@@ -32,4 +32,29 @@ class reportController extends Controller
         return view('report.paybleReport');
     }
 
+      // product sale Report
+    public function addProductSaleReport(){
+        return view('report.productSaleReport');
+    }
+
+      //low stock  report
+    public function addLowProductListReport(){
+        return view('report.lowStockProduct');
+    }
+
+      //transaction report
+    public function addTransactionReport(){
+        return view('report.transactionReport');
+
+        
+    }
+
+      //transaction report
+    public function addExpenseReport(){
+        return view('report.expenseReport');
+
+        
+    }
+
+
 }

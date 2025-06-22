@@ -1,7 +1,7 @@
-@extends('include') @section('backTitle')Sales report @endsection @section('container')
+@extends('include') @section('backTitle')Transaction report @endsection @section('container')
 <div class="row">
     <div class="col-12 mb-3">
-        <h4>Sales Report</h4>
+        <h4>Transaction Report</h4>
     </div>
 </div>
 <form action="" method="POST" >
@@ -35,21 +35,17 @@
             <table class="data-tables table mb-0 table-bordered">
                 <thead class="bg-white text-uppercase">
                     <tr>
-                        <th>Reference</th>
-                        <th>Created Date</th>
-                        <th>Customer Name</th>
-                        <th>Salse Person</th>
-                        <th>Grand Total</th>
-                        <th>Paid</th>
-                        <th>Due Amount</th>
-                        <th>Profit</th>
+                        <th>Date</th>
+                        <th>Contract Details</th>
+                        <th>Type</th>
+                        <th>Receivable/Purchase</th>
+                        <th>Payment/Sale</th>
+                        <th>Note</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -64,12 +60,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">Total : </td>
+                        <td colspan="3">Total : </td>
                         <td>10</td>
                         <td>1000</td>
-                        <td>0000</td>
-                        <td>0000</td>
-                        <td>000000</td>
                     </tr>
                 </tbody>
             </table>

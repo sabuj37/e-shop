@@ -407,4 +407,29 @@ Route::middleware(['posAdmin'])->group(function(){
         'addPaybleReport'
     ])->name('addPaybleReport');
 
+    //product sale report
+    Route::get('product/sale/report/',[
+        reportController::class,
+        'addProductSaleReport'
+    ])->name('addProductSaleReport');
+
+    //low stock  report
+    Route::get('low/product/list/report/',[
+        reportController::class,
+        'addLowProductListReport'
+    ])->name('addLowProductListReport');
+
+    //transaction  report
+    Route::get('transaction/report/',[
+        reportController::class,
+        'addTransactionReport'
+    ])->name('addTransactionReport');
+    
+    //expense  report
+    Route::get('expense/report/',[
+        reportController::class,
+        'addExpenseReport'
+    ])->name('addExpenseReport');
+
+
 });

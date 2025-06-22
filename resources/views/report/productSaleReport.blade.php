@@ -1,7 +1,7 @@
-@extends('include') @section('backTitle')Sales report @endsection @section('container')
+@extends('include') @section('backTitle')Product sales report @endsection @section('container')
 <div class="row">
     <div class="col-12 mb-3">
-        <h4>Sales Report</h4>
+        <h4>Product Sales Report</h4>
     </div>
 </div>
 <form action="" method="POST" >
@@ -35,19 +35,21 @@
             <table class="data-tables table mb-0 table-bordered">
                 <thead class="bg-white text-uppercase">
                     <tr>
-                        <th>Reference</th>
-                        <th>Created Date</th>
-                        <th>Customer Name</th>
-                        <th>Salse Person</th>
-                        <th>Grand Total</th>
-                        <th>Paid</th>
-                        <th>Due Amount</th>
+                        <th>SL</th>
+                        <th>Product Name</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
                         <th>Profit</th>
-                        <th>Action</th>
+                        <th>Sale Date</th>
+                        <th>Sale Invoice</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>#</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -64,12 +66,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">Total : </td>
+                        <td colspan="5">Total : </td>
                         <td>10</td>
                         <td>1000</td>
                         <td>0000</td>
-                        <td>0000</td>
-                        <td>000000</td>
                     </tr>
                 </tbody>
             </table>

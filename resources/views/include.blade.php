@@ -340,22 +340,22 @@
                                                   </a>
                                               </li>
                                               <li class="">
-                                                  <a href="">
+                                                  <a href="{{route('addProductSaleReport')}}">
                                                       <i class="las la-minus"></i><span>Product Sale Report</span>
                                                   </a>
                                               </li>
                                               <li class="">
-                                                  <a href="">
+                                                  <a href="{{route('addLowProductListReport')}}">
                                                       <i class="las la-minus"></i><span>Low Stock Product</span>
                                                   </a>
                                               </li>
                                               <li class="">
-                                                  <a href="">
+                                                  <a href="{{route('addTransactionReport')}}">
                                                       <i class="las la-minus"></i><span>Transaction Report</span>
                                                   </a>
                                               </li>
                                                   <li class="">
-                                                  <a href="">
+                                                  <a href="{{route('addExpenseReport')}}">
                                                       <i class="las la-minus"></i>Expense Reprot<span></span>
                                                   </a>
                                               </li>
