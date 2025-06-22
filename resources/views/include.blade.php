@@ -705,6 +705,7 @@
             </div>
         </div>
     </footer>
+    
     <script>
         $(document).ready(function() {
             $(".alert").fadeTo(2000, 500).slideUp(500, function() {
@@ -712,10 +713,7 @@
             });
         });
     </script>
-    <script
-  src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
-  type="module"
-></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     <!-- Backend Bundle JavaScript -->
     <script src="{{asset('/public/eshop/')}}/assets/js/backend-bundle.min.js"></script>
     
