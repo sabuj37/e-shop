@@ -373,13 +373,8 @@
                           </a>
                           <ul id="return" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                   <li class="">
-                                          <a href="">
-                                              <i class="las la-minus"></i><span>List Returns</span>
-                                          </a>
-                                  </li>
-                                  <li class="">
-                                          <a href="">
-                                              <i class="las la-minus"></i><span>Add Return</span>
+                                          <a href="{{route('addBusinessSetupPage')}}">
+                                              <i class="las la-minus"></i><span>Setup Page</span>
                                           </a>
                                   </li>
                           </ul>

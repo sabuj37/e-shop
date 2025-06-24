@@ -10,6 +10,7 @@ use App\Http\Controllers\userInfo;
 use App\Http\Controllers\expenseController;
 use App\Http\Controllers\JqueryController;
 use App\Http\Controllers\reportController;
+use App\Http\Controllers\businessController;
 
 //user info str
 Route::get('/login',[
@@ -430,6 +431,16 @@ Route::middleware(['posAdmin'])->group(function(){
         reportController::class,
         'addExpenseReport'
     ])->name('addExpenseReport');
+
+    //Report end
+
+    //Business set up --------------------
+
+    //set up page
+    Route::get('Business/setup/',[
+        businessController::class,
+        'addBusinessSetupPage'
+    ])->name('addBusinessSetupPage');
 
 
 });
