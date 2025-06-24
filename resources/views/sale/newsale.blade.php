@@ -74,86 +74,31 @@
             </div>
         </div>
          <div class="card ">
-            <div class="card-body table-responsive  product-table">
+            <div class="card-body  product-table">
                 <div class="header-title">
                     <h6 class="card-title">Product Details</h6>
                 </div>
-                <table class="  table mb-0 table-bordered rounded-0">
-                    <thead class="bg-white text-uppercase">
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Purchase Date</th>
-                            <th>Serial</th>
-                            <th>Qty</th>
-                            <th>Warranty</th>
-                            <th>Purchase</th>
-                            <th>Purchase Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id ="productDetails">
-                        <tr>
-                            <td width="20%">
-                                <input type="text" class="form-control" id="selectProductName"  name="selectProductName"  />
-                            </td>
-                            <td width="15%">
-                                <input type="number" class="form-control" id="purchaseDate"  name="purchaseDate"  />
-                            </td>
-                            <td width="20%">
-                                -
-                            </td>
-                            <td width="10%">
-                                <input type="number" class="form-control" id="qty"  name="qty"  />
-                            </td>
-                            <td width="10%">
-                                <input type="number" class="form-control" placeholder="" id="warranty"  name="warranty" required />
-                            </td>
-                            <td width="10%">
-                                <input type="number" class="form-control" placeholder="" id="purchase"  name="purchase" required  />
-                            </td>
-                            <td width="10%">
-                                <input type="number" class="form-control" placeholder=""  id="purchaseTotal"  name="purchaseTotal" required  />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-         <div class="card ">
-            <div class="card-body table-responsive  product-table"> <div class="header-title">
-                    <h6 class="card-title">Sale Details</h6>
+                <div class="table-responsive">
+                    <table class="table mb-0 table-bordered rounded-0">
+                        <thead class="bg-white text-uppercase">
+                            <tr>
+                                <th>Remove</th>
+                                <th>SL</th>
+                                <th>Product Name</th>
+                                <th>Purchase Date</th>
+                                <th>Qty</th>
+                                <th>Sale Price</th>
+                                <th>Total</th>
+                                <th>Purchase</th>
+                                <th>Purchase Total</th>
+                                <th>Profit Margin</th>
+                                <th>Profit Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productDetails">
+                        </tbody>
+                    </table>
                 </div>
-                <table class="  table mb-0 table-bordered rounded-0">
-                    <thead class="bg-white text-uppercase">
-                        <tr>
-                            <th>Sale Price</th>
-                            <th>Total</th>
-                            <th>MRP</th>
-                            <th>Profit Margin %</th>
-                            <th>DP</th>
-                        </tr>
-                    </thead>
-                    <tbody id ="saleDetails">
-                        <tr>
-                            <td width="15%">
-                                <input type="number" class="form-control" id="salePrice"  name="salePrice"  />
-                            </td>
-                            <td width="15%">
-                                <input type="number" class="form-control" id="totalSalePrice"  name="totalSalePrice"  />
-                                
-                            </td>
-                            <td width="10%">
-                               <input type="number" class="form-control" id="mrp"  name="mrp"  />
-                            </td>
-                            </td>
-                            <td width="10%">
-                               <input type="number" class="form-control" id="profitMargin"  name="profitMargin"  />
-                            </td>
-                            <td width="10%">
-                                <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
@@ -308,7 +253,6 @@
 //add customer----------
 
 $(document).on('click','#add-customer', function(){
-    
     var name = $('#fullName').val();
     var gmail = $('#mail').val();
     var phone = $('#mobile').val();
@@ -321,14 +265,16 @@ $(document).on('click','#add-customer', function(){
 
         url: '{{ route('createCustomer') }}',
 
-        data: { fullName:       name,
-                mail:           gmail,  
-                mobile:         phone, 
-                country:        country, 
-                city:           city, 
-                state:          state ,
-                area:           area ,
-              },
+        data: 
+        { 
+            fullName: name,
+            mail    : gmail,  
+            mobile  : phone, 
+            country : country, 
+            city    : city, 
+            state   : state ,
+            area    : area ,
+        },
 
         contentType: 'html',
 
@@ -343,20 +289,18 @@ $(document).on('click','#add-customer', function(){
     });
 })
 
-// actProductList ()------
+// actProductList
 
 function actProductList(){
     var data = $('#customerName').val();
     
     if(data == ""){
         //reset the product list
-        var productField = '<tr><td width="20%"><input type="text" class="form-control" id="selectProductName" name="selectProductName" readonly/></td><td width="15%"><input type="number" class="form-control" id="purchaseDate" name="purchaseDate" readonly/></td><td width="20%">-</td><td width="10%"><input type="number" class="form-control" id="qty" name="qty" readonly/></td><td width="10%"><input type="number" class="form-control" placeholder="" id="warranty" name="warranty" required readonly/></td><td width="10%"><input type="number" class="form-control" placeholder="" id="purchase" name="purchase" required readonly/></td><td width="10%"><input type="number" class="form-control" placeholder="" id="purchaseTotal" name="purchaseTotal" required readonly/></tr>';
+        var productField = '';
 
-        var saleField = '<tr></td><td width="15%"><input type="number" class="form-control" id="salePrice" name="salePrice" readonly/></td><td width="15%"><input type="number" class="form-control" id="totalSalePrice" name="totalSalePrice" readonly/></td><td width="10%"><input type="number" class="form-control" id="mrp" name="mrp" readonly/></td></td><td width="10%"><input type="number" class="form-control" id="profitMargin" name="profitMargin" readonly/></td><td width="10%"><input type="number" class="form-control" id="discountAmount" name="discountAmount" readonly/></td></tr>';
 
-        var otherField = '<td><input type="number" class="form-control" id="totalSalePrice" name="totalSalePrice" readonly/></td><td><select name="discountStatus" id="discountStatus" class="form-control" readonly><option value="">-</option><option value="1">Amount</option><option value="2">Parcent</option></select></td><td><input type="number" class="form-control" id="discountAmount" name="discountAmount" readonly/></td><td><input type="number" class="form-control" id="discountPercent" name="discountPercent" readonly/></td><td><input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly/></td><td><input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0" readonly/></td><td><input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly/></td><td><textarea class="form-control" id="specialNote" name="specialNote" readonly></textarea></td>';
+        var otherField = '<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
         $('#productDetails').html(productField);
-        $('#saleDetails').html(saleField);
         $('#otherDetails').html(otherField);
 
         $('#productName option:selected').prop("selected", false);
@@ -368,18 +312,24 @@ function actProductList(){
         $('#productName').removeAttr('disabled');
     };
 
-    //productSelect()-----------
+}
 
-    function productSelect(){
-        var = $("#productName").val();
 
-        
-        // $.ajax({
-        //     method: 'get',
+function productSelect(){
+    var product = $("#productName").val();
 
-        //     url: '{{}}'
-        // });
+    $.ajax({
+        method: 'get',
 
-    }
+        url: '{{ url('/') }}/product/details/'+product,
+
+        contentType: 'html',
+
+        success:function(result){
+            var field = '<tr><td><i class="ri-delete-bin-line mr-0"></i></td><td>-</td><td>'+result.productName+'</td><td>-</td><td><input type="number" class="form-control" id="qty" name="qty"/></td><td><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" onkeyup="priceCalculation()"/></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
+            $('#productDetails').append(field);
+        }
+    });
+
 }
 </script>

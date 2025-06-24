@@ -22,6 +22,7 @@
             font-size: 10px !important;
             text-align: center !important;
             padding: .5rem .2rem !important;
+            min-width: 80px;
         }
         .form-control {
             height: 30px;

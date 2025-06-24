@@ -1,8 +1,6 @@
 @extends('include') @section('backTitle') purchase @endsection @section('container')
 
-<div class="col-12">
-    @include('sweetalert::alert')
-</div>
+
 
 <form action="{{ route('savePurchase') }}" class="row" method="POST">
     @csrf
