@@ -28,9 +28,9 @@ class JqueryController extends Controller
             $productName = $getData->name;
             // $buyingPrice = $getData->purchasePrice;
             // $productName = $getData->name;
-            return ['productName' => $productName,'currentStock' => $currentStock, 'message'=>'Success ! Form successfully subjmit.'];
+            return ['productName' => $productName, 'currentStock' => $currentStock, 'message'=>'Success ! Form successfully subjmit.','id'=> $getData->id];
         else:
-            return ['productName' => "",'currentStock' =>"", 'message'=>'Error ! There is an error. Please try agin.'];
+            return ['productName' => "",'currentStock' =>"", 'message'=>'Error ! There is an error. Please try agin.','id'=>''];
         endif;
     }
 

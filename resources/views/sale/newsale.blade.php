@@ -83,7 +83,6 @@
                         <thead class="bg-white text-uppercase">
                             <tr>
                                 <th>Remove</th>
-                                <th>SL</th>
                                 <th>Product Name</th>
                                 <th>Purchase Date</th>
                                 <th>Qty</th>
@@ -308,16 +307,19 @@ function actProductList(){
         $('#productName').attr('disabled','disabled');
 
     }else{
-        
         $('#productName').removeAttr('disabled');
     };
 
 }
 
 
+function remove(e){
+    $(e).remove();
+};
+
 function productSelect(){
     var product = $("#productName").val();
-
+    var i = 1;
     $.ajax({
         method: 'get',
 
@@ -326,8 +328,12 @@ function productSelect(){
         contentType: 'html',
 
         success:function(result){
-            var field = '<tr><td><i class="ri-delete-bin-line mr-0"></i></td><td>-</td><td>'+result.productName+'</td><td>-</td><td><input type="number" class="form-control" id="qty" name="qty"/></td><td><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" onkeyup="priceCalculation()"/></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
+            var productField = "productField"+result.id;
+            var field = '<tr id="productField'+result.id+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td>-</td><td><input type="number" class="form-control" id="qty" name="qty"/></td><td><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" onkeyup="priceCalculation()"/></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
             $('#productDetails').append(field);
+        },
+        error: function(){
+            $('#productDetails').html('');
         }
     });
 
