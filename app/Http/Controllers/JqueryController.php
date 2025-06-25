@@ -25,6 +25,8 @@ class JqueryController extends Controller
                 $currentStock   = 0;
             endif;
 
+            $purchaseHistory = ProductPurchase::
+
             $productName = $getData->name;
             // $buyingPrice = $getData->purchasePrice;
             // $productName = $getData->name;
