@@ -25,7 +25,7 @@ class JqueryController extends Controller
                 $currentStock   = 0;
             endif;
 
-            $purchaseHistory = ProductPurchase::
+            // $purchaseHistory = ProductPurchase::where(['productId'=>$getData->id])->get();
 
             $productName = $getData->name;
             // $buyingPrice = $getData->purchasePrice;
@@ -34,10 +34,38 @@ class JqueryController extends Controller
         else:
             return ['productName' => "",'currentStock' =>"", 'message'=>'Error ! There is an error. Please try agin.','id'=>''];
         endif;
+    
     }
 
+     
+
     public function getSaleProductDetails($id){
-        $getProductData = Product::find($id);
+        $getData = PurchaseProduct::where(['productId'=>$id])
+        ->join('suppliers','purchase_products.supplier','suppliers.id')
+        ->join('product_stocks','product_stocks.productId','purchase_products.productName')
+        ->select(
+            'purchase_products.id as purchaseId',
+            'purchase_products.supplier',
+            'purchase_products.buyPrice',
+            'purchase_products.salePriceExVat',
+            'purchase_products.salePriceInVat',
+            'purchase_products.vatStatus',
+            'purchase_products.created_at as purchaseDate',
+            'suppliers.name as supplierName',
+            'suppliers.mail as supplierMail',
+            'suppliers.mobile as supplierMobile',
+            'product_stocks.currentStock'
+        )->get();
+
+        //purchase product
+        if($getData->count()>0):
+            $product        = Product::find($id);
+            $productName    = $product->name;
+
+            return ['productName' => $productName, 'id'=>$product->id, 'getData' => $getData, 'message'=>'Success ! Form successfully submit.'];
+        else:
+            return ['productName' => "", 'id'=>$id, 'getData' => null, 'message'=>'Error ! There is an error. Please try agin.'];
+        endif;
     }
 
     public function savePurchase(Request $requ){

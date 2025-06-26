@@ -84,7 +84,7 @@
                             <tr>
                                 <th>Remove</th>
                                 <th>Product Name</th>
-                                <th>Purchase Date</th>
+                                <th>Purchase Data</th>
                                 <th>Qty</th>
                                 <th>Sale Price</th>
                                 <th>Total</th>
@@ -323,14 +323,26 @@ function productSelect(){
     $.ajax({
         method: 'get',
 
-        url: '{{ url('/') }}/product/details/'+product,
+        url: '{{ url('/') }}/sale/product/details/'+product,
 
         contentType: 'html',
 
         success:function(result){
-            var productField = "productField"+result.id;
-            var field = '<tr id="productField'+result.id+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td>-</td><td><input type="number" class="form-control" id="qty" name="qty"/></td><td><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" onkeyup="priceCalculation()"/></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
-            $('#productDetails').append(field);
+            if(result.getData==null){
+                alert("No available items found in stock for sale");
+            }else{
+                var productField    = "productField"+result.id;
+                var purchaseField   = "purchaseData"+result.id;
+                var dataItems = "";
+                var items = result.getData;
+                
+                $.each(items, function (b,item) {
+                    console.log('index', item)
+                    dataItems +=  '<option value="'+item['id']+'">'+item[b]+'</option>';
+                });
+                var field = '<tr id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+purchaseField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control" id="qty" name="qty"/></td><td><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" onkeyup="priceCalculation()"/></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
+                $('#productDetails').append(field);
+            }
         },
         error: function(){
             $('#productDetails').html('');
