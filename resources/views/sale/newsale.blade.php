@@ -317,6 +317,23 @@ function remove(e){
     $(e).remove();
 };
 
+// calculate sale details
+function calculateSaleDetails(e){
+    let buyPrice        = parseInt($("#buyPrice"+e).val());
+    let salePrice       = parseInt($("#salePrice"+e).val());
+    let qty             = parseInt($("#qty"+e).val());
+    let totalPurchase   = parseInt(buyPrice*qty);
+    let totalSale       = parseInt(salePrice*qty);
+    let profitValue     = parseInt((totalSale-totalPurchase));
+    let profitPercent   = parseInt((profitValue/totalPurchase)*100);
+    // let profitPercent   = parseInt(salePrice*qty);
+
+    $("#totalSale"+e).html(totalSale);
+    $("#totalPurchase"+e).html(totalPurchase);
+    $("#profitMargin"+e).html(profitPercent);
+    $("#profitTotal"+e).html(profitValue);
+}
+
 function productSelect(){
     var product = $("#productName").val();
     var i = 1;
@@ -337,10 +354,10 @@ function productSelect(){
                 var items = result.getData;
                 
                 $.each(items, function (b,item) {
-                    console.log('index', item)
-                    dataItems +=  '<option value="'+item['id']+'">'+item[b]+'</option>';
+                    var date = new Date(item.created_at).toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" })
+                    dataItems +=  '<option value="'+item.purchaseId+'">('+item.currentStock+') '+item.supplierName+'-'+date+'</option>';
                 });
-                var field = '<tr id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+purchaseField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control" id="qty" name="qty"/></td><td><input type="number" class="form-control" id="salingPriceWithoutVat" name="salingPriceWithoutVat" onkeyup="priceCalculation()"/></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
+                var field = '<tr id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+purchaseField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control" id="qty'+result.id+'" name="qty" onkeyup="calculateSaleDetails('+result.id+')"/></td><td><input type="number" class="form-control" id="salePrice'+result.id+'" name="salePrice[]" value="'+result.salePrice+'"/></td><td id="totalSale'+result.id+'"></td><td><input type="number" class="form-control" id="buyPrice'+result.id+'" name="buyPrice[]" value="'+result.buyPrice+'" readonly /></td><td id="totalPurchase'+result.id+'">-</td><td id="profitMargin'+result.id+'"></td><td id="profitTotal'+result.id+'"></td></tr>';
                 $('#productDetails').append(field);
             }
         },

@@ -50,21 +50,24 @@ class JqueryController extends Controller
             'purchase_products.salePriceExVat',
             'purchase_products.salePriceInVat',
             'purchase_products.vatStatus',
+            'purchase_products.created_at',
             'purchase_products.created_at as purchaseDate',
             'suppliers.name as supplierName',
             'suppliers.mail as supplierMail',
             'suppliers.mobile as supplierMobile',
-            'product_stocks.currentStock'
-        )->get();
+            'product_stocks.currentStock',
+        )->orderBy('purchaseId','desc')->get();
 
         //purchase product
         if($getData->count()>0):
             $product        = Product::find($id);
             $productName    = $product->name;
+            $salePrice      = $getData->first()->salePriceExVat;
+            $buyPrice       = $getData->first()->buyPrice;
 
-            return ['productName' => $productName, 'id'=>$product->id, 'getData' => $getData, 'message'=>'Success ! Form successfully submit.'];
+            return ['productName' => $productName, 'id'=>$product->id, 'getData' => $getData, 'buyPrice'=> $buyPrice, 'salePrice'=>$salePrice];
         else:
-            return ['productName' => "", 'id'=>$id, 'getData' => null, 'message'=>'Error ! There is an error. Please try agin.'];
+            return ['productName' => "", 'id'=>$id, 'getData' => null, 'buyPrice'=>'', 'salePrice'=>''];
         endif;
     }
 
