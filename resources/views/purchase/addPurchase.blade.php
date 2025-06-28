@@ -342,6 +342,9 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-1 mt-4 p-0">
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#createBrand" ><i class="las la-plus mr-2"></i>Brand</button>
+                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Product Category</label>
@@ -403,6 +406,32 @@
     </div>
 </div>
 
+<!-- brand modal -->
+<div class="modal fade" id="createBrand" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="createBrand" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title fs-5">Creat Brand</h6>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="POST" id="brandForm">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="NewBrand" class="form-label">Brand Name</label>
+                        <input type="text" class="form-control" id="NewBrand" name="NewBrand" placeholder="Enter brand name" />
+                    </div>
+                  
+                <button type="button" class="btn btn-primary" id="saveBrand">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -411,6 +440,31 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+//product brand adding
+    $(document).on('click','#saveBrand', function(){
+    
+    var name = $('#NewBrand').val();
+    $.ajax({
+        method: 'get',
+
+        url: '{{ route('createBrand') }}',
+
+        data: { name: name, },
+
+        contentType: 'html',
+
+        success: function(result) {
+            console.log("message: ", result.message);
+            // console.log("data: ", result.data);
+            $('#createBrand').modal('hide');
+            document.getElementById("brandForm").reset();
+            $('#brand').html(result.data); 
+        },
+
+    });
+})
+
+
 function savePurchase(e){
     let token = document.body.querySelector('input[name="_token"]');
     var formData = $('#savePurchase').serialize();
