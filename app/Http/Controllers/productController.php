@@ -32,10 +32,6 @@ class productController extends Controller
             $data->quantity      = $req->quantity;
             $data->details       = $req->details;
             $data->barCode       = $req->barCode;
-            $data->currentStock  = $req->currentStock;
-            $data->purchasePrice = $req->purchasePrice;
-            $data->sellingPrice  = $req->sellingPrice;
-            $data->wholesale     = $req->wholesale;
 
             if($data->save()):
                 return redirect(route('addProduct'))->with('success','Success !  Customer profile created successfully');
@@ -76,11 +72,6 @@ class productController extends Controller
             $data->quantity      = $req->quantity;
             $data->details       = $req->details;
             $data->barCode       = $req->barCode;
-            $data->currentStock  = $req->currentStock;
-            $data->purchasePrice = $req->purchasePrice;
-            $data->sellingPrice  = $req->sellingPrice;
-            $data->wholesale     = $req->wholesale;
-            
             $option="";
 
             if($data->save()):
@@ -220,6 +211,7 @@ class productController extends Controller
             if($data->save()):
                 $getData = Category::orderBy('id','DESC')->get();
                 if(!empty($getData)):
+                    $option .='<option value="">Select</option>';
                     foreach($getData as $d):
                         $option .='<option value="'.$d->id.'">'.$d->name.'</option>';
                     endforeach;
@@ -281,6 +273,7 @@ class productController extends Controller
             if($data->save()):
                 $getData = ProductUnit::orderBy('id','DESC')->get();
                 if(!empty($getData)):
+                    $option .='<option value="">Select</option>';
                     foreach($getData as $d):
                         $option .='<option value="'.$d->id.'">'.$d->name.'</option>';
                     endforeach;

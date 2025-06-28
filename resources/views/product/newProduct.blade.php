@@ -12,8 +12,8 @@
         @endif
     </div>
     @php if(isset($profile)): $name = $profile->name; $brand = $profile->brand; $category = $profile->category; $unitName = $profile->unitName; $quantity = $profile->quantity; $details = $profile->details; $barCode = $profile->barCode;
-    $currentStock = $profile->currentStock; $purchasePrice = $profile->purchasePrice; $sellingPrice = $profile->sellingPrice; $wholesale = $profile->wholesale; $profileId = $profile->id; else: $name = ''; $brand = ''; $category = '';
-    $unitName = ''; $quantity = ''; $details = ''; $barCode = ''; $currentStock = ''; $purchasePrice = ''; $sellingPrice = ''; $wholesale = ''; $profileId = ''; endif; @endphp
+     $profileId = $profile->id; else: $name = ''; $brand = ''; $category = '';
+    $unitName = ''; $quantity = ''; $details = ''; $barCode = '';  $profileId = ''; endif; @endphp
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">

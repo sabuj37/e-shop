@@ -20,10 +20,6 @@ return new class extends Migration
             $table->string('quantity')->nullable();
             $table->string('details')->nullable();
             $table->string('barCode')->nullable();
-            $table->string('currentStock')->nullable();
-            $table->string('purchasePrice')->nullable();
-            $table->string('sellingPrice')->nullable();
-            $table->string('wholesale')->nullable();
             $table->timestamps();
         });
     }

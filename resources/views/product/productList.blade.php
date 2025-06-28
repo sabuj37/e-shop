@@ -19,23 +19,23 @@
                                         <label for="checkbox1" class="mb-0"></label>
                                     </div>
                                 </th>
-                                <th>Name</th>
-                                <th>Unit</th>
-                                <th>Barcode</th>
-                                <th>Category Name</th>
+                                <th>Product Name</th>
                                 <th>Brand</th>
-                                <th>Total stock</th>
-                                <th>Last Purchase</th>
-                                <th>Last MRP</th>
-                                <th>Last DP/RP</th>
-                                <th>Highest Purchase</th>
-                                <th>Highest MRP</th>
-                                <th>Last DP</th>
+                                <th>Category</th>
+                                <th>Unit</th>
+                                <th>Alert Quantity</th>
+                                <th>Barcode</th>
+                                <th>Deatils</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @if(!empty($listItem) && $listItem->count()>0 ) @foreach($listItem as $productList)
+                        @if(!empty($listItem) && $listItem->count()>0 ) @foreach($listItem as $productList) 
+                        @php                         
+                          $categorySingleData  = \App\Models\Category::find($productList->category);           
+                          $productUnitSingleData  = \App\Models\ProductUnit::find($productList->unitName);
+                          $brandSingleData  = \App\Models\Brand::find($productList->brand);
+                        @endphp
                             <tr>
                                 <td>
                                     <div class="checkbox d-inline-block">
@@ -44,17 +44,24 @@
                                     </div>
                                 </td>
                                 <td>{{$productList->name}}</td>
-                                <td>{{$productList->unitName}}</td>
+                                @if(!empty($brandSingleData))
+                                    <td>{{$brandSingleData->name}}</td>
+                                @else
+                                    <td>-</td>
+                                @endif
+                                @if(!empty($categorySingleData))
+                                    <td>{{$categorySingleData->name}}</td>
+                                @else
+                                    <td>-</td>
+                                @endif
+                                @if(!empty($productUnitSingleData))
+                                    <td>{{$productUnitSingleData->name}}</td>
+                                @else
+                                    <td>-</td>
+                                @endif
+                                <td>{{$productList->quantity}}</td>
                                 <td>{{$productList->barCode}}</td>
-                                <td>{{$productList->category}}</td>
-                                <td>{{$productList->brand}}</td>
-                                <td>sob gola plus hoye asbe</td>
-                                <td>{{$productList->purchasePrice}}</td>
-                                <td>{{$productList->sellingPrice}}</td>
-                                <td>{{$productList->wholesale}}</td>
-                                <td>sob theke besi dam</td>
-                                <td>sob theke besi dam</td>
-                                <td>sob theke besi dam</td>
+                                <td>{{$productList->details}}</td>
                                 <td><div class="d-flex align-items-center list-action">
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
                                     href="#"><i class="ri-eye-line mr-0"></i></a>

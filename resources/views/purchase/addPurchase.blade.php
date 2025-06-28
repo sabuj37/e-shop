@@ -352,6 +352,7 @@
                                 <select id="categoryName" class="form-control" >
                                  
                                   <!--  form option show proccessing -->
+                                    <option value="">Select</option>
                                   @if(!empty($categoryList) && count($categoryList)>0)
                                   @foreach($categoryList as $categoryData)
                                     <option value="{{$categoryData->id}}">{{$categoryData->name}}</option>
@@ -360,6 +361,9 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-2 mt-4 p-0">
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#categoryModal" ><i class="las la-plus mr-2"></i>Category</button>
+                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Product Unit</label>
@@ -367,6 +371,7 @@
                                 <select id="unit" class="form-control" >
                                  
                                   <!--  form option show proccessing -->
+                                    <option value="">Select</option>
                                   @if(!empty($productUnitList) && count($productUnitList)>0)
                                   @foreach($productUnitList as $productUnitData)
                                     <option value="{{$productUnitData->id}}">{{$productUnitData->name}}</option>
@@ -374,6 +379,9 @@
                                     @endif
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-md-2 mt-4 p-0">
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#productUnitModal" ><i class="las la-plus mr-2"></i>Product unit</button>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -432,6 +440,58 @@
     </div>
 </div>
 
+<!-- category modal -->
+<div class="modal fade" id="categoryModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="categoryModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title fs-5">Creat Category</h6>
+                <button type="button" class="btn-close"  onclick="closeModel('categoryModal','categoryForm')" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" id="categoryForm">
+                    @csrf
+                <div class="mb-3">
+                    <label for="NewCategory" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="NewCategory" name="NewCategory" placeholder="Enter Category name" />
+                </div>
+                <button type="button" class="btn btn-primary" id="add-category">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" onclick="closeModel('categoryModal','categoryForm')">Cancle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- product unit -->
+
+<div class="modal fade" id="productUnitModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="productUnitModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title fs-5" >Preoduct Unit</h6>
+                <button type="button" class="btn-close" onclick="closeModel('productUnitModal','productUnitForm')" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" id="productUnitForm">
+                    @csrf
+                <div class="mb-3">
+                    <label for="productUnitName" class="form-label">Product Unit</label>
+                    <input type="text" class="form-control" id="productUnitName" name="productUnitName" placeholder="Enter Product Unit name" />
+                </div>
+                <button type="button" class="btn btn-primary" id="add-productUnit">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" onclick="closeModel('productUnitModal','productUnitForm')">Cancle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 
@@ -441,7 +501,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
 
-//product brand adding
+//product brand adding modal
 $(document).on('click','#saveBrand', function(){
     var name = $('#NewBrand').val();
     $.ajax({
@@ -457,9 +517,57 @@ $(document).on('click','#saveBrand', function(){
             console.log("message: ", result.message);
             // console.log("data: ", result.data);
             $('#createBrand').modal('hide');
-            document.getElementById("productForm").reset();
             document.getElementById("brandForm").reset();
             $('#brandName').html(result.data); 
+        },
+
+    });
+})
+
+//add-category adding modal
+$(document).on('click','#add-category', function(){
+    
+    var name = $('#NewCategory').val();
+    $.ajax({
+        method: 'get',
+
+        url: '{{ route('createCategory') }}',
+
+        data: { name: name, },
+
+        contentType: 'html',
+
+        success: function(result) {
+            console.log("message: ", result.message);
+            // console.log("data: ", result.data);
+            $('#categoryModal').modal('hide');
+            document.getElementById("categoryForm").reset();
+            $('#categoryName').html(result.data); 
+        },
+
+    });
+})
+
+//add-productunit modal adding
+
+$(document).on('click','#add-productUnit', function(){
+    
+    var name = $('#productUnitName').val();
+    $.ajax({
+        method: 'get',
+
+        url: '{{ route('createProductUnit') }}',
+
+        data: { name: name, },
+
+        contentType: 'html',
+
+        success: function(result) {
+            console.log("message: ", result.message);
+            // console.log("data: ", result.data);
+            $('#productUnitModal').modal('hide');
+            document.getElementById("productUnitForm").reset();
+            $('#unit').html(result.data); 
         },
 
     });
