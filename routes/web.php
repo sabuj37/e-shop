@@ -371,6 +371,11 @@ Route::middleware(['posAdmin'])->group(function(){
         JqueryController::class,
         'getSaleProductDetails'
     ])->name('getSaleProductDetails');
+    
+    Route::get('purchase/details/{id}',[
+        JqueryController::class,
+        'getPurchaseDetails'
+    ])->name('getPurchaseDetails');
 
     // endsupplierbalance
 
