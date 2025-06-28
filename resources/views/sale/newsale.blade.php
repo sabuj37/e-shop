@@ -318,20 +318,20 @@ function remove(e){
 };
 
 // calculate sale details
-function calculateSaleDetails(e){
-    let buyPrice        = parseInt($("#buyPrice"+e).val());
-    let salePrice       = parseInt($("#salePrice"+e).val());
-    let qty             = parseInt($("#qty"+e).val());
+function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
+    let buyPrice        = parseInt($(bp).val());
+    let salePrice       = parseInt($(sp).val());
+    let qty             = parseInt($(qd).val());
     let totalPurchase   = parseInt(buyPrice*qty);
     let totalSale       = parseInt(salePrice*qty);
     let profitValue     = parseInt((totalSale-totalPurchase));
     let profitPercent   = parseInt((profitValue/totalPurchase)*100);
     // let profitPercent   = parseInt(salePrice*qty);
 
-    $("#totalSale"+e).html(totalSale);
-    $("#totalPurchase"+e).html(totalPurchase);
-    $("#profitMargin"+e).html(profitPercent);
-    $("#profitTotal"+e).html(profitValue);
+    $(ts).html(totalSale);
+    $(tp).html(totalPurchase);
+    $(pm).html(profitPercent);
+    $(pt).html(profitValue);
 }
 
 function productSelect(){
@@ -350,6 +350,13 @@ function productSelect(){
             }else{
                 var productField    = "productField"+result.id;
                 var purchaseField   = "purchaseData"+result.id;
+                var buyPrice        = "buyPrice"+result.id;
+                var salePrice       = "salePrice"+result.id;
+                var totalPurchase   = "totalPurchase"+result.id;
+                var qtyData         = "qty"+result.id;
+                var totalSale       = "totalSale"+result.id;
+                var profitMargin    = "profitMargin"+result.id;
+                var profitTotal     = "profitTotal"+result.id;
                 var dataItems = "";
                 var items = result.getData;
                 
@@ -357,12 +364,35 @@ function productSelect(){
                     var date = new Date(item.created_at).toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" })
                     dataItems +=  '<option value="'+item.purchaseId+'">('+item.currentStock+') '+item.supplierName+'-'+date+'</option>';
                 });
-                var field = '<tr id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+purchaseField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control" id="qty'+result.id+'" name="qty" onkeyup="calculateSaleDetails('+result.id+')"/></td><td><input type="number" class="form-control" id="salePrice'+result.id+'" name="salePrice[]" value="'+result.salePrice+'"/></td><td id="totalSale'+result.id+'"></td><td><input type="number" class="form-control" id="buyPrice'+result.id+'" name="buyPrice[]" value="'+result.buyPrice+'" readonly /></td><td id="totalPurchase'+result.id+'">-</td><td id="profitMargin'+result.id+'"></td><td id="profitTotal'+result.id+'"></td></tr>';
+                var field = '<tr id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control" id="'+qtyData+'" name="qty" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td><input type="number" class="form-control" id="'+salePrice+'" name="salePrice[]" value="'+result.salePrice+'"/></td><td id="'+totalSale+'"></td><td><input type="number" class="form-control" id="'+buyPrice+'" name="buyPrice[]" value="'+result.buyPrice+'" readonly /></td><td id="'+totalPurchase+'">-</td><td id="'+profitMargin+'"></td><td id="'+profitTotal+'"></td></tr>';
                 $('#productDetails').append(field);
             }
         },
         error: function(){
             $('#productDetails').html('');
+        }
+    });
+}
+
+function purchaseData(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
+    var pData = parseInt($(pf).val());
+    var i = 1;
+    $.ajax({
+        method: 'get',
+
+        url: '{{ url('/') }}/purchase/details/'+pData,
+
+        contentType: 'html',
+
+        success:function(result){
+            if(result.getData==null){
+                alert("no available items found in stock for sale");
+            }else{
+                alert("success data");
+            }
+        },
+        error:function(){
+            alert("failed data");
         }
     });
 

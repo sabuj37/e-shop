@@ -33,16 +33,13 @@ class JqueryController extends Controller
             return ['productName' => $productName, 'currentStock' => $currentStock, 'message'=>'Success ! Form successfully subjmit.','id'=> $getData->id];
         else:
             return ['productName' => "",'currentStock' =>"", 'message'=>'Error ! There is an error. Please try agin.','id'=>''];
-        endif;
-    
+        endif;    
     }
-
-     
 
     public function getSaleProductDetails($id){
         $getData = PurchaseProduct::where(['productId'=>$id])
         ->join('suppliers','purchase_products.supplier','suppliers.id')
-        ->join('product_stocks','product_stocks.productId','purchase_products.productName')
+        ->join('product_stocks','product_stocks.purchaseId','purchase_products.id')
         ->select(
             'purchase_products.id as purchaseId',
             'purchase_products.supplier',
@@ -65,10 +62,20 @@ class JqueryController extends Controller
             $salePrice      = $getData->first()->salePriceExVat;
             $buyPrice       = $getData->first()->buyPrice;
 
-            return ['productName' => $productName, 'id'=>$product->id, 'getData' => $getData, 'buyPrice'=> $buyPrice, 'salePrice'=>$salePrice];
+            return ['productName' => $productName, 'id'=>$getData->first()->purchaseId, 'getData' => $getData, 'buyPrice'=> $buyPrice, 'salePrice'=>$salePrice];
         else:
             return ['productName' => "", 'id'=>$id, 'getData' => null, 'buyPrice'=>'', 'salePrice'=>''];
         endif;
+    }
+    public function getPurchaseDetails($id){
+        $getData = PurchaseProduct::find($id);
+        if($getData->count()>0){
+            $salePrice      = $getData->salePriceExVat;
+            $buyPrice       = $getData->buyPrice;
+            return ['id'=>$id, 'buyPrice'=> $buyPrice, 'getData' => $getData, 'salePrice'=>$salePrice];
+        }else{
+            return ['id'=>"", 'buyPrice'=> "", 'getData' => null, 'salePrice'=>""];
+        }
     }
 
     public function savePurchase(Request $requ){
@@ -112,19 +119,12 @@ class JqueryController extends Controller
                         $i++;
                     }
                 endif;
+                $prevStock = new ProductStock();
+                $prevStock->productId    = $requ->productName;
+                $prevStock->purchaseId   = $purchase->id;
+                $prevStock->currentStock = $requ->qty;
+                $prevStock->save();
 
-                $prevStock = ProductStock::where(['productId'=>$requ->productName])->first();
-                if(!empty($prevStock)):
-                    $currStock = $prevStock->currentStock;
-                    $newStock = $currStock+$requ->qty;
-                    $prevStock->currentStock  = $newStock;
-                    $prevStock->save();
-                else:
-                    $prevStock = new ProductStock();
-                    $prevStock->productId = $requ->productName;
-                    $prevStock->currentStock = $requ->qty;
-                    $prevStock->save();
-                endif;
                 $message = Alert::success('Success!','Data saved successfully');
                 return back();
             else:
