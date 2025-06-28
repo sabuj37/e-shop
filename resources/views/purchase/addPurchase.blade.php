@@ -332,12 +332,12 @@
                                 <label>Brand Name *</label>
                                 <label for="brandName" class="form-label"></label>
                                 <select id="brandName" class="form-control" >
-                                  
-                                  <!--  form option show proccessing -->
-                                  @if(!empty($brandList) && count($brandList)>0)
-                                  @foreach($brandList as $brandData)
-                                    <option value="{{$brandData->id}}">{{$brandData->name}}</option>
-                                    @endforeach
+                                    <!--  form option show proccessing -->
+                                    <option value="">Select</option>
+                                    @if(!empty($brandList) && count($brandList)>0)
+                                        @foreach($brandList as $brandData)
+                                        <option value="{{$brandData->id}}">{{$brandData->name}}</option>
+                                        @endforeach
                                     @endif
                                 </select>
                             </div>
@@ -401,7 +401,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
         </div>
     </div>
 </div>
@@ -412,7 +412,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title fs-5">Creat Brand</h6>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close"  onclick="closeModel('createBrand','brandForm')" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="#" method="POST" id="brandForm">
@@ -426,7 +426,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+                <button type="button" class="btn btn-light" onclick="closeModel('createBrand','brandForm')">Cancel</button>
             </div>
         </div>
     </div>
@@ -440,9 +440,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+
 //product brand adding
-    $(document).on('click','#saveBrand', function(){
-    
+$(document).on('click','#saveBrand', function(){
     var name = $('#NewBrand').val();
     $.ajax({
         method: 'get',
@@ -457,8 +457,9 @@
             console.log("message: ", result.message);
             // console.log("data: ", result.data);
             $('#createBrand').modal('hide');
+            document.getElementById("productForm").reset();
             document.getElementById("brandForm").reset();
-            $('#brand').html(result.data); 
+            $('#brandName').html(result.data); 
         },
 
     });
