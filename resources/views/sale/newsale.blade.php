@@ -388,7 +388,24 @@ function purchaseData(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
             if(result.getData==null){
                 alert("no available items found in stock for sale");
             }else{
-                alert("success data");
+                // alert("success data");
+                let buyPrice        = parseInt(result.buyPrice);
+                let salePrice       = parseInt(result.salePrice);
+                let qty             = parseInt($(qd).val());
+                
+                let totalPurchase   = parseInt(buyPrice*qty);
+                let totalSale       = parseInt(salePrice*qty);
+                    
+                let profitValue     = parseInt((totalSale-totalPurchase));
+                let profitPercent   = parseInt((profitValue/totalPurchase)*100);
+                // let profitPercent   = parseInt(salePrice*qty);
+
+                $(ts).html(totalSale);
+                $(tp).html(totalPurchase);
+                $(sp).val(salePrice);
+                $(bp).val(buyPrice);
+                $(pm).html(profitPercent);
+                $(pt).html(profitValue);                
             }
         },
         error:function(){
