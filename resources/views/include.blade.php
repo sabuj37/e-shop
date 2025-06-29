@@ -210,17 +210,17 @@
                           </a>
                           <ul id="return" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                   <li class="">
-                                          <a href="">
-                                              <i class="las la-minus"></i><span>Creat Service</span>
+                                          <a href="{{route('provideService')}}">
+                                              <i class="las la-minus"></i><span>Provide Service</span>
                                           </a>
                                   </li>
                                   <li class="">
-                                          <a href="">
+                                          <a href="{{route('addServiceName')}}">
                                               <i class="las la-minus"></i><span>Service item</span>
                                           </a>
                                   </li>
                                    <li class="">
-                                          <a href="">
+                                          <a href="{{route('serviceProvideList')}}">
                                               <i class="las la-minus"></i><span>Service List</span>
                                           </a>
                                   </li>

@@ -9,6 +9,7 @@ use App\Http\Controllers\saleController;
 use App\Http\Controllers\userInfo;
 use App\Http\Controllers\expenseController;
 use App\Http\Controllers\JqueryController;
+use App\Http\Controllers\serviceController;
 use App\Http\Controllers\reportController;
 use App\Http\Controllers\businessController;
 
@@ -379,6 +380,24 @@ Route::middleware(['posAdmin'])->group(function(){
 
     // endsupplierbalance
 
+    
+    //Service------------------------
+
+    //add service name
+    Route::get('create/service/',[
+        serviceController::class,
+        'addServiceName'
+    ])->name('addServiceName');
+
+    Route::get('provide/service/',[
+        serviceController::class,
+        'provideService'
+    ])->name('provideService');
+
+    Route::get('provide/service/list',[
+        serviceController::class,
+        'serviceProvideList'
+    ])->name('serviceProvideList');
 
     //Report------------------------
 
