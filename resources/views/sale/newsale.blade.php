@@ -58,12 +58,6 @@
                                 </select>
                             </div>
                             </div>
-                            <div class="col-md-2  mt-3">
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#">Reset Product</button>
-                            </div>
-                            <div class="col-md-1 mt-3 p-0">
-                                <button type="button" class="btn btn-success btn-sm w-100" data-toggle="modal" data-target="#customer">Profit</button>
-                            </div>
                             <div class="col-8">
                                 <label for="note">Note</label>
                                 <textarea class="form-control" aria-label="With textarea"></textarea>
@@ -107,51 +101,43 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="header-title">
-                            <h6 class="card-title">Other Details</h6>
+                            <h6 class="card-title">Payment Details</h6>
                         </div>
                         <div class="mb-3 table-responsive product-table">
                             <table class="table mb-0 table-bordered rounded-0">
                                 <thead class="bg-white text-uppercase">
                                     <tr>
                                         <th>Total</th>
-                                        <th>Discount Type</th>
-                                        <th>Discount Amount</th>
-                                        <th>Discount Parcent</th>
+                                        <th>Discount</th>
                                         <th>Grand Total</th>
                                         <th>Paid Amount</th>
                                         <th>Due Amount</th>
-                                        <th>Special Note</th>
+                                        <th>Previous Due</th>
+                                        <th>Current Due</th>
                                     </tr>
                                 </thead>
-                                <tbody id="otherDetails">
+                                <tbody id="paymentDetails">
                                     <tr>
                                         <td>
-                                            <input type="number" class="form-control" id="totalSalePrice" name="totalSalePrice"   />
-                                        </td>
-                                        <td>
-                                            <select name="discountStatus" id="discountStatus"  class="form-control" >
-                                                <option value="">-</option>
-                                                <option value="1">Amount</option>
-                                                <option value="2">Parcent</option>
-                                            </select>
+                                            <input type="number" class="form-control" id="totalSaleAmount" name="totalSaleAmount" readonly  />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountPercent"  name="discountPercent"  />
-                                        </td>
-                                        <td>
-                                            <input type="number" class="form-control" id="grandTotal" name="grandTotal"  />
+                                            <input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0"  />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="dueAmount" name="dueAmount"  />
+                                            <input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly  />
                                         </td>
                                         <td>
-                                            <textarea class="form-control" id="specialNote" name="specialNote" ></textarea>
+                                            <input type="number" class="form-control" id="prevDue" name="prevDue" readonly  />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="curDue" name="curDue" readonly  />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -236,7 +222,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancle</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -325,13 +311,31 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     let totalPurchase   = parseInt(buyPrice*qty);
     let totalSale       = parseInt(salePrice*qty);
     let profitValue     = parseInt((totalSale-totalPurchase));
-    let profitPercent   = parseInt((profitValue/totalPurchase)*100);
+    let profitPercent   = parseFloat(parseFloat((profitValue/totalPurchase)*100).toFixed(2));
+
+    let totalAmount     = parseInt($('#totalSaleAmount').val());
+    let grandTotal      = parseInt($('#grandTotal').val());
+    let discountAmount  = parseInt($('#discountAmount').val());
+    let paidAmount      = parseInt($('#paidAmount').val());
+    let dueAmount       = parseInt($('#dueAmount').val());
+    let prevDue         = parseInt($('#prevDue').val());
+    let curDue          = parseInt($('#curDue').val());
     // let profitPercent   = parseInt(salePrice*qty);
+
+    let newTotal        = parseInt(totalAmount+totalSale);
+    let newGrandTotal   = parseInt(newTotal-discountAmount);
+    let newDueAmount    = parseInt(newGrandTotal-paidAmount);
+    let newPrevDue      = parseInt(0);
+    let newCurDue       = parseInt(newDueAmount);
 
     $(ts).html(totalSale);
     $(tp).html(totalPurchase);
     $(pm).html(profitPercent);
-    $(pt).html(profitValue);
+    $("#totalSaleAmount").val(newTotal);
+    $("#grandTotal").val(newGrandTotal);
+    $("#dueAmount").val(newDueAmount);
+    $("#prevDue").val(newPrevDue);
+    $("#curDue").val(newCurDue);
 }
 
 function productSelect(){
@@ -364,7 +368,7 @@ function productSelect(){
                     var date = new Date(item.created_at).toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" })
                     dataItems +=  '<option value="'+item.purchaseId+'">('+item.currentStock+') '+item.supplierName+'-'+date+'</option>';
                 });
-                var field = '<tr id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control" id="'+qtyData+'" name="qty" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td><input type="number" class="form-control" id="'+salePrice+'" name="salePrice[]" value="'+result.salePrice+'"/></td><td id="'+totalSale+'"></td><td><input type="number" class="form-control" id="'+buyPrice+'" name="buyPrice[]" value="'+result.buyPrice+'" readonly /></td><td id="'+totalPurchase+'">-</td><td id="'+profitMargin+'"></td><td id="'+profitTotal+'"></td></tr>';
+                var field = '<tr id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control" id="'+qtyData+'" name="qty" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td><input type="number" class="form-control" id="'+salePrice+'" name="salePrice[]" value="'+result.salePrice+'" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td id="'+totalSale+'"></td><td><input type="number" class="form-control" id="'+buyPrice+'" name="buyPrice[]" value="'+result.buyPrice+'" readonly /></td><td id="'+totalPurchase+'">-</td><td id="'+profitMargin+'"></td><td id="'+profitTotal+'"></td></tr>';
                 $('#productDetails').append(field);
             }
         },
@@ -397,7 +401,7 @@ function purchaseData(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
                 let totalSale       = parseInt(salePrice*qty);
                     
                 let profitValue     = parseInt((totalSale-totalPurchase));
-                let profitPercent   = parseInt((profitValue/totalPurchase)*100);
+                let profitPercent   = parseFloat(parseFloat((profitValue/totalPurchase)*100).toFixed(2));
                 // let profitPercent   = parseInt(salePrice*qty);
 
                 $(ts).html(totalSale);
