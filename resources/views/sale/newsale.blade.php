@@ -313,13 +313,42 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     let profitValue     = parseInt((totalSale-totalPurchase));
     let profitPercent   = parseFloat(parseFloat((profitValue/totalPurchase)*100).toFixed(2));
 
-    let totalAmount     = parseInt($('#totalSaleAmount').val());
-    let grandTotal      = parseInt($('#grandTotal').val());
-    let discountAmount  = parseInt($('#discountAmount').val());
-    let paidAmount      = parseInt($('#paidAmount').val());
-    let dueAmount       = parseInt($('#dueAmount').val());
-    let prevDue         = parseInt($('#prevDue').val());
-    let curDue          = parseInt($('#curDue').val());
+    let tsa = '#totalSaleAmount';
+    let gt = '#grandTotal';
+    let da = '#discountAmount';
+    let pa = '#paidAmount';
+    let dua = '#dueAmount';
+    let pd = '#prevDue';
+    let cd = '#curDue';
+
+    let totalAmount     = parseInt($(tsa).val());
+    let grandTotal      = parseInt($(gt).val());
+    let discountAmount  = parseInt($(da).val());
+    let paidAmount      = parseInt($(pa).val());
+    let dueAmount       = parseInt($(dua).val());
+    let prevDue         = parseInt($(pd).val());
+    let curDue          = parseInt($(cd).val());
+    if(totalAmount == ""){
+        let totalAmount = 0;
+    }
+    if(grandTotal == ""){
+        let grandTotal = 0;
+    }
+    if(discountAmount == ""){
+        let discountAmount = 0;
+    }
+    if(paidAmount == ""){
+        let paidAmount = 0;
+    }
+    if(dueAmount == ""){
+        let dueAmount = 0;
+    }
+    if(prevDue == ""){
+        let prevDue = 0;
+    }
+    if(curDue == ""){
+        let curDue = 0;
+    }
     // let profitPercent   = parseInt(salePrice*qty);
 
     let newTotal        = parseInt(totalAmount+totalSale);
@@ -331,11 +360,11 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     $(ts).html(totalSale);
     $(tp).html(totalPurchase);
     $(pm).html(profitPercent);
-    $("#totalSaleAmount").val(newTotal);
-    $("#grandTotal").val(newGrandTotal);
-    $("#dueAmount").val(newDueAmount);
-    $("#prevDue").val(newPrevDue);
-    $("#curDue").val(newCurDue);
+    $(tsa).val(newTotal);
+    $(gt).val(newGrandTotal);
+    $(dua).val(newDueAmount);
+    $(pd).val(newPrevDue);
+    $(cd).val(newCurDue);
 }
 
 function productSelect(){

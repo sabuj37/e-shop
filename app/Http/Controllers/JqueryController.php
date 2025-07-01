@@ -18,9 +18,9 @@ class JqueryController extends Controller
         $getData = Product::find($id);
 
         if($getData->count()>0):
-            $stockHistory       = ProductStock::where(['productId'=>$getData->id])->first();
+            $stockHistory       = ProductStock::where(['productId'=>$getData->id])->get();
             if(!empty($stockHistory)):
-                $currentStock   = $stockHistory->currentStock;
+                $currentStock   = $stockHistory->sum('currentStock');
             else:
                 $currentStock   = 0;
             endif;
