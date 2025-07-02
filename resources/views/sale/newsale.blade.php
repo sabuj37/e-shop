@@ -321,34 +321,14 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     let pd = '#prevDue';
     let cd = '#curDue';
 
-    let totalAmount     = parseInt($(tsa).val());
-    let grandTotal      = parseInt($(gt).val());
-    let discountAmount  = parseInt($(da).val());
-    let paidAmount      = parseInt($(pa).val());
-    let dueAmount       = parseInt($(dua).val());
-    let prevDue         = parseInt($(pd).val());
-    let curDue          = parseInt($(cd).val());
-    if(totalAmount == ""){
-        let totalAmount = 0;
-    }
-    if(grandTotal == ""){
-        let grandTotal = 0;
-    }
-    if(discountAmount == ""){
-        let discountAmount = 0;
-    }
-    if(paidAmount == ""){
-        let paidAmount = 0;
-    }
-    if(dueAmount == ""){
-        let dueAmount = 0;
-    }
-    if(prevDue == ""){
-        let prevDue = 0;
-    }
-    if(curDue == ""){
-        let curDue = 0;
-    }
+    let totalAmount     = $(tsa).val();
+    let grandTotal      = $(gt).val();
+    let discountAmount  = $(da).val();
+    let paidAmount      = $(pa).val();
+    let dueAmount       = $(dua).val();
+    let prevDue         = $(pd).val();
+    let curDue          = $(cd).val();
+    
     // let profitPercent   = parseInt(salePrice*qty);
 
     let newTotal        = parseInt(totalAmount+totalSale);
