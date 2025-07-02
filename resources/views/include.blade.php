@@ -714,6 +714,12 @@
             $('#'+e).modal('hide');
             $("#"+f)[0].reset();
         }
+
+        
+
+        function remove(e){
+            $(e).remove();
+        };
     </script>
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     <!-- Backend Bundle JavaScript -->

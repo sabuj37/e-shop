@@ -799,10 +799,6 @@ $(document).on('click','#add-serial', function(){
     i++;
 });
 
-function remove(e){
-    $(e).remove();
-};
-
 function resetSerial(){
     var serial = '<div class="row" id="serialField0"><div class="col-10 mb-3"><input type="" class="form-control" name="serialNumber[]" placeholder="Enter serial number" /></div><div class="col-1 mt-1  p-0"></div></div>';
     $('#serialNumberBox').html(serial);

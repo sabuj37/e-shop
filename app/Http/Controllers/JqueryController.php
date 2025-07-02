@@ -141,10 +141,10 @@ class JqueryController extends Controller
 
         if($getData->count()>0):
             $serviceName = $getData->serviceName;
-            $rete = $getData->rete;
-            return ['serviceName' => $serviceName, 'rete' => $rete, 'message'=>'Success ! Form successfully subjmit.','id'=> $getData->id];
+            $rate = $getData->rate;
+            return ['serviceName' => $serviceName, 'rate' => $rate, 'message'=>'Success ! Form successfully subjmit.','id'=> $getData->id];
         else:
-            return ['serviceName' => "",'rete' => "", 'message'=>'Error ! There is an error. Please try agin.','id'=>''];
+            return ['serviceName' => "",'rate' => "", 'message'=>'Error ! There is an error. Please try agin.','id'=>''];
         endif;    
     }
 }

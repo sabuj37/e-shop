@@ -35,7 +35,7 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label>Select A Service </label>
-                        <select id="service" class="form-control" name="service" onchange="serviceSelect()" >
+                        <select id="serviceType" class="form-control" name="serviceType" onchange="serviceSelect()" >
                               <option value="">Select Service</option>
                                     <!--  form option show proccessing -->
                                   @if(!empty($serviceList) && count($serviceList)>0)
@@ -58,18 +58,8 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="text" class="form-control" name="serviceName" value="" id="serviceName" readonly />
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" value="" id="rent" name="rent" readonly />
-                                    </td>
-                                    <td>
-                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                    </td>
-                                </tr>
+                            <tbody id="serviceBox">
+
                             </tbody>
                         </table>
                     </div>
@@ -90,7 +80,7 @@
 <script>
 
 function serviceSelect(){
-    var data = $('#service').val();
+    var data = $('#serviceType').val();
 console.log(data)
     $.ajax({
         method: 'get',
@@ -99,10 +89,10 @@ console.log(data)
         contentType: 'html',
 
         success:function(result){
-            var field ='<tr><td><input type="text" class="form-control" name="serviceName" value="'+result.serviceName+'" id="serviceName" readonly/></td><td><input type="number" class="form-control" value="'+result.rent+'" id="rent" name="rent" readonly/></td><td><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></td></tr>';
+            var serialField = "'#serialField"+result.id+"'";
+            var field ='<tr id="serialField'+result.id+'"><td><input type="text" class="form-control" name="serviceName[]" value="'+result.serviceName+'" id="serviceName" readonly/></td><td><input type="number" class="form-control" value="'+result.rate+'" id="rate" name="rate[]" /></td><td><a class="badge bg-warning mr-2" title="delete serial number" onclick="remove('+serialField+')" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></td></tr>';
             
-            $('#serviceName').removeAttr('readonly');
-            $('#rent').removeAttr('readonly');
+            $('#serviceBox').append(field);
         },
         error:function(){
             var field ='<tr><td><input type="text" class="form-control" name="serviceName" value="" id="serviceName" readonly/></td><td><input type="number" class="form-control" value="" id="rent" name="rent" readonly/></td><td><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></td></tr>';
