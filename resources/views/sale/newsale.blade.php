@@ -328,10 +328,13 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     let dueAmount       = $(dua).val();
     let prevDue         = $(pd).val();
     let curDue          = $(cd).val();
-    
+    if(totalAmount.length<1){
+        let totalAmt = parseInt(0);
+    }else{
+        let totalAmt = parseInt(totalAmount);
+    }
     // let profitPercent   = parseInt(salePrice*qty);
-
-    let newTotal        = parseInt(totalAmount+totalSale);
+    let newTotal        = parseInt(totalAmt+totalSale);
     let newGrandTotal   = parseInt(newTotal-discountAmount);
     let newDueAmount    = parseInt(newGrandTotal-paidAmount);
     let newPrevDue      = parseInt(0);
@@ -340,6 +343,7 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     $(ts).html(totalSale);
     $(tp).html(totalPurchase);
     $(pm).html(profitPercent);
+    $(pt).html(profitValue);
     $(tsa).val(newTotal);
     $(gt).val(newGrandTotal);
     $(dua).val(newDueAmount);
