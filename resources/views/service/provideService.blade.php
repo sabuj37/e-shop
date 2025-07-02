@@ -90,8 +90,8 @@
 <script>
 
 function serviceSelect(){
-    var data = $('#service') .val();
-
+    var data = $('#service').val();
+console.log(data)
     $.ajax({
         method: 'get',
         url: '{{url('/')}}/service/details/'+data,
@@ -99,8 +99,7 @@ function serviceSelect(){
         contentType: 'html',
 
         success:function(result){
-            console.log("message:",result.message);
-            var field ='<tr><td><input type="text" class="form-control" name="serviceName" value="'+result.servicename'" id="serviceName" readonly/></td><td><input type="number" class="form-control" value="'+result.rent'" id="rent" name="rent" readonly/></td><td><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></td></tr>';
+            var field ='<tr><td><input type="text" class="form-control" name="serviceName" value="'+result.serviceName+'" id="serviceName" readonly/></td><td><input type="number" class="form-control" value="'+result.rent+'" id="rent" name="rent" readonly/></td><td><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></td></tr>';
             
             $('#serviceName').removeAttr('readonly');
             $('#rent').removeAttr('readonly');
