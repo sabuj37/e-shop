@@ -1,5 +1,7 @@
 @extends('include') @section('backTitle')Add Service @endsection @section('container')
-
+<div class="col-12">
+    @include('sweetalert::alert')
+</div>
 <div class="card">
     <div class="card-body">
         <div class="row">
@@ -7,7 +9,7 @@
                 <h4>Create Service</h4>
             </div>
         </div>
-        <form action="" method="POST">
+        <form action="{{route('saveService')}}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -23,7 +25,9 @@
                     </div>
                 </div>
             </div>
-            <a href="page-add-product.html" class="btn btn-primary add-list">Add Product</a>
+             <div class=" d-md-flex justify-content-md-end mt-2">
+            <button class="btn btn-primary btn-sm" type="submit">Add Service </button>
+        </div>
         </form>
     </div>
 </div>
@@ -51,7 +55,9 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody class="ligth-body text-center">
+                <tbody class="ligth-body ">
+                    @if(!empty($listItem))
+                    @foreach($listItem as $serviceList)
                     <tr>
                         <td>
                             <div class="checkbox d-inline-block">
@@ -59,8 +65,26 @@
                                 <label for="checkbox2" class="mb-0"></label>
                             </div>
                         </td>
-                        <td>demon</td>
-                        <td>10.0</td>
+                        <td>{{$serviceList -> serviceName}}</td>
+                        <td>{{$serviceList -> rate}}</td>
+                        <td>
+                            <div class="d-flex align-items-center list-action">
+                                <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="{{route('editService',['id'=>$serviceList->id])}}"><i class="ri-pencil-line mr-0"></i></a>
+                                <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @else
+                    <tr>
+                        <td>
+                            <div class="checkbox d-inline-block">
+                                <input type="checkbox" class="checkbox-input" id="checkbox2" />
+                                <label for="checkbox2" class="mb-0"></label>
+                            </div>
+                        </td>
+                        <td>Standerd</td>
+                        <td>1000</td>
                         <td>
                             <div class="d-flex align-items-center list-action">
                                 <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="ri-pencil-line mr-0"></i></a>
@@ -68,6 +92,7 @@
                             </div>
                         </td>
                     </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

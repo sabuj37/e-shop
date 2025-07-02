@@ -389,6 +389,18 @@ Route::middleware(['posAdmin'])->group(function(){
         'addServiceName'
     ])->name('addServiceName');
 
+    //save service
+    Route::post('/save/service',[
+        serviceController::class,
+        'saveService'
+    ])->name('saveService');
+    
+    //service edit
+    Route::get('/service/edit/{id}',[
+        serviceController::class,
+        'editService'
+    ])->name('editService');
+
     Route::get('provide/service/',[
         serviceController::class,
         'provideService'
