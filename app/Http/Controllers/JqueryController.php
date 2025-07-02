@@ -10,6 +10,7 @@ use App\Models\ProductUnit;
 use App\Models\PurchaseProduct;
 use App\Models\ProductStock;
 use App\Models\ProductSerial;
+use App\Models\Service;
 use Alert;
 
 class JqueryController extends Controller
@@ -132,5 +133,18 @@ class JqueryController extends Controller
                 return back();
             endif;
         endif;
+    }
+
+    //service
+    public function getserviceDetails($id){
+        $getData = Service::find($id);
+
+        if($getData->count()>0):
+            $serviceName = $getData->serviceName;
+            $rete = $getData->rete;
+            return ['serviceName' => $serviceName, 'rete' => $rete, 'message'=>'Success ! Form successfully subjmit.','id'=> $getData->id];
+        else:
+            return ['serviceName' => "",'rete' => "", 'message'=>'Error ! There is an error. Please try agin.','id'=>''];
+        endif;    
     }
 }

@@ -378,6 +378,12 @@ Route::middleware(['posAdmin'])->group(function(){
         'getPurchaseDetails'
     ])->name('getPurchaseDetails');
 
+    
+    Route::get('service/details/{id}',[
+        JqueryController::class,
+        'getServiceDetails'
+    ])->name('getServiceDetails');
+
     // endsupplierbalance
 
     
@@ -400,6 +406,13 @@ Route::middleware(['posAdmin'])->group(function(){
         serviceController::class,
         'editService'
     ])->name('editService');
+
+    
+    //brand delete
+    Route::get('/service/delete/{id}',[
+        serviceController::class,
+        'delService'
+    ])->name('delService');
 
     Route::get('provide/service/',[
         serviceController::class,

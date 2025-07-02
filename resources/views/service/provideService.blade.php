@@ -1,5 +1,7 @@
-@extends('include') @section('backTitle')Add Service @endsection @section('container')
-
+@extends('include') @section('backTitle')provide service @endsection @section('container')
+<div class="col-12">
+    @include('sweetalert::alert')
+</div>
 <div class="card">
     <div class="card-body">
         <div class="row">
@@ -13,7 +15,15 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="customerName" class="form-label">Customer Name</label>
-                        <input type="text" class="form-control" placeholder="Enter the customer name" id="customerName" name="customerName" required />
+                        <select id="customerName" class="form-control" required>
+                                    <option value="">Select Customer Name</option>
+                                    <!--  form option show proccessing -->
+                                  @if(!empty($customerList) && count($customerList)>0)
+                                  @foreach($customerList as $customerData)
+                                    <option value="{{$customerData->id}}">{{$customerData->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -25,8 +35,14 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label>Select A Service </label>
-                        <select id="service" class="form-control" name="service">
-                            <option value=""></option>
+                        <select id="service" class="form-control" name="service" onchange="serviceSelect()" >
+                              <option value="">Select Service</option>
+                                    <!--  form option show proccessing -->
+                                  @if(!empty($serviceList) && count($serviceList)>0)
+                                  @foreach($serviceList as $serviceData)
+                                    <option value="{{$serviceData->id}}">{{$serviceData->serviceName}}</option>
+                                    @endforeach
+                                    @endif
                         </select>
                     </div>
                 </div>
@@ -45,10 +61,10 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <input type="number" class="form-control" id="discountAmount" name="discountAmount" readonly />
+                                        <input type="text" class="form-control" name="serviceName" value="" id="serviceName" readonly />
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" id="discountPercent" name="discountPercent" readonly />
+                                        <input type="number" class="form-control" value="" id="rent" name="rent" readonly />
                                     </td>
                                     <td>
                                         <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a>
@@ -68,4 +84,32 @@
     </div>
 </div>
 
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+function serviceSelect(){
+    var data = $('#service') .val();
+
+    $.ajax({
+        method: 'get',
+        url: '{{url('/')}}/service/details/'+data,
+
+        contentType: 'html',
+
+        success:function(result){
+            console.log("message:",result.message);
+            var field ='<tr><td><input type="text" class="form-control" name="serviceName" value="'+result.servicename'" id="serviceName" readonly/></td><td><input type="number" class="form-control" value="'+result.rent'" id="rent" name="rent" readonly/></td><td><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></td></tr>';
+            
+            $('#serviceName').removeAttr('readonly');
+            $('#rent').removeAttr('readonly');
+        },
+        error:function(){
+            var field ='<tr><td><input type="text" class="form-control" name="serviceName" value="" id="serviceName" readonly/></td><td><input type="number" class="form-control" value="" id="rent" name="rent" readonly/></td><td><a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a></td></tr>';
+        }
+    });
+}
+
+</script>
 @endsection
