@@ -40,6 +40,15 @@ class productController extends Controller
             endif;
     }
 
+    //add bamage product
+    public function damageProduct(){
+        return view('product.damageProduct');
+   }
+    //add bamage product list
+    public function damageProductList(){
+        return view('product.damageProductList');
+   }
+
 
     //edit product
      public function editProduct($id){

@@ -14,4 +14,19 @@ class saleController extends Controller
         return view('sale.newsale',['customerList'=>$customer,'productList'=>$product]);
 
     }
+
+     public function saleList(){
+        return view('sale.saleList');
+    }
+
+    
+     public function returnSale(){
+        return view('sale.returnSale');
+        
+    }
+
+     public function returnSaleList(){
+        return view('sale.returnSaleList');
+        
+    }
 }

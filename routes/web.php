@@ -10,6 +10,7 @@ use App\Http\Controllers\userInfo;
 use App\Http\Controllers\expenseController;
 use App\Http\Controllers\JqueryController;
 use App\Http\Controllers\serviceController;
+use App\Http\Controllers\accountController;
 use App\Http\Controllers\reportController;
 use App\Http\Controllers\businessController;
 
@@ -281,6 +282,19 @@ Route::middleware(['posAdmin'])->group(function(){
 
     //endProduct
 
+    //damage product str---------------
+
+    //damage product end
+        
+    Route::get('/damage/product',[
+        productController::class,
+        'damageProduct'
+    ])->name('damageProduct');
+
+    Route::get('/damage/product/list',[
+        productController::class,
+        'damageProductList'
+    ])->name('damageProductList');
     //purchase str-------------------------
 
     Route::get('/add/purchase',[
@@ -301,6 +315,23 @@ Route::middleware(['posAdmin'])->group(function(){
         saleController::class,
         'newsale'
     ])->name('newsale');
+
+    
+    Route::get('Sale/list',[
+        saleController::class,
+        'saleList'
+    ])->name('saleList');
+
+    Route::get('/return/sale',[
+        saleController::class,
+        'returnSale'
+    ])->name('returnSale');
+
+    
+    Route::get('/return/sale/list',[
+        saleController::class,
+        'returnSaleList'
+    ])->name('returnSaleList');
     //sale end
 
     // expense------------------------
@@ -423,6 +454,24 @@ Route::middleware(['posAdmin'])->group(function(){
         serviceController::class,
         'serviceProvideList'
     ])->name('serviceProvideList');
+
+    //account------------------------
+    Route::get('/add/account',[
+        accountController::class,
+        'addAccount'
+    ])->name('addAccount');
+
+    Route::get('/account/report',[
+        accountController::class,
+        'accountReport'
+    ])->name('accountReport');
+
+    
+    Route::get('/account/list',[
+        accountController::class,
+        'accountList'
+    ])->name('accountList');
+    //account end
 
     //Report------------------------
 
