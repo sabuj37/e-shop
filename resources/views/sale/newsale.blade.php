@@ -119,25 +119,25 @@
                                 <tbody id="paymentDetails">
                                     <tr>
                                         <td>
-                                            <input type="number" class="form-control" id="totalSaleAmount" name="totalSaleAmount" readonly  />
+                                            <input type="number" class="form-control" id="totalSaleAmount" name="totalSaleAmount" value="0" readonly  />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountAmount"  name="discountAmount"  />
+                                            <input type="number" class="form-control" id="discountAmount"  name="discountAmount" value="0"  />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="grandTotal" name="grandTotal" readonly />
+                                            <input type="number" class="form-control" id="grandTotal" name="grandTotal" value="0" readonly />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0"  />
+                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0"    />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="dueAmount" name="dueAmount" readonly  />
+                                            <input type="number" class="form-control" id="dueAmount" name="dueAmount" value="0" readonly  />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="prevDue" name="prevDue" readonly  />
+                                            <input type="number" class="form-control" id="prevDue" name="prevDue" value="0" readonly  />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="curDue" name="curDue" readonly  />
+                                            <input type="number" class="form-control" id="curDue" name="curDue" value="0" readonly  />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -299,56 +299,83 @@ function actProductList(){
 }
 
 
-function remove(e){
-    $(e).remove();
-};
-
 // calculate sale details
 function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
-    let buyPrice        = parseInt($(bp).val());
-    let salePrice       = parseInt($(sp).val());
-    let qty             = parseInt($(qd).val());
-    let totalPurchase   = parseInt(buyPrice*qty);
-    let totalSale       = parseInt(salePrice*qty);
-    let profitValue     = parseInt((totalSale-totalPurchase));
-    let profitPercent   = parseFloat(parseFloat((profitValue/totalPurchase)*100).toFixed(2));
+    const buyPrice        = parseInt($(bp).val());
+    const salePrice       = parseInt($(sp).val());
+    const qty             = parseInt($(qd).val());
+    const totalPurchase   = parseInt(parseInt(buyPrice*qty));
+    const totalSale       = parseInt(parseInt(salePrice*qty));
+    const profitValue     = parseInt(parseInt(totalSale-totalPurchase));
+    const profitPercent   = parseFloat(parseFloat((profitValue/totalPurchase)*100).toFixed(2));
 
-    let tsa = '#totalSaleAmount';
-    let gt = '#grandTotal';
-    let da = '#discountAmount';
-    let pa = '#paidAmount';
-    let dua = '#dueAmount';
-    let pd = '#prevDue';
-    let cd = '#curDue';
+    const tsa = 'totalSaleAmount';
+    const gt = 'grandTotal';
+    const da = 'discountAmount';
+    const pa = 'paidAmount';
+    const dua= 'dueAmount';
+    const pd = 'prevDue';
+    const cd = 'curDue';
 
-    let totalAmount     = $(tsa).val();
-    let grandTotal      = $(gt).val();
-    let discountAmount  = $(da).val();
-    let paidAmount      = $(pa).val();
-    let dueAmount       = $(dua).val();
-    let prevDue         = $(pd).val();
-    let curDue          = $(cd).val();
-    if(totalAmount.length<1){
-        let totalAmt = parseInt(0);
-    }else{
-        let totalAmt = parseInt(totalAmount);
+    const totalAmount     = parseInt($('#'+tsa).val());
+    // const grandTotal      = parseInt($('#'+gt).val());
+    // const discountAmount  = parseInt($('#'+da).val());
+    // const paidAmount      = parseInt($('#'+pa).val());
+    // const dueAmount       = parseInt($('#'+dua).val());
+    // const prevDue         = parseInt($('#'+pd).val());
+    // const curDue          = parseInt($('#'+cd).val());
+
+    if(!totalAmount || totalAmount== ""){
+        const totalAmount = parseInt(0);
     }
+
+    if(!qty || qty== ""){
+        const newTotal = parseInt(0);
+        $('#'+tsa).val(0);
+    }else{
+        const newTotal        = parseInt(parseInt(totalAmount+totalSale));
+        $('#'+tsa).val(newTotal);
+    }
+
+    // if(!grandTotal || grandTotal== ""){
+    //     let grandTotal = parseInt(0);
+    // }
+
+    // if(!discountAmount || discountAmount== ""){
+    //     const discountAmount = parseInt(0);
+    // }
+
+    // if(!paidAmount || paidAmount== ""){
+    //     const paidAmount = parseInt(0);
+    // }
+
+    // if(!dueAmount || dueAmount== ""){
+    //     const dueAmount = parseInt(0);
+    // }
+
+    // if(!prevDue || prevDue== ""){
+    //     const prevDue = parseInt(0);
+    // }
+
+    // if(!curDue || curDue== ""){
+    //     const curDue = parseInt(0);
+    // }
+    
     // let profitPercent   = parseInt(salePrice*qty);
-    let newTotal        = parseInt(totalAmt+totalSale);
-    let newGrandTotal   = parseInt(newTotal-discountAmount);
-    let newDueAmount    = parseInt(newGrandTotal-paidAmount);
-    let newPrevDue      = parseInt(0);
-    let newCurDue       = parseInt(newDueAmount);
+
+    // const newGrandTotal   = parseInt(parseInt(newTotal-discountAmount));
+    // const newDueAmount    = parseInt(parseInt(newGrandTotal-paidAmount));
+    // const newPrevDue      = parseInt(0);
+    // const newCurDue       = parseInt(newDueAmount);
 
     $(ts).html(totalSale);
     $(tp).html(totalPurchase);
     $(pm).html(profitPercent);
     $(pt).html(profitValue);
-    $(tsa).val(newTotal);
-    $(gt).val(newGrandTotal);
-    $(dua).val(newDueAmount);
-    $(pd).val(newPrevDue);
-    $(cd).val(newCurDue);
+    // $('#'+gt).val(newGrandTotal);
+    // $('#'+dua).val(newDueAmount);
+    // $('#'+pd).val(newPrevDue);
+    // $('#'+cd).val(newCurDue);
 }
 
 function productSelect(){
