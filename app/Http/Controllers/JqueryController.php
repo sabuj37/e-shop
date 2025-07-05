@@ -18,7 +18,7 @@ class JqueryController extends Controller
     public function getProductDetails($id){
         $getData = Product::find($id);
 
-        if($getData->count()>0):
+        if($getData):
             $stockHistory       = ProductStock::where(['productId'=>$getData->id])->get();
             if(!empty($stockHistory)):
                 $currentStock   = $stockHistory->sum('currentStock');
@@ -70,7 +70,7 @@ class JqueryController extends Controller
     }
     public function getPurchaseDetails($id){
         $getData = PurchaseProduct::find($id);
-        if($getData->count()>0){
+        if($getData){
             $salePrice      = $getData->salePriceExVat;
             $buyPrice       = $getData->buyPrice;
             return ['id'=>$id, 'buyPrice'=> $buyPrice, 'getData' => $getData, 'salePrice'=>$salePrice];
@@ -139,7 +139,7 @@ class JqueryController extends Controller
     public function getserviceDetails($id){
         $getData = Service::find($id);
 
-        if($getData->count()>0):
+        if($getData):
             $serviceName = $getData->serviceName;
             $rate = $getData->rate;
             return ['serviceName' => $serviceName, 'rate' => $rate, 'message'=>'Success ! Form successfully subjmit.','id'=> $getData->id];
