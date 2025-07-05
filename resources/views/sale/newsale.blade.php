@@ -321,8 +321,6 @@ function actProductList(){
 
 }
 
-<<<<<<< Updated upstream
-
 // calculate sale details
 function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     const buyPrice        = parseInt($(bp).val());
@@ -400,7 +398,7 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     // $('#'+dua).val(newDueAmount);
     // $('#'+pd).val(newPrevDue);
     // $('#'+cd).val(newCurDue);
-=======
+    
 // calculate sale details
 function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     let buyPrice        = parseInt($(bp).val());
@@ -430,7 +428,6 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
         $(tp).html(totalPurchase);
         $(pm).html(profitPercent);
         $(pt).html(profitValue);
->>>>>>> Stashed changes
 }
 
 function productSelect(){
