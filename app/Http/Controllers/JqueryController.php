@@ -147,4 +147,21 @@ class JqueryController extends Controller
             return ['serviceName' => "",'rate' => "", 'message'=>'Error ! There is an error. Please try agin.','id'=>''];
         endif;    
     }
+
+    // get grand total
+     public function calculateGrandTotal()
+    {
+        $items = request()->input('items');
+        $grandTotal = 0;
+
+        foreach ($items as $item) {
+            $price = floatval($item['price']);
+            $quantity = intval($item['quantity']);
+            $grandTotal += $price * $quantity;
+        }
+
+        return response()->json([
+            'grandTotal' => number_format($grandTotal, 2)
+        ]);
+    }
 }

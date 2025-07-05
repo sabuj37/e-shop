@@ -234,7 +234,30 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+$('#calculateTotal').on('click', function () {
+        let products = [];
 
+        $('.product-row').each(function () {
+            let price = parseFloat($(this).find('.price').val()) || 0;
+            let quantity = parseInt($(this).find('.quantity').val()) || 0;
+            products.push({ price: price, quantity: quantity });
+        });
+
+        $.ajax({
+            url: '{{ route("calculate.grand.total") }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                products: products
+            },
+            success: function (response) {
+                $('#grandTotal').text(response.total);
+            },
+            error: function () {
+                alert("Error calculating total.");
+            }
+        });
+    });
 //add customer----------
 
 $(document).on('click','#add-customer', function(){
@@ -298,6 +321,7 @@ function actProductList(){
 
 }
 
+<<<<<<< Updated upstream
 
 // calculate sale details
 function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
@@ -376,6 +400,37 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     // $('#'+dua).val(newDueAmount);
     // $('#'+pd).val(newPrevDue);
     // $('#'+cd).val(newCurDue);
+=======
+// calculate sale details
+function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
+    let buyPrice        = parseInt($(bp).val());
+    let salePrice       = parseInt($(sp).val());
+    let qty             = parseInt($(qd).val());
+    let totalPurchase   = parseInt(buyPrice*qty);
+    let totalSale       = parseInt(salePrice*qty);
+    let profitValue     = parseInt((totalSale-totalPurchase));
+    let profitPercent   = parseFloat(parseFloat((profitValue/totalPurchase)*100).toFixed(2));
+    
+        let items = [];
+
+        $('.product-row').each(function () {
+            let price = parseFloat($(this).find('.sale-price').val()) || 0;
+            let quantity = parseInt($(this).find('.quantity').val()) || 0;
+            items.push({ price: price, quantity: quantity });
+        });
+
+        $.get('{{ route("calculate.grand.total") }}', { items: items }, function (response) {
+            let grandTotal = response.grandTotal.replace(/,/g, '');
+            $('#grandTotal').val(grandTotal);
+            $('#totalSaleAmount').val(grandTotal);
+        });
+    
+
+        $(ts).html(totalSale);
+        $(tp).html(totalPurchase);
+        $(pm).html(profitPercent);
+        $(pt).html(profitValue);
+>>>>>>> Stashed changes
 }
 
 function productSelect(){
@@ -408,7 +463,7 @@ function productSelect(){
                     var date = new Date(item.created_at).toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" })
                     dataItems +=  '<option value="'+item.purchaseId+'">('+item.currentStock+') '+item.supplierName+'-'+date+'</option>';
                 });
-                var field = '<tr id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control" id="'+qtyData+'" name="qty" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td><input type="number" class="form-control" id="'+salePrice+'" name="salePrice[]" value="'+result.salePrice+'" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td id="'+totalSale+'"></td><td><input type="number" class="form-control" id="'+buyPrice+'" name="buyPrice[]" value="'+result.buyPrice+'" readonly /></td><td id="'+totalPurchase+'">-</td><td id="'+profitMargin+'"></td><td id="'+profitTotal+'"></td></tr>';
+                var field = '<tr class="product-row" id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control quantity" id="'+qtyData+'" name="qty" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td><input type="number" class="form-control sale-price" id="'+salePrice+'" name="salePrice[]" value="'+result.salePrice+'" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td id="'+totalSale+'"></td><td><input type="number" class="form-control" id="'+buyPrice+'" name="buyPrice[]" value="'+result.buyPrice+'" readonly /></td><td id="'+totalPurchase+'">-</td><td id="'+profitMargin+'"></td><td id="'+profitTotal+'"></td></tr>';
                 $('#productDetails').append(field);
             }
         },

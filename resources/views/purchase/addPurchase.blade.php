@@ -748,7 +748,7 @@ function profitCalculation(){
 }
 
 function productSelect(){
-    var product = $("#pro   ductName").val();
+    var product = $("#productName").val();
     $.ajax({
         method: 'get',
         url: '{{ url('/') }}/product/details/'+product,

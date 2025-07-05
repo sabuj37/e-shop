@@ -414,6 +414,10 @@ Route::middleware(['posAdmin'])->group(function(){
         JqueryController::class,
         'getServiceDetails'
     ])->name('getServiceDetails');
+    Route::get('/calculate-grand-total', [
+        JqueryController::class, 
+        'calculateGrandTotal'
+    ])->name('calculate.grand.total');
 
     // endsupplierbalance
 
