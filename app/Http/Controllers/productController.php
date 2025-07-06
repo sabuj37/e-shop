@@ -106,6 +106,12 @@ class productController extends Controller
         $data = Product::orderBy('id','DESC')->get();
       return view('product.productList',['listItem'=>$data,'brandList'=>$brand,'categoryList'=>$category,'productUnitList'=>$productUnit]);
     }
+
+    
+    //stock product
+    public function stockProduct(){
+      return view('product.stockProduct');
+   }
     
     //addBrand
     public function addBrand(){

@@ -126,6 +126,11 @@
                                           </a>
                                   </li>
                                   <li class="">
+                                          <a href="{{route('stockProduct')}}">
+                                              <i class="las la-minus"></i><span>Stock Product</span>
+                                          </a>
+                                  </li>
+                                  <li class="">
                                           <a href="{{route('addBrand')}}">
                                               <i class="las la-minus"></i><span>Brand</span>
                                           </a>
@@ -404,6 +409,11 @@
                                   <li class="">
                                           <a href="{{route('addBusinessSetupPage')}}">
                                               <i class="las la-minus"></i><span>Setup Page</span>
+                                          </a>
+                                  </li>
+                                  <li class="">
+                                          <a href="{{route('invoicePage')}}">
+                                              <i class="las la-minus"></i><span>Invoice Page</span>
                                           </a>
                                   </li>
                           </ul>

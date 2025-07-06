@@ -433,7 +433,21 @@ function purchaseData(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
                 $(sp).val(salePrice);
                 $(bp).val(buyPrice);
                 $(pm).html(profitPercent);
-                $(pt).html(profitValue);                
+                $(pt).html(profitValue);    
+    
+                let items = [];
+
+                $('.product-row').each(function () {
+                    let price = parseFloat($(this).find('.sale-price').val()) || 0;
+                    let quantity = parseInt($(this).find('.quantity').val()) || 0;
+                    items.push({ price: price, quantity: quantity });
+                });
+
+                $.get('{{ route("calculate.grand.total") }}', { items: items }, function (response) {
+                    let grandTotal = response.grandTotal.replace(/,/g, '');
+                    $('#grandTotal').val(grandTotal);
+                    $('#totalSaleAmount').val(grandTotal);
+                });            
             }
             let items = [];
 

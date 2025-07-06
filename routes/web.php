@@ -13,6 +13,7 @@ use App\Http\Controllers\serviceController;
 use App\Http\Controllers\accountController;
 use App\Http\Controllers\reportController;
 use App\Http\Controllers\businessController;
+use App\Http\Controllers\invoiceController;
 
 //user info str
 Route::get('/login',[
@@ -183,6 +184,13 @@ Route::middleware(['posAdmin'])->group(function(){
         'createProduct'
     ])->name('createProduct');
 
+    //stock product----------------------
+    
+    Route::get('stock/product',[
+        productController::class,
+        'stockProduct'
+    ])->name('stockProduct');
+
 
     //brand -----------------------------
 
@@ -295,6 +303,7 @@ Route::middleware(['posAdmin'])->group(function(){
         productController::class,
         'damageProductList'
     ])->name('damageProductList');
+
     //purchase str-------------------------
 
     Route::get('/add/purchase',[
@@ -543,6 +552,13 @@ Route::middleware(['posAdmin'])->group(function(){
         businessController::class,
         'addBusinessSetupPage'
     ])->name('addBusinessSetupPage');
+
+    //invoice------------------------------
+    //invoice view
+    Route::get('/invoice',[
+        invoiceController::class,
+        'invoicePage'
+    ])->name('invoicePage');
 
 
 });
