@@ -122,13 +122,13 @@
                                             <input type="number" class="form-control" id="totalSaleAmount" name="totalSaleAmount" value="0" readonly  />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountAmount"  name="discountAmount" value="0"  />
+                                            <input type="number" class="form-control" id="discountPrice" onkeyup="discountAmount()"  name="discountAmount" value="0"  />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="grandTotal" name="grandTotal" value="0" readonly />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="paidAmount" name="paidAmount" value="0"    />
+                                            <input type="number" class="form-control" id="paidAmount" onkeyup="dueCalculate()" name="paidAmount" value="0"    />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="dueAmount" name="dueAmount" value="0" readonly  />
@@ -143,9 +143,9 @@
                                 </tbody>
                             </table>
                         </div>
-                <div class=" d-md-flex  mt-2">
-                    <button class="btn btn-primary btn-sm" type="submit">Save</button>
-                </div>
+                        <div class="d-md-flex  mt-2">
+                            <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -234,30 +234,32 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+
+// not use function
 $('#calculateTotal').on('click', function () {
-        let products = [];
+    let products = [];
 
-        $('.product-row').each(function () {
-            let price = parseFloat($(this).find('.price').val()) || 0;
-            let quantity = parseInt($(this).find('.quantity').val()) || 0;
-            products.push({ price: price, quantity: quantity });
-        });
-
-        $.ajax({
-            url: '{{ route("calculate.grand.total") }}',
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                products: products
-            },
-            success: function (response) {
-                $('#grandTotal').text(response.total);
-            },
-            error: function () {
-                alert("Error calculating total.");
-            }
-        });
+    $('.product-row').each(function () {
+        let price = parseFloat($(this).find('.price').val()) || 0;
+        let quantity = parseInt($(this).find('.quantity').val()) || 0;
+        products.push({ price: price, quantity: quantity });
     });
+
+    $.ajax({
+        url: '{{ route("calculate.grand.total") }}',
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            products: products
+        },
+        success: function (response) {
+            $('#grandTotal').text(response.total);
+        },
+        error: function () {
+            alert("Error calculating total.");
+        }
+    });
+});
 //add customer----------
 
 $(document).on('click','#add-customer', function(){
@@ -340,9 +342,17 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
         });
 
         $.get('{{ route("calculate.grand.total") }}', { items: items }, function (response) {
-            let grandTotal = response.grandTotal.replace(/,/g, '');
-            $('#grandTotal').val(grandTotal);
+            let discountAmount  = parseInt($("#discountPrice").val());
+            let dstAmount       = discountAmount ? discountAmount:0;
+            let grandTotal      = response.grandTotal.replace(/,/g, '');
+            let paidAmount      = parseInt($("#paidAmount").val());
+            let payAmount       = paidAmount ? paidAmount: 0;
+            let gTotal          = parseInt(grandTotal-dstAmount);
+            let dueAmount       = parseInt(gTotal-payAmount);
+            // let grandTotal  = gTotal;
+            $('#grandTotal').val(gTotal);
             $('#totalSaleAmount').val(grandTotal);
+            $('#dueAmount').val(dueAmount);
         });
     
 
@@ -425,11 +435,55 @@ function purchaseData(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
                 $(pm).html(profitPercent);
                 $(pt).html(profitValue);                
             }
+            let items = [];
+
+            $('.product-row').each(function () {
+                let price = parseFloat($(this).find('.sale-price').val()) || 0;
+                let quantity = parseInt($(this).find('.quantity').val()) || 0;
+                items.push({ price: price, quantity: quantity });
+            });
+
+            $.get('{{ route("calculate.grand.total") }}', { items: items }, function (response) {
+                let discountAmount  = parseInt($("#discountPrice").val());
+                let dstAmount       = discountAmount ? discountAmount:0;
+                let grandTotal      = response.grandTotal.replace(/,/g, '');
+                let paidAmount      = parseInt($("#paidAmount").val());
+                let payAmount       = paidAmount ? paidAmount: 0;
+                let gTotal          = parseInt(grandTotal-dstAmount);
+                let dueAmount       = parseInt(gTotal-payAmount);
+                // let grandTotal  = gTotal;
+                $('#grandTotal').val(gTotal);
+                $('#totalSaleAmount').val(grandTotal);
+                $('#dueAmount').val(dueAmount);
+            });
         },
         error:function(){
             alert("failed data");
         }
     });
 
+}
+
+function discountAmount(){
+    let dstAmount   = parseInt($("#discountPrice").val());
+    let saleTotal   = parseInt($("#totalSaleAmount").val());
+
+    let gTotal      = parseInt(saleTotal-dstAmount);
+    let grandTotal  = gTotal;
+
+    $('#grandTotal').val(grandTotal);
+}
+
+function dueCalculate(){
+    let dstAmount   = parseInt($("#discountPrice").val());
+    let paidAmount  = parseInt($("#paidAmount").val());
+    let saleTotal   = parseInt($("#totalSaleAmount").val());
+    let grandTotal  = parseInt($("#grandTotal").val());
+
+    let customerDue = parseInt(grandTotal-paidAmount);
+    let gTotal      = parseInt(saleTotal-dstAmount);
+    let dueAmount   = parseInt(grandTotal-paidAmount);
+
+    $('#dueAmount').val(dueAmount);
 }
 </script>
