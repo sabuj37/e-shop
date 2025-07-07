@@ -481,11 +481,15 @@ function purchaseData(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
 function discountAmount(){
     let dstAmount   = parseInt($("#discountPrice").val());
     let saleTotal   = parseInt($("#totalSaleAmount").val());
+    let paidAmount  = parseInt($("#paidAmount").val());
 
     let gTotal      = parseInt(saleTotal-dstAmount);
     let grandTotal  = gTotal;
 
+    let customerDue = parseInt(grandTotal-paidAmount);
+
     $('#grandTotal').val(grandTotal);
+    $('#dueAmount').val(customerDue);
 }
 
 function dueCalculate(){
