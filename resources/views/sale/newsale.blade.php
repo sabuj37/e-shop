@@ -1,5 +1,16 @@
-@extends('include') @section('backTitle')new sale @endsection @section('container')
-<div class="row">
+@extends('include') 
+    @section('backTitle') 
+        new sale 
+    @endsection 
+@section('container')
+<div class="col-12">
+    @include('sweetalert::alert')
+</div>
+<form action="{{ route('saveSale') }}" class="row" method="POST">
+    @csrf
+    @php
+    $randomInvoiceNumber = 'INV-' . strtoupper(substr(md5(uniqid(rand(), true)), 0, 8));
+    @endphp
     <div class="col-12">
         <div class="row">
             <div class="col-md-12 col-12">
@@ -9,7 +20,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Date</label>
-                                    <input type="date" class="form-control" placeholder="" required />
+                                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" placeholder="" required />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -29,18 +40,18 @@
                                 </div>
                             </div>
                             <div class="col-md-2 mt-3 p-0">
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customerModal"><i class="las la-plus mr-2"></i>customer</button>
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#customerModal"><i class="las la-plus mr-2"></i>add customer</button>
                             </div>
                             <div class="col-md-3 ">
                                 <div class="form-group">
                                     <label for="invoice" class="form-label">Invoice *</label>
-                                    <input type="text" class="form-control" id="invoice" name="invoice" />
+                                    <input type="text" class="form-control" id="invoice" name="invoice" value="{{ $randomInvoiceNumber }}" readonly />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Reference *</label>
-                                    <input type="text" class="form-control" placeholder="Enter Name" required />
+                                    <label>Reference(if any)</label>
+                                    <input type="text" class="form-control" placeholder="Enter reference if any" />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -151,7 +162,7 @@
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <!-- start_model -->
  <div class="modal fade" id="customerModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="customerModal" aria-hidden="true">
@@ -327,6 +338,7 @@ function actProductList(){
 function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
     let buyPrice        = parseInt($(bp).val());
     let salePrice       = parseInt($(sp).val());
+    let purchaseId      = parseInt($(pf).val());
     let qty             = parseInt($(qd).val());
     let totalPurchase   = parseInt(buyPrice*qty);
     let totalSale       = parseInt(salePrice*qty);
@@ -341,18 +353,23 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
             items.push({ price: price, quantity: quantity });
         });
 
-        $.get('{{ route("calculate.grand.total") }}', { items: items }, function (response) {
-            let discountAmount  = parseInt($("#discountPrice").val());
-            let dstAmount       = discountAmount ? discountAmount:0;
-            let grandTotal      = response.grandTotal.replace(/,/g, '');
-            let paidAmount      = parseInt($("#paidAmount").val());
-            let payAmount       = paidAmount ? paidAmount: 0;
-            let gTotal          = parseInt(grandTotal-dstAmount);
-            let dueAmount       = parseInt(gTotal-payAmount);
-            // let grandTotal  = gTotal;
-            $('#grandTotal').val(gTotal);
-            $('#totalSaleAmount').val(grandTotal);
-            $('#dueAmount').val(dueAmount);
+        $.get('{{ route("calculate.grand.total") }}', { items: items, purchaseId: purchaseId }, function (response) {
+            if(qty>response.currentStock){
+                alert('You can not order more then '+response.currentStock+', because of product sortage')
+            }else{
+                let discountAmount  = parseInt($("#discountPrice").val());
+                let dstAmount       = discountAmount ? discountAmount:0;
+                let grandTotal      = response.grandTotal.replace(/,/g, '');
+                let paidAmount      = parseInt($("#paidAmount").val());
+                let payAmount       = paidAmount ? paidAmount: 0;
+                let gTotal          = parseInt(grandTotal-dstAmount);
+                let dueAmount       = parseInt(gTotal-payAmount);
+                // let grandTotal  = gTotal;
+                $('#grandTotal').val(gTotal);
+                $('#totalSaleAmount').val(grandTotal);
+                $('#dueAmount').val(dueAmount);
+                $('#curDue').val(dueAmount);
+            }
         });
     
 
@@ -367,7 +384,6 @@ function productSelect(){
     var i = 1;
     $.ajax({
         method: 'get',
-
         url: '{{ url('/') }}/sale/product/details/'+product,
 
         contentType: 'html',
@@ -392,7 +408,7 @@ function productSelect(){
                     var date = new Date(item.created_at).toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" })
                     dataItems +=  '<option value="'+item.purchaseId+'">('+item.currentStock+') '+item.supplierName+'-'+date+'</option>';
                 });
-                var field = '<tr class="product-row" id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control quantity" id="'+qtyData+'" name="qty" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td><input type="number" class="form-control sale-price" id="'+salePrice+'" name="salePrice[]" value="'+result.salePrice+'" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td id="'+totalSale+'"></td><td><input type="number" class="form-control" id="'+buyPrice+'" name="buyPrice[]" value="'+result.buyPrice+'" readonly /></td><td id="'+totalPurchase+'">-</td><td id="'+profitMargin+'"></td><td id="'+profitTotal+'"></td></tr>';
+                var field = '<tr class="product-row" id="'+productField+'"><td><i onclick="remove('+productField+')" class="ri-delete-bin-line mr-0"></i></td><td>'+result.productName+'</td><td><select class="form-control" id="'+purchaseField+'" onchange="purchaseData('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')" name="purchaseData[]">'+dataItems+'</select></td><td><input type="number" class="form-control quantity" id="'+qtyData+'" name="qty[]" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td><input type="number" class="form-control sale-price" id="'+salePrice+'" name="salePrice[]" value="'+result.salePrice+'" onkeyup="calculateSaleDetails('+result.id+','+productField+','+purchaseField+','+buyPrice+','+salePrice+','+totalSale+','+totalPurchase+','+qtyData+','+profitMargin+','+profitTotal+','+productField+')"/></td><td id="'+totalSale+'"></td><td><input type="number" class="form-control" id="'+buyPrice+'" name="buyPrice[]" value="'+result.buyPrice+'" readonly /></td><td id="'+totalPurchase+'">-</td><td id="'+profitMargin+'"></td><td id="'+profitTotal+'"></td></tr>';
                 $('#productDetails').append(field);
             }
         },
@@ -469,6 +485,7 @@ function purchaseData(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
                 $('#grandTotal').val(gTotal);
                 $('#totalSaleAmount').val(grandTotal);
                 $('#dueAmount').val(dueAmount);
+                $('#curDue').val(dueAmount);
             });
         },
         error:function(){
@@ -490,6 +507,8 @@ function discountAmount(){
 
     $('#grandTotal').val(grandTotal);
     $('#dueAmount').val(customerDue);
+    $('#prevDue').val(0);
+    $('#curDue').val(customerDue);
 }
 
 function dueCalculate(){
@@ -502,6 +521,7 @@ function dueCalculate(){
     let gTotal      = parseInt(saleTotal-dstAmount);
     let dueAmount   = parseInt(grandTotal-paidAmount);
 
-    $('#dueAmount').val(dueAmount);
+    $('#dueAmount').val(dueAmount); 
+    $('#curDue').val(dueAmount); 
 }
 </script>

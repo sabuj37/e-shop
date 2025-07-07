@@ -511,6 +511,11 @@ Route::middleware(['posAdmin'])->group(function(){
         reportController::class,
         'addRceivableReport'
     ])->name('addRceivableReport');
+    
+    Route::post('/sale/save/data',[
+        JqueryController::class,
+        'saveSale'
+    ])->name('saveSale');
 
     
     //Payble report

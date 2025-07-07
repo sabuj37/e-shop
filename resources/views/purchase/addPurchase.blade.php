@@ -406,7 +406,7 @@
                     <button type="reset" class="btn btn-danger mt-4 mr-2">Reset</button>
                 </form>
                 </div>
-                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
@@ -485,7 +485,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" onclick="closeModel('productUnitModal','productUnitForm')">Cancle</button>
+                <button type="button" class="btn btn-light" onclick="closeModel('productUnitModal','productUnitForm')">Cancel</button>
             </div>
         </div>
     </div>

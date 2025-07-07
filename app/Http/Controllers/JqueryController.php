@@ -10,6 +10,8 @@ use App\Models\ProductUnit;
 use App\Models\PurchaseProduct;
 use App\Models\ProductStock;
 use App\Models\ProductSerial;
+use App\Models\SaleProduct;
+use App\Models\InvoiceItem;
 use App\Models\Service;
 use Alert;
 
@@ -151,6 +153,7 @@ class JqueryController extends Controller
     // get grand total
      public function calculateGrandTotal()
     {
+        $stock = ProductStock::where(['purchaseId'=>request()->input('purchaseId')])->sum('currentStock');
         $items = request()->input('items');
         $grandTotal = 0;
 
@@ -161,7 +164,60 @@ class JqueryController extends Controller
         }
 
         return response()->json([
-            'grandTotal' => number_format($grandTotal, 2)
+            'grandTotal'    => number_format($grandTotal, 2),
+            'currentStock'  => $stock
         ]);
+    }
+
+    public function saveSale(Request $requ){
+        // return $requ;
+        $sales = new SaleProduct();
+
+        $sales->invoice         = $requ->invoice;
+        $sales->date            = $requ->date;
+        $sales->customerId      = $requ->customerId;
+        $sales->reference       = $requ->reference;
+        $sales->note            = $requ->note;
+        $sales->totalSale       = $requ->totalSale;
+        $sales->discountAmount  = $requ->discountAmount;
+        $sales->grandTotal      = $requ->grandTotal;
+        $sales->paidAmount      = $requ->paidAmount;
+        $sales->invoiceDue      = $requ->invoiceDue;
+        $sales->prevDue         = $requ->prevDue;
+        $sales->curDue          = $requ->curDue;
+        $sales->status          = "Ordered";
+        
+        $items = $requ->qty;
+        if($sales->save()):
+            if(count($items)>0):
+                foreach($items as $index => $item):
+                    $invoice = new InvoiceItem();
+                    $invoice->purchaseId = $requ->purchaseData[$index];
+                    $invoice->saleId = $sales->id;
+                    $invoice->qty = $item;
+                    $invoice->salePrice = $requ->salePrice[$index];
+                    $invoice->buyPrice = $requ->buyPrice[$index];
+
+                    $totalSale      = $requ->salePrice[$index]*$item;
+                    $totalPurchase  = $requ->buyPrice[$index]*$item;
+                    $profitTotal    = $totalSale-$totalPurchase;
+                    $profitMargin   = ($profitTotal/$totalPurchase)*100;
+                    $profitParcent  = number_format($profitMargin,2);
+
+                    $invoice->totalSale = $totalSale;
+                    $invoice->totalPurchase = $totalPurchase;
+                    $invoice->profitTotal   = $profitTotal;
+                    $invoice->profitMargin  = $profitParcent;
+
+                    $invoice->save();
+                endforeach;
+            endif;
+
+            $message = Alert::success('Success!','Data saved successfully');
+            return back();
+        else:
+            $message = Alert::error('Sorry!','Data failed to save');
+            return back();
+        endif;
     }
 }
