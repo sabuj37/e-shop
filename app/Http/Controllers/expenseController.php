@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Expense;
+use Alert;
 
 use Illuminate\Http\Request;
 
@@ -24,9 +25,11 @@ class expenseController extends Controller
             $data->name          = $req->name;
 
             if($data->save()):
-                return redirect(route('addExpense'))->with('success','Success !  Customer profile created successfully');
+                Alert::success('Success!','Expense created successfully');
+                return redirect(route('addExpense'));
             else:
-                return back()->with('error','Error !  There was an error. Please try agin');
+                Alert::error('Failed!','Expense creation failed');
+                return back();
             endif;
     }
 
@@ -42,13 +45,16 @@ class expenseController extends Controller
         $data = Expense::find($id);
         if(!empty($data)):
             $data->delete();
-            return back()->with('success','Data delete successfully');
+             Alert::success('Success!','Expense created successfully');
+                return redirect(route('addExpense'));
         else:
-            return back()->with('error','Data failed to delete');
+           lert::error('Failed!','Expense creation failed');
+                return back();
         endif;
     }
+
+
      Public function expense (){
-        
       $data = Expense::orderBy('id','DESC')->get();
         return view('expense.expense',['expenseList'=>$data]);
 

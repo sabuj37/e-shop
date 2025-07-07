@@ -49,10 +49,10 @@ class serviceController extends Controller
         $data = Service::find($id);
         if($data->save()):
             $data->delete();
-            Alert::success('Success!','Service profile created successfully');
+            Alert::success('Success!','Service delete successfully');
             return redirect(route('addServiceName'));
         else:
-            Alert::error('Failed!','Service profile creation failed');
+            Alert::error('Failed!','Service delete failed');
             return back();
         endif;
     }

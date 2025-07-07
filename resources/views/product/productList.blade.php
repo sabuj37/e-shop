@@ -1,5 +1,7 @@
 @extends('include') @section('backTitle') Product List @endsection @section('container')
-
+<div class="col-12">
+    @include('sweetalert::alert')
+</div>
  <div class="card">
             <div class="card-body">
                

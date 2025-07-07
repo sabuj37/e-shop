@@ -53,9 +53,11 @@ class coustomerSupplier extends Controller
         $data = Customer::find($id);
         if(!empty($data)):
             $data->delete();
-            return back()->with('success','Data delete successfully');
+                Alert::success('Success!','Customer profile created successfully');
+                return back();
         else:
-            return back()->with('error','Data failed to delete');
+                Alert::error('Failed!','Customer profile creation failed');
+                return back();
         endif;
     }
 
@@ -111,9 +113,11 @@ class coustomerSupplier extends Controller
             $data->area          = $req->area;
 
             if($data->save()):
-                return redirect(route('addSupplier'))->with('success','Success !  Supplier profile created successfully');
+                Alert::success('Success!','Supplier profile created successfully');
+                return redirect(route('addSupplier'));
             else:
-                return back()->with('Error','Error !  There was an error. Please try agin');
+                Alert::error('Failed!','Supplier profile creation failed');
+                return back();
             endif;
     }
 
@@ -129,9 +133,11 @@ class coustomerSupplier extends Controller
         $data = Supplier::find($id);
         if(!empty($data)):
             $data->delete();
-            return back()->with('success','Data delete successfully');
+                Alert::success('Success!','Supplier profile created successfully');
+                return back();
         else:
-            return back()->with('error','Data failed to delete');
+                Alert::error('Failed!','Supplier profile creation failed');
+                return back();
         endif;
     }
 

@@ -15,7 +15,7 @@ Dashboard
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-primary">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -31,7 +31,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-success">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -47,7 +47,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-info">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -63,7 +63,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-warning">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -79,7 +79,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-dark">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -95,7 +95,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-warning">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -111,7 +111,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-light">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -127,7 +127,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-info">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -143,7 +143,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-primary">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -159,7 +159,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-primary">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>
@@ -175,7 +175,7 @@ Dashboard
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 ">
-                        <div class="card">
+                        <div class="alert alert-danger">
                             <div class="card-body">
                                 <div class="d-flex align-items-center  card-total-sale">
                                     <div>

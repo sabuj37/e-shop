@@ -1,4 +1,8 @@
 @extends('include') @section('backTitle')Expense Type @endsection @section('container')
+
+<div class="col-12">
+    @include('sweetalert::alert')
+</div>
 <div class="row">
     <div class="col-12">
         <h3>Creat Expense</h3>
