@@ -1,4 +1,7 @@
 @extends('include') @section('backTitle')new products @endsection @section('container')
+<div class="col-12">
+    @include('sweetalert::alert')
+</div>
 <div class="row">
     <div class="col-12">
         @if(session()->has('success'))

@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ProductUnit;
+use Alert;
 
 class productController extends Controller
 {
@@ -34,21 +35,13 @@ class productController extends Controller
             $data->barCode       = $req->barCode;
 
             if($data->save()):
-                return redirect(route('addProduct'))->with('success','Success !  Customer profile created successfully');
+                Alert::success('Success!','Product created successfully');
+                return redirect(route('addProduct'));
             else:
-                return back()->with('error','Error !  There was an error. Please try agin');
+                Alert::error('Failed!','Product creation failed');
+                return back();
             endif;
     }
-
-    //add bamage product
-    public function damageProduct(){
-        return view('product.damageProduct');
-   }
-    //add bamage product list
-    public function damageProductList(){
-        return view('product.damageProductList');
-   }
-
 
     //edit product
      public function editProduct($id){
@@ -64,9 +57,11 @@ class productController extends Controller
         $data = Product::find($id);
         if(!empty($data)):
             $data->delete();
-            return back()->with('success','Data delete successfully');
+                Alert::success('Success!','Product delete successfully');
+                return back();
         else:
-            return back()->with('error','Data failed to delete');
+                Alert::error('Failed!','Product delete failed');
+                return back();
         endif;
     }
 
@@ -108,6 +103,18 @@ class productController extends Controller
     }
 
     
+
+    //add bamage product
+    public function damageProduct(){
+        return view('product.damageProduct');
+   }
+    //add bamage product list
+    public function damageProductList(){
+        return view('product.damageProductList');
+   }
+
+
+    
     //stock product
     public function stockProduct(){
       return view('product.stockProduct');
@@ -128,9 +135,11 @@ class productController extends Controller
             $data->name          = $req->name;
 
             if($data->save()):
-                return redirect(route('addBrand'))->with('success','Success !  Customer profile created successfully');
+                Alert::success('Success!','Brand created successfully');
+                return redirect(route('addBrand'));
             else:
-                return back()->with('error','Error !  There was an error. Please try agin');
+                Alert::error('Failed!','Brand creation failed');
+                return back();
             endif;
     }
 
@@ -146,9 +155,12 @@ class productController extends Controller
         $data = Brand::find($id);
         if(!empty($data)):
             $data->delete();
-            return back()->with('success','Data delete successfully');
+            $data->delete();
+                Alert::success('Success!','Brand delete successfully');
+                return back();
         else:
-            return back()->with('error','Data failed to delete');
+                Alert::error('Failed!','Brand delete failed');
+                return back();
         endif;
     }
 
@@ -192,9 +204,11 @@ class productController extends Controller
             $data->name          = $req->name;
 
             if($data->save()):
-                return redirect(route('addCategory'))->with('success','Success !  Customer profile created successfully');
+                Alert::success('Success!','Category created successfully');
+                return redirect(route('addCategory'));
             else:
-                return back()->with('error','Error !  There was an error. Please try agin');
+                Alert::error('Failed!','Category creation failed');
+                return back();
             endif;
     }
 
@@ -210,9 +224,11 @@ class productController extends Controller
         $data = Category::find($id);
         if(!empty($data)):
             $data->delete();
-            return back()->with('success','Data delete successfully');
+                Alert::success('Success!','Category delete successfully');
+                return back();
         else:
-            return back()->with('error','Data failed to delete');
+                Alert::error('Failed!','Category delete failed');
+                return back();
         endif;
     }
 
@@ -254,9 +270,11 @@ class productController extends Controller
             $data->name          = $req->name;
 
             if($data->save()):
-                return redirect(route('addProductUnit'))->with('success','Success !  Customer profile created successfully');
+                Alert::success('Success!','Product unit created successfully');
+                return redirect(route('addProductUnit'));
             else:
-                return back()->with('error','Error !  There was an error. Please try agin');
+                Alert::error('Failed!','Product unit creation failed');
+                return back();
             endif;
     }
 
@@ -272,9 +290,11 @@ class productController extends Controller
         $data = ProductUnit::find($id);
         if(!empty($data)):
             $data->delete();
-            return back()->with('success','Data delete successfully');
+                Alert::success('Success!','Product unit delete successfully');
+                return back();
         else:
-            return back()->with('error','Data failed to delete');
+                Alert::error('Failed!','Product unit delete failed');
+                return back();
         endif;
     }
 

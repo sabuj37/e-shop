@@ -1,19 +1,8 @@
 @extends('include') 
 
 @section('backTitle')Unit Type @endsection @section('container')
-<div class="row">
-    <div class="col-12">
-        @if(session()->has('success'))
-            <div class="alert alert-success w-100">
-                {{ session()->get('success') }}
-            </div>
-        @endif
-        @if(session()->has('error'))
-            <div class="alert alert-danger w-100">
-                {{ session()->get('error') }}
-            </div>
-        @endif
-    </div>
+<div class="col-12">
+    @include('sweetalert::alert')
 </div>
 @php
     if(isset($profile)):
