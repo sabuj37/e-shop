@@ -32,10 +32,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(!empty($saleList))
+                            @if(!empty($saleList) && $saleList->count()>0)
                             @foreach($saleList as $sl)
                             @php
                                 $customer = \App\Models\Customer::find($sl->customerId);
+                                if($customer->count()>0):
+                                    $customerName = $customer->name;
+                                else:
+                                    $customerName = '-';
+                                endif;
                             @endphp
                             <tr>
                                 <td>
