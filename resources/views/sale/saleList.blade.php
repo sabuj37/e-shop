@@ -36,10 +36,10 @@
                             @forelse($saleList as $sl)
                             @php
                                 $customer = \App\Models\Customer::find($sl->customerId);
-                                if($customer->isEmpty()):
-                                    $customerName = '-';
+                                if($customer):
+                                    $customerName = $customer->name ?? 'N/A';
                                 else:
-                                    $customerName = $customer->name;
+                                    $customerName = '-';
                                 endif;
                             @endphp
                             <tr>
