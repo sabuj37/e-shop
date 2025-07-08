@@ -36,7 +36,7 @@
                             @foreach($saleList as $sl)
                             @php
                                 $customer = \App\Models\Customer::find($sl->customerId);
-                                if($customer->count()>0):
+                                if(!empty($customer)):
                                     $customerName = $customer->name;
                                 else:
                                     $customerName = '-';
