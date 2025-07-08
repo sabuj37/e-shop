@@ -61,6 +61,10 @@
                                 </td>
                                 <td>-</td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="8">No data found</td>
+                            </tr>
                             @endforelse
                             @endif
                         </tbody>
