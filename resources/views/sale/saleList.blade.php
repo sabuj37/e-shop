@@ -33,10 +33,10 @@
                         </thead>
                         <tbody>
                             @if(!empty($saleList) && $saleList->count()>0)
-                            @foreach($saleList as $sl)
+                            @forelse($saleList as $sl)
                             @php
                                 $customer = \App\Models\Customer::find($sl->customerId);
-                                if(!empty($customer)):
+                                if($customer):
                                     $customerName = $customer->name;
                                 else:
                                     $customerName = '-';
@@ -61,7 +61,7 @@
                                 </td>
                                 <td>-</td>
                             </tr>
-                            @endforeach
+                            @endforelse
                             @endif
                         </tbody>
                     </table>
