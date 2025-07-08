@@ -37,7 +37,7 @@
                             @php
                                 $customer = \App\Models\Customer::find($sl->customerId);
                                 if($customer):
-                                    $customerName = $customer->name ?? 'N/A';
+                                    $customerName = $customer->name;
                                 else:
                                     $customerName = '-';
                                 endif;
@@ -50,7 +50,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $sl->invoice }}</td>
-                                <td>{{ $customer->name }}</td>
+                                <td>{{ $customerName }}</td>
                                 <td>{{ $sl->grandTotal }}</td>
                                 <td>{{ $sl->paidAmount }}</td>
                                 <td>{{ $sl->curDue }}</td>
