@@ -78,21 +78,21 @@
     <div class="header">
       <div class="invoice-title">INVOICE</div>
       <div class="store-info">
-        <strong>GreenTech Store</strong><br>
-        123 Main Street, City<br>
+        <strong>Computer Care</strong><br>
+        Office Road, Burichong Bazar, Cumilla<br>
         Phone: 0123456789<br>
-        Email: info@example.com
+        Email: info@computercare.com
       </div>
     </div>
 
     <table class="info-table">
       <tr>
-        <td><strong>Invoice #:</strong> INV-2025-001</td>
-        <td class="text-right"><strong>Date:</strong> 2025-07-06</td>
+        <td><strong>Invoice #:</strong> {{ $invoice->invoice }}</td>
+        <td class="text-right"><strong>Date:</strong> {{ \Carbon\Carbon::parse($invoice->date)->format('d-m-Y') }}</td>
       </tr>
       <tr>
-        <td ><strong>Customer:</strong> John Doe</td>
-        <td class="text-right"><strong>Phone:</strong> 017xxxxxxxx</td>
+        <td ><strong>Customer:</strong> {{ $customer->name }}</td>
+        <td class="text-right"><strong>Phone:</strong> {{ $customer->mobile }}</td>
       </tr>
     </table>
 
@@ -106,44 +106,55 @@
           <th>Total</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="text-right">
+        @if($items)
+        @php
+        $sl = 1;
+        @endphp
+        @foreach($items as $item)
         <tr>
-          <td>1</td>
-          <td>Wireless Mouse</td>
-          <td>2</td>
-          <td>500</td>
-          <td>1000</td>
+          <td>{{ $sl }}</td>
+          <td>{{ $item->productName }}</td>
+          <td>{{ $item->qty }}</td>
+          <td>{{ $item->salePrice }}</td>
+          <td>{{ number_format($item->totalSale ?? 0, 2, '.', ',') }}</td>
         </tr>
+        @php
+        $sl++;
+        @endphp
+        @endforeach
+        @else
         <tr>
-          <td>2</td>
-          <td>Keyboard</td>
-          <td>1</td>
-          <td>800</td>
-          <td>800</td>
+          <td colspan="5">No items found</td>
         </tr>
+        @endif
       </tbody>
     </table>
 
     <table class="summary-table">
       <tr>
         <td class="text-right">Subtotal:</td>
-        <td class="text-right">1800</td>
+        <td class="text-right">{{ number_format($invoice->totalSale ?? 0, 2, '.', ',') }} ৳</td>
       </tr>
       <tr>
         <td class="text-right">Discount:</td>
-        <td class="text-right">100</td>
+        <td class="text-right">{{ number_format($invoice->discountAmount ?? 0, 2, '.', ',') }} ৳</td>
       </tr>
       <tr class="total">
         <td class="text-right">Grand Total:</td>
-        <td class="text-right">1700</td>
+        <td class="text-right">{{ number_format($invoice->grandTotal ?? 0, 2, '.', ',') }} ৳</td>
       </tr>
       <tr>
         <td class="text-right">Paid:</td>
-        <td class="text-right">1700</td>
+        <td class="text-right">{{ number_format($invoice->paidAmount ?? 0, 2, '.', ',') }} ৳</td>
       </tr>
       <tr>
-        <td class="text-right">Change:</td>
-        <td class="text-right">0</td>
+        <td class="text-right">Previous Due:</td>
+        <td class="text-right">{{ number_format($invoice->prevDue ?? 0, 2, '.', ',') }} ৳</td>
+      </tr>
+      <tr>
+        <td class="text-right">Current Due:</td>
+        <td class="text-right">{{ number_format($invoice->curDue ?? 0, 2, '.', ',') }} ৳</td>
       </tr>
     </table>
 

@@ -19,47 +19,45 @@
                                         <label for="checkbox1" class="mb-0"></label>
                                     </div>
                                 </th>
-                                <th>Reference</th>
-                                <th>Name</th>
+                                <th>Invoice</th>
+                                <th>Customer</th>
                                 <th>Grand Total</th>
                                 <th>Paid Amount</th>
                                 <th>Due</th>
                                 <th>Created By</th>
                                 <th>Date</th>
+                                <th>Print</th>
                                 <th>Return</th>
                                 <th>Delete</th>
-                                <th>Details</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @if($saleList)
+                            @foreach($saleList as $sl)
+                            @php
+                                $customer = \App\Models\Customer::find($sl->customerId);
+                            @endphp
                             <tr>
                                 <td>
                                     <div class="checkbox d-inline-block">
-                                        <input type="checkbox" class="checkbox-input" id="checkbox2" />
-                                        <label for="checkbox2" class="mb-0"></label>
+                                        <input type="checkbox" class="checkbox-input" id="saleBox{{ $sl->id }}" />
+                                        <label for="saleBox{{ $sl->id }}" class="mb-0"></label>
                                     </div>
                                 </td>
-                                <td>PUR-234</td>
-                                <td>Hasnat Saimun</td>
-                                <td>45000</td>
-                                <td>400000</td>
-                                <td>00</td>
-                                <td>Sobuj</td>
-                                <td>14.5.2025</td>
+                                <td>{{ $sl->invoice }}</td>
+                                <td>{{ $customer->name }}</td>
+                                <td>{{ $sl->grandTotal }}</td>
+                                <td>{{ $sl->paidAmount }}</td>
+                                <td>{{ $sl->curDue }}</td>
+                                <td>-</td>
+                                <td>{{ $sl->date }}</td>
                                 <td>
-                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                        href="#"><i class="ri-eye-line mr-0"></i>
+                                    <a href="{{ route('invoiceGenerate',['id'=>$sl->id]) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></a>
                                 </td>
-                                <td>
-                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                        href="#"><i class="ri-eye-line mr-0"></i>
-                                </td>
-                                <td>
-                                    <div class="list-action">
-                                        <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line mr-0"></i></a>
-                                    </div>
-                                </td>
+                                <td>-</td>
                             </tr>
+                            @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

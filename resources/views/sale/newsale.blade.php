@@ -20,7 +20,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Date</label>
-                                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" placeholder="" required />
+                                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="date" placeholder="" required />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                                 <div class="form-group">
                                     <label>Select Customer *</label>
                                     <label for="customerName" class="form-label"></label>
-                                <select id="customerName" class="form-control" onchange="actProductList()" required>
+                                <select id="customerName" name="customerId" class="form-control" onchange="actProductList()" required>
                                         <option value="">-</option>
                                     <!--  form option show proccessing -->
                                   @if(!empty($customerList) && count($customerList)>0)
@@ -51,7 +51,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Reference(if any)</label>
-                                    <input type="text" class="form-control" placeholder="Enter reference if any" />
+                                    <input type="text" name="reference" class="form-control" placeholder="Enter reference if any" />
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -70,8 +70,8 @@
                             </div>
                             </div>
                             <div class="col-8">
-                                <label for="note">Note</label>
-                                <textarea class="form-control" aria-label="With textarea"></textarea>
+                                <label for="note">Note(if applicable)</label>
+                                <textarea class="form-control" id="note" name="note" placeholder="Enter some notes if you have"></textarea>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                                             <input type="number" class="form-control" id="totalSaleAmount" name="totalSaleAmount" value="0" readonly  />
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" id="discountPrice" onkeyup="discountAmount()"  name="discountAmount" value="0"  />
+                                            <input type="number" class="form-control" id="discountAmount" onkeyup="getDiscountAmount()"  name="discountAmount" value="0"  />
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" id="grandTotal" name="grandTotal" value="0" readonly />
@@ -357,7 +357,7 @@ function calculateSaleDetails(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
             if(qty>response.currentStock){
                 alert('You can not order more then '+response.currentStock+', because of product sortage')
             }else{
-                let discountAmount  = parseInt($("#discountPrice").val());
+                let discountAmount  = parseInt($("#discountAmount").val());
                 let dstAmount       = discountAmount ? discountAmount:0;
                 let grandTotal      = response.grandTotal.replace(/,/g, '');
                 let paidAmount      = parseInt($("#paidAmount").val());
@@ -474,7 +474,7 @@ function purchaseData(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
             });
 
             $.get('{{ route("calculate.grand.total") }}', { items: items }, function (response) {
-                let discountAmount  = parseInt($("#discountPrice").val());
+                let discountAmount  = parseInt($("#discountAmount").val());
                 let dstAmount       = discountAmount ? discountAmount:0;
                 let grandTotal      = response.grandTotal.replace(/,/g, '');
                 let paidAmount      = parseInt($("#paidAmount").val());
@@ -495,8 +495,8 @@ function purchaseData(pid,proField,pf,bp,sp,ts,tp,qd,pm,pt){
 
 }
 
-function discountAmount(){
-    let dstAmount   = parseInt($("#discountPrice").val());
+function getDiscountAmount(){
+    let dstAmount   = parseInt($("#discountAmount").val());
     let saleTotal   = parseInt($("#totalSaleAmount").val());
     let paidAmount  = parseInt($("#paidAmount").val());
 
@@ -512,7 +512,7 @@ function discountAmount(){
 }
 
 function dueCalculate(){
-    let dstAmount   = parseInt($("#discountPrice").val());
+    let dstAmount   = parseInt($("#discountAmount").val());
     let paidAmount  = parseInt($("#paidAmount").val());
     let saleTotal   = parseInt($("#totalSaleAmount").val());
     let grandTotal  = parseInt($("#grandTotal").val());

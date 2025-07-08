@@ -60,10 +60,9 @@ class serviceController extends Controller
 
   //add provideService
   Public function provideService(){
-        $service = Service::orderBy('id','DESC')->get();
-        $customer = Customer::orderBy('id','DESC')->get();
+    $service = Service::orderBy('id','DESC')->get();
+    $customer = Customer::orderBy('id','DESC')->get();
     return view('service.provideService',['customerList'=>$customer,'serviceList'=>$service]);
-
   }
 
   //save provideService service 
@@ -75,10 +74,9 @@ class serviceController extends Controller
     endif;
 
     $data->customerName = $req->customerName;
-    $data->serviceName = $req->serviceName;
-    $data->amount = $req->amount;
-    $data->note = $req->note;
-
+    $data->serviceName  = $req->serviceName;
+    $data->amount       = $req->amount;
+    $data->note         = $req->note;
 
     if($data->save()):
         Alert::success('Success!','Service profile created successfully');
@@ -92,8 +90,6 @@ class serviceController extends Controller
   
   //list provideService
   Public function serviceProvideList(){
-    
     return view('service.serviceList');
-
   }
 }

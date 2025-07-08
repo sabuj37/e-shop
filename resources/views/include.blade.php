@@ -6,18 +6,19 @@
 <!-- Mirrored from templates.iqonic.design/eshop/html/backend/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Mar 2025 08:07:13 GMT -->
 <head>
     <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>E-Shop | @yield('backTitle')</title>
-      
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="{{asset('/public/eshop/')}}/assets/images/favicon.ico" />
-      <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/css/backend-plugin.min.css">
-      <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/css/backende209.css?v=1.0.0">
-      <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/vendor/fortawesome/fontawesome-free/css/all.min.css">
-      <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
-      <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/vendor/remixicon/fonts/remixicon.css"> 
-       
-      <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>E-Shop | @yield('backTitle')</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{asset('/public/eshop/')}}/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/css/backend-plugin.min.css">
+    <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/css/backende209.css?v=1.0.0">
+    <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/vendor/fortawesome/fontawesome-free/css/all.min.css">
+    <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
+    <link rel="stylesheet" href="{{asset('/public/eshop/')}}/assets/vendor/remixicon/fonts/remixicon.css"> 
+    <script src="https://kit.fontawesome.com/163dbb3d41.js" crossorigin="anonymous"></script>
+    
+    <style>
         .product-table table td,  th{
             font-size: 10px !important;
             text-align: center !important;
@@ -48,7 +49,10 @@
             font-size: 15px !important;
             padding-left: 20px !important;
         }
-      </style>
+        .btn i{
+            margin-right: 0 !important;u
+        }
+    </style>
 </head>
   <body class="">
     <!-- loader Start -->

@@ -174,15 +174,15 @@ class JqueryController extends Controller
         $sales = new SaleProduct();
 
         $sales->invoice         = $requ->invoice;
-        $sales->date            = $requ->date;
+        $sales->date   = $requ->date;
         $sales->customerId      = $requ->customerId;
         $sales->reference       = $requ->reference;
         $sales->note            = $requ->note;
-        $sales->totalSale       = $requ->totalSale;
+        $sales->totalSale       = $requ->totalSaleAmount;
         $sales->discountAmount  = $requ->discountAmount;
         $sales->grandTotal      = $requ->grandTotal;
         $sales->paidAmount      = $requ->paidAmount;
-        $sales->invoiceDue      = $requ->invoiceDue;
+        $sales->invoiceDue      = $requ->dueAmount;
         $sales->prevDue         = $requ->prevDue;
         $sales->curDue          = $requ->curDue;
         $sales->status          = "Ordered";
@@ -209,7 +209,13 @@ class JqueryController extends Controller
                     $invoice->profitTotal   = $profitTotal;
                     $invoice->profitMargin  = $profitParcent;
 
-                    $invoice->save();
+                    if($invoice->save()):
+                        // stock updated
+                        $stockHistory = ProductStock::where(['purchaseId'=>$requ->purchaseData[$index]])->first();
+                        $updatedStock = $stockHistory->currentStock-$item;
+                        $stockHistory->currentStock = $updatedStock;
+                        $stockHistory->save();
+                    endif;
                 endforeach;
             endif;
 
