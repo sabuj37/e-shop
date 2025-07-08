@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if($saleList)
+                            @if(!empty($saleList))
                             @foreach($saleList as $sl)
                             @php
                                 $customer = \App\Models\Customer::find($sl->customerId);
