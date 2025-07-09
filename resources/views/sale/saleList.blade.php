@@ -1,4 +1,4 @@
-@extends('include') @section('backTitle') sale list @endsection @section('container')
+ @extends('include') @section('backTitle') sale list @endsection @section('container')
 <div class="col-12">
     @include('sweetalert::alert')
 </div>

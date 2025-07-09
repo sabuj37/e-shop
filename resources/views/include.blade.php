@@ -19,6 +19,77 @@
     <script src="https://kit.fontawesome.com/163dbb3d41.js" crossorigin="anonymous"></script>
     
     <style>
+        body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f4f6f8;
+        padding: 30px;
+        color: #333;
+        }
+        .invoice-box {
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        max-width: 800px;
+        margin: auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+        border-bottom: 2px solid #4CAF50;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        }
+        .header .store-info {
+        font-size: 14px;
+        }
+        .header .invoice-title {
+        font-size: 28px;
+        color: #4CAF50;
+        font-weight: bold;
+        }
+        .info-table, .product-table, .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        }
+        .info-table td {
+        padding: 5px 10px;
+        }
+        .product-table th {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        }
+        .product-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        }
+        .summary-table td {
+        padding: 8px 10px;
+        }
+        .text-right {
+        text-align: right;
+        }
+        .total {
+        font-weight: bold;
+        background-color: #f2f2f2;
+        }
+        .footer {
+        text-align: center;
+        font-size: 14px;
+        color: #888;
+        margin-top: 30px;
+        }
+        .qr-code {
+        margin-top: 20px;
+        text-align: right;
+        }
+        .qr-code img {
+        width: 100px;
+        }
         .product-table table td,  th{
             font-size: 10px !important;
             text-align: center !important;
