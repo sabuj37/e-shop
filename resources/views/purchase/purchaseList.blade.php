@@ -24,37 +24,30 @@
                                 <th>Due</th>
                                 <th>Created By</th>
                                 <th>Supplier</th>
-                                <th>Delete</th>
                                 <th>Details</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if(!empty($purchaseList) && $purchaseList->count()>0)
                             @forelse($purchaseList as $purchase)
-                            @php
-                                $customer = \App\Models\Customer::find($sl->customerId);
-                                if($customer):
-                                    $customerName = $customer->name;
-                                else:
-                                    $customerName = '-';
-                                endif;
-                            @endphp
                             <tr>
                                 <td>
                                     <div class="checkbox d-inline-block">
-                                        <input type="checkbox" class="checkbox-input" id="saleBox{{ $sl->id }}" />
-                                        <label for="saleBox{{ $sl->id }}" class="mb-0"></label>
+                                        <input type="checkbox" class="checkbox-input" id="saleBox{{ $purchase->id }}" />
+                                        <label for="saleBox{{ $purchase->id }}" class="mb-0"></label>
                                     </div>
                                 </td>
-                                <td>{{ $sl->invoice }}</td>
-                                <td>{{ $customerName }}</td>
-                                <td>{{ $sl->grandTotal }}</td>
-                                <td>{{ $sl->paidAmount }}</td>
-                                <td>{{ $sl->curDue }}</td>
+                                <td>{{ $purchase->invoice }}</td>
+                                <td>{{ $purchase->productName }}</td>
+                                <td>{{ $purchase->grandTotal }}</td>
+                                <td>{{ $purchase->paidAmount }}</td>
+                                <td>{{ $purchase->dueAmount }}</td>
                                 <td>-</td>
-                                <td>{{ $sl->date }}</td>
+                                <td>{{ $purchase->purchase_date }}</td>
+                                <td>{{ $purchase->supplierName }}</td>
                                 <td>
-                                    <a href="{{ route('invoiceGenerate',['id'=>$sl->id]) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></a>
+                                    <a href="{{ route('invoiceGenerate',['id'=>$purchase->id]) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></a>
                                 </td>
                                 <td>-</td>
                             </tr>

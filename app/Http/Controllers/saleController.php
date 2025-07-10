@@ -17,7 +17,7 @@ class saleController extends Controller
 
     }
 
-     public function saleList(){
+    public function saleList(){
         $saleList = SaleProduct::orderBy('id','desc')->get();
         return view('sale.saleList',['saleList'=>$saleList]);
     }

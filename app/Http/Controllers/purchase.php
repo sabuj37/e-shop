@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ProductUnit;
+use App\Models\PurchaseProduct;
 
 use Illuminate\Http\Request;
 
@@ -20,7 +21,28 @@ class purchase extends Controller
     return view('purchase.addPurchase',['brandList'=>$brand,'categoryList'=>$category,'productUnitList'=>$productUnit,'supplierList'=>$supplier,'productList'=>$product]);
    }
 
-    public function purchaseList(){
-    return view('purchase.purchaseList');
+   public function purchaseList(){
+      $purchaseList = PurchaseProduct::join('products','products.id','purchase_products.productName')
+      ->join('suppliers','suppliers.id','purchase_products.supplier')
+      ->select(
+            'purchase_products.id as purchaseId',
+            'products.id as productId',
+            'products.name as productName',
+            'suppliers.id as supplierId',
+            'suppliers.name as supplierName',
+            'purchase_products.invoice',
+            'purchase_products.qty',
+            'purchase_products.totalAmount',
+            'purchase_products.grandTotal',
+            'purchase_products.paidAmount',
+            'purchase_products.paidAmount',
+            'purchase_products.dueAmount',
+            'purchase_products.salePriceExVat',
+            'purchase_products.salePriceInVat',
+            'purchase_products.vatStatus',
+            'purchase_products.buyPrice',
+            'purchase_products.purchase_date',
+      )->orderBy('totalAmount','desc')->get();
+      return view('purchase.purchaseList',['purchaseList'=>$purchaseList]);
    }
 }
