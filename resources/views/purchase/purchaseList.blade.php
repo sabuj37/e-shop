@@ -43,11 +43,10 @@
                                 <td>{{ $purchase->grandTotal }}</td>
                                 <td>{{ $purchase->paidAmount }}</td>
                                 <td>{{ $purchase->dueAmount }}</td>
-                                <td>-</td>
                                 <td>{{ $purchase->purchase_date }}</td>
                                 <td>{{ $purchase->supplierName }}</td>
                                 <td>
-                                    <a href="{{ route('invoiceGenerate',['id'=>$purchase->id]) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></a>
+                                    <a href="{{ route('purchaseView',['id'=>$purchase->id]) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></a>
                                 </td>
                                 <td>-</td>
                             </tr>

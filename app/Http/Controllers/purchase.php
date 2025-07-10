@@ -42,6 +42,7 @@ class purchase extends Controller
             'purchase_products.vatStatus',
             'purchase_products.buyPrice',
             'purchase_products.purchase_date',
+            'purchase_products.id',
       )->orderBy('totalAmount','desc')->get();
       return view('purchase.purchaseList',['purchaseList'=>$purchaseList]);
    }

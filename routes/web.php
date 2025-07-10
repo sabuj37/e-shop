@@ -315,6 +315,11 @@ Route::middleware(['posAdmin'])->group(function(){
         purchase::class,
         'purchaseList'
     ])->name('purchaseList');
+
+    Route::get('purchase/veiew/{id}',[
+        saleController::class,
+        'purchaseView'
+    ])->name('purchaseView');
     //Purchase end
     
 
