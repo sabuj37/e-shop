@@ -22,7 +22,7 @@
                                 <th>Grand Total</th>
                                 <th>Paid Amount</th>
                                 <th>Due</th>
-                                <th>Created By</th>
+                                <th>Current Stock</th>
                                 <th>Supplier</th>
                                 <th>Details</th>
                                 <th>Delete</th>
@@ -43,10 +43,10 @@
                                 <td>{{ $purchase->grandTotal }}</td>
                                 <td>{{ $purchase->paidAmount }}</td>
                                 <td>{{ $purchase->dueAmount }}</td>
-                                <td>{{ $purchase->purchase_date }}</td>
+                                <td>{{ $purchase->currentStock }}</td>
                                 <td>{{ $purchase->supplierName }}</td>
                                 <td>
-                                    <a href="{{ route('purchaseView',['id'=>$purchase->id]) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></a>
+                                    <a href="{{ route('purchaseView',['id'=>$purchase->id]) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
                                 </td>
                                 <td>-</td>
                             </tr>

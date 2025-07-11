@@ -24,12 +24,15 @@ class purchase extends Controller
    public function purchaseList(){
       $purchaseList = PurchaseProduct::join('products','products.id','purchase_products.productName')
       ->join('suppliers','suppliers.id','purchase_products.supplier')
+      ->join('product_stocks','product_stocks.purchaseId','purchase_products.id')
       ->select(
             'purchase_products.id as purchaseId',
             'products.id as productId',
             'products.name as productName',
             'suppliers.id as supplierId',
             'suppliers.name as supplierName',
+            'product_stocks.id as stockId',
+            'product_stocks.currentStock',
             'purchase_products.invoice',
             'purchase_products.qty',
             'purchase_products.totalAmount',
